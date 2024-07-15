@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.public.home.index');
+});
+
+Route::get('/admin', function () {
+    return view('pages.admin.dashboard.index');
 });
