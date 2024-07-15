@@ -46,5 +46,5 @@ Route::prefix('admin')->middleware('auth.middleware')->group(function () {
 });
 
 Route::get('/', function () {
-    return view('pages.public.home');
+    return view('pages.public.home.index');
 })->name('home');
