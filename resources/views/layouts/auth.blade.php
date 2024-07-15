@@ -2,7 +2,7 @@
 
 <style>
     .background {
-        background-image: url('{{ asset('storage/images/wallpaper.jpg') }}');
+        /* background-image: url('{{ asset('storage/images/wallpaper.jpg') }}'); */
     }
 </style>
 
