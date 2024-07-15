@@ -13,10 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.public.home.index');
-});
 
+Route::get('/login', function () {
+    return view('pages.public.auth.login');
+})->name('login.form');
+
+Route::post('/login', function () {
+    return view('pages.public.auth.login');
+})->name('login.handle');
+
+Route::get('/register', function () {
+    return view('pages.public.auth.register');
+})->name('register.form');
+
+Route::post('/register', function () {
+    return view('pages.public.auth.register');
+})->name('register.hadle');
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('pages.admin.dashboard.index');
