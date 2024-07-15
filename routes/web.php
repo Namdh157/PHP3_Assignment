@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/login', function () {
     return view('pages.public.auth.login');
 })->name('login.form');
@@ -29,3 +28,15 @@ Route::get('/register', function () {
 Route::post('/register', function () {
     return view('pages.public.auth.register');
 })->name('register.hadle');
+
+Route::get('/', function () {
+    return view('pages.public.home.index');
+});
+
+Route::get('/detail', function () {
+    return view('pages.public.home.detail');
+})->name('detail');
+
+Route::get('/cart', function () {
+    return view('pages.public.home.cart');
+})->name('cart');
