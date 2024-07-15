@@ -28,7 +28,8 @@ Route::get('/register', function () {
 
 Route::post('/register', function () {
     return view('pages.public.auth.register');
-})->name('register.hadle');
+})->name('register.handle');
+
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('pages.admin.dashboard.index');
