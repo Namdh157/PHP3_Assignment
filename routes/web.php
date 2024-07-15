@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('pages.public.home.index');
 });
 
-Route::get('/admin', function () {
-    return view('pages.admin.dashboard.index');
+Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('pages.admin.dashboard.index');
+    });
 });
