@@ -6,13 +6,11 @@ namespace Database\Seeders;
 
 use App\Models\Bill;
 use App\Models\BillDetail;
-use App\Models\BillStatus;
 use App\Models\Brand;
-use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Catalogue;
 use App\Models\CheckVoucher;
 use App\Models\Comment;
-use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductGallery;
@@ -38,9 +36,7 @@ class DatabaseSeeder extends Seeder
         ProductColor::factory(10)->create();
         ProductVariant::factory(10)->create();
         Comment::factory(10)->create();
-        PaymentMethod::factory(10)->create();
-        Cart::factory(10)->create();
-        BillStatus::factory(3)->create();
+        CartItem::factory(10)->create();
         Bill::factory(10)->create();
         BillDetail::factory(10)->create();
         Voucher::factory(10)->create();

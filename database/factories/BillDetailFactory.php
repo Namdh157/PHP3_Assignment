@@ -17,9 +17,13 @@ class BillDetailFactory extends Factory
     {
         return [
             'bill_id' => Bill::factory(),
-            'product_id' => Product::factory(),
-            'quantity' => $this->faker->numberBetween(1, 10),
+            'product_sku' => $this->faker->unique()->word,
+            'product_name' => $this->faker->name(),
+            'product_size' => $this->faker->randomElement(['S', 'M', 'L', 'XL']),
+            'product_color' => $this->faker->randomElement(['Red', 'Green', 'Blue']),
+            'product_image_thumbnail' => $this->faker->imageUrl(),
             'unit_price' => $this->faker->randomFloat(2, 10, 100),
+            'quantity' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

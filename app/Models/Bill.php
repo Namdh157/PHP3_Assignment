@@ -9,6 +9,21 @@ class Bill extends Model
 {
     use HasFactory;
 
+    const PAYMENT_METHOD = [
+        'transfer' => 'Chuyển khoản',
+        'cod' => 'Thanh toán khi nhận hàng',
+    ];
+    const METHOD_TRANSFER = "TRANSFER";
+    const METHOD_COD = "COD";
+
+    const PENDING = 'PENDING';
+    const CONFIRMED = 'CONFIRMED';
+    const SHIPPING = 'SHIPPING';
+    const SUCCESS = 'SUCCESS';
+    const CANCEL = 'CANCEL';
+    
+    
+
     protected $fillable = [
         'item',
         'quantity',

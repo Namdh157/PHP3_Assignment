@@ -17,11 +17,12 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Catalogue::class)->constrained();
             $table->foreignIdFor(Brand::class)->constrained();
-            $table->string('slug')->unique();
-            $table->string('sku')->unique();
-            $table->string('image_thumbnail')->nullable();
+            $table->string('slug')->unique()->comment('Đường dẫn thân thiện'); 
+            $table->string('sku')->unique()->comment('Mã sản phẩm');
+            $table->string('image_thumbnail');
             $table->string('description')->nullable();
             $table->text('content')->nullable();
+            $table->unsignedBigInteger('sell_count')->default(0);
             $table->unsignedBigInteger('view')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();

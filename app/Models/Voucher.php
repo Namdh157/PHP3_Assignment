@@ -9,6 +9,9 @@ class Voucher extends Model
 {
     use HasFactory;
 
+    const TYPE_PERCENT = 'PERCENT';
+    const TYPE_FIXED = 'FIXED';
+
     protected $fillable = [
         'code',
         'value',
@@ -22,7 +25,6 @@ class Voucher extends Model
     ];
 
     protected $casts = [
-        'code' => 'hashed',
         'is_active' => 'boolean',
         'start_at' => 'datetime',
         'end_at' => 'datetime',

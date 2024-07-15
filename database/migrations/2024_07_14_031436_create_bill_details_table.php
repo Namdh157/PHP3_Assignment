@@ -16,9 +16,13 @@ return new class extends Migration
         Schema::create('bill_details', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Bill::class)->constrained()->onDelete('cascade');
-            $table->foreignIdFor(Product::class)->constrained();
-            $table->integer('quantity')->comment('Số lượng sản phẩm trong hóa đơn');
-            $table->decimal('unit_price', 10, 2)->comment('Giá sản phẩm tại thời điểm mua');
+            $table->string('product_sku');
+            $table->string('product_name');
+            $table->string('product_size');
+            $table->string('product_color');
+            $table->string('product_image_thumbnail');
+            $table->decimal('unit_price')->comment('Giá sản phẩm tại thời điểm mua');
+            $table->integer('quantity')->comment('Số lượng sản phẩm trong hóa đơn');         
             $table->timestamps();
         });
     }

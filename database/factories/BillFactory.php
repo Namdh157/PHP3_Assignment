@@ -18,10 +18,7 @@ class BillFactory extends Factory
     public function definition(): array
     {
         return [
-            'bill_status_id' => BillStatus::factory(),
             'user_id' => User::factory(),
-            'payment_method_id' => PaymentMethod::factory(),
-            'item' => json_encode(['product_id' => Product::factory(), 'name' => Product::factory()]),
             'quantity' => $this->faker->numberBetween(1, 5),
             'total_discount' => $this->faker->randomFloat(2, 10, 100),
             'total_price' => $this->faker->randomFloat(2, 20, 200),
