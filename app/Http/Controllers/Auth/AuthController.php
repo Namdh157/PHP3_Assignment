@@ -24,7 +24,7 @@ class AuthController extends Controller
             return redirect()->route('admin.dashboard')->with('success', 'Welcome back, ' . Auth::user()->name);
         }
 
-        return redirect()->back()->with('error', 'Invalid credentials');
+        return redirect()->back()->with('error', 'Email or password is incorrect');
     }
 
     public function registerForm()
@@ -32,7 +32,7 @@ class AuthController extends Controller
         return view('pages.public.auth.register');
     }
 
-    public function registerHandle()
+    public function registerHandle(Request $request)
     {
         return view('pages.public.auth.register');
     }

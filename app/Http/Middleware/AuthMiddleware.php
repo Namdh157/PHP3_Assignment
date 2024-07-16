@@ -19,10 +19,7 @@ class AuthMiddleware
         $user = Auth::user();
         // echo "Middleware Auth: {$user->email}<br>";
         if (!$user) {
-            return redirect()->route('home')->with([
-                'status' => 'error',
-                'message' => 'You are not allowed to access this page'
-            ]);
+            return redirect()->route('home')->with('error', 'You are not allowed to access this page');
         }
         return $next($request);
     }
