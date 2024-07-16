@@ -19,4 +19,8 @@ class ProductVariant extends Model
         'is_sale' => 'boolean',
         'is_active' => 'boolean',
     ];
+
+    public function product() {
+        return $this->belongsTo(Product::class);
+    }
 }

@@ -11,8 +11,9 @@ class ProductController extends Controller
     const PATH_VIEW = 'pages.admin.product.';
     public function index()
     {
+        $products = Product::query()->with('catalogue')->latest('id');
         return view(self::PATH_VIEW . __FUNCTION__, [
-            'products' => Product::all()
+            'products' => $products->paginate(10),
         ]);
     }
 
@@ -21,7 +22,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -38,7 +39,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
 
-        $product = Product::with(['brand', 'catalogue', 'productGalleries', 'productColors', 'productSizes'])->find($product->id);
+        $product = Product::with(['brand', 'catalogue', 'productGalleries', 'productColors', 'productSizes', 'productVariants'])->find($product->id);
+        dd($product);
         return view(self::PATH_VIEW . __FUNCTION__, [
             'product' => $product,
         ]);

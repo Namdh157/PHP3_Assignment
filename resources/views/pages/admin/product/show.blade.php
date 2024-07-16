@@ -26,7 +26,7 @@
                                 </tr>
                                 <tr>
                                     <th>Price</th>
-                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $product->productVariants->price_regular }}</td>
                                 </tr>
                                 <tr>
                                     <th>Stock</th>
