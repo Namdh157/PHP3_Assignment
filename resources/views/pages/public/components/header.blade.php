@@ -85,11 +85,11 @@
                                                         <div class="menu-title">Shop with sidebar</div>
                                                         <!-- End .menu-title -->
                                                         <ul>
-                                                            <li><a href="category-list.html">Shop List</a></li>
-                                                            <li><a href="category-2cols.html">Shop Grid 2 Columns</a>
+                                                            <li><a href="{{ route('category')}}">Shop List</a></li>
+                                                            <li><a href="#">Shop Grid 2 Columns</a>
                                                             </li>
-                                                            <li><a href="category.html">Shop Grid 3 Columns</a></li>
-                                                            <li><a href="category-4cols.html">Shop Grid 4 Columns</a>
+                                                            <li><a href="#">Shop Grid 3 Columns</a></li>
+                                                            <li><a href="#">Shop Grid 4 Columns</a>
                                                             </li>
                                                         </ul>
                                                     </div><!-- End .col-md-6 -->
@@ -97,9 +97,9 @@
                                                         <div class="menu-title">Product Category</div>
                                                         <!-- End .menu-title -->
                                                         <ul>
-                                                            <li><a href="product-category-boxed.html">Product Category
+                                                            <li><a href="#">Product Category
                                                                     Boxed</a></li>
-                                                            <li><a href="product-category-fullwidth.html">Product
+                                                            <li><a href="#">Product
                                                                     Category Fullwidth</a></li>
                                                         </ul>
                                                     </div><!-- End .col-md-6 -->
@@ -134,13 +134,13 @@
                                             <div class="menu-col">
                                                 <div class="menu-title">Product Details</div><!-- End .menu-title -->
                                                 <ul>
-                                                    <li><a href="product.html">Default</a></li>
-                                                    <li><a href="product-centered.html">Centered</a></li>
-                                                    <li><a href="product-gallery.html">Gallery</a></li>
-                                                    <li><a href="product-sticky.html">Sticky Info</a></li>
-                                                    <li><a href="product-sidebar.html">Boxed With Sidebar</a></li>
-                                                    <li><a href="product-fullwidth.html">Full Width</a></li>
-                                                    <li><a href="product-masonry.html">Masonry Sticky Info</a></li>
+                                                    <li><a href="{{ route('detail')}}">Default</a></li>
+                                                    <li><a href="#">Centered</a></li>
+                                                    <li><a href="#">Gallery</a></li>
+                                                    <li><a href="#">Sticky Info</a></li>
+                                                    <li><a href="#">Boxed With Sidebar</a></li>
+                                                    <li><a href="#">Full Width</a></li>
+                                                    <li><a href="#">Masonry Sticky Info</a></li>
                                                 </ul>
                                             </div><!-- End .menu-col -->
                                         </div><!-- End .col-md-6 -->
@@ -171,8 +171,8 @@
                                     <li>
                                         <a href="contact.html" class="">Contact</a>
                                     </li>
-                                    <li><a href="faq.html">FAQs</a></li>
-                                    <li><a href="404.html">Error 404</a></li>
+                                    <li><a href="#">FAQs</a></li>
+                                    <li><a href="#">Error 404</a></li>
                                 </ul>
                             </li>
                         </ul><!-- End .menu -->

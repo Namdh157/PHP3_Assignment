@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Empty title')</title>
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -35,10 +36,14 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/css/plugins/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/plugins/magnific-popup/magnific-popup.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/plugins/jquery.countdown.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/bootstrap.min.css">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/skins/skin-demo-6.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/demos/demo-6.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/plugins/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/plugins/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/plugins/nouislider/nouislider.css">
     <meta name="theme-color" content="#712cf9">
     <!-- csrf -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -142,7 +147,9 @@
     @yield('script')
 
     <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
     <!-- Change Theme Script -->
     <script>
         (() => {
@@ -222,25 +229,28 @@
         })()
     </script>
     <!-- Plugins JS File -->
-    <script src="{{asset('assets')}}/js/jquery.min.js"></script>
-    <script src="{{asset('assets')}}/js/bootstrap.bundle.min.js"></script>
-    <script src="{{asset('assets')}}/js/jquery.hoverIntent.min.js"></script>
-    <script src="{{asset('assets')}}/js/jquery.waypoints.min.js"></script>
-    <script src="{{asset('assets')}}/js/superfish.min.js"></script>
-    <script src="{{asset('assets')}}/js/owl.carousel.min.js"></script>
-    <script src="{{asset('assets')}}/js/bootstrap-input-spinner.js"></script>
-    <script src="{{asset('assets')}}/js/jquery.plugin.min.js"></script>
-    <script src="{{asset('assets')}}/js/jquery.countdown.min.js"></script>
-    <script src="{{asset('assets')}}/js/bootstrap-input-spinner.js"></script>
-    <script src="{{asset('assets')}}/js/jquery.magnific-popup.min.js"></script>
-    <script src="{{asset('assets')}}/js/superfish.min.js"></script>
-    <script src="{{asset('assets')}}/js/jquery.elevateZoom.min.js"></script>
-    <script src="{{asset('assets')}}/js/jquery.sticky-kit.min.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.min.js"></script>
+    <script src="{{ asset('assets') }}/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.hoverIntent.min.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.waypoints.min.js"></script>
+    <script src="{{ asset('assets') }}/js/superfish.min.js"></script>
+    <script src="{{ asset('assets') }}/js/owl.carousel.min.js"></script>
+    <script src="{{ asset('assets') }}/js/bootstrap-input-spinner.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.plugin.min.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.countdown.min.js"></script>
+    <script src="{{ asset('assets') }}/js/bootstrap-input-spinner.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.magnific-popup.min.js"></script>
+    <script src="{{ asset('assets') }}/js/superfish.min.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.elevateZoom.min.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.sticky-kit.min.js"></script>
+    <script src="{{ asset('assets') }}/js/wNumb.js"></script>
+    <script src="{{ asset('assets') }}/js/nouislider.min.js"></script>
+
     <!-- Main JS File -->
-    <script src="{{asset('assets')}}/js/main.js"></script>
-    <script src="{{asset('assets')}}/js/demos/demo-6.js"></script>
- 
-  
+    <script src="{{ asset('assets') }}/js/main.js"></script>
+    <script src="{{ asset('assets') }}/js/demos/demo-6.js"></script>
+
+
 </body>
 
 </html>

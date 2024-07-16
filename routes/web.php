@@ -29,7 +29,6 @@ Route::prefix('admin')->middleware('auth.middleware')->name('admin.')->group(fun
     Route::resource('voucher', Voucher::class);
 });
 
-
 Route::controller(AuthController::class)->group(function(){
     Route::get('/login', 'loginForm')->name('login.form');
     Route::post('/login', 'loginHandle')->name('login.handle');
@@ -48,10 +47,6 @@ Route::get('/', function () {
     return view('pages.public.home.index');
 })->name('home');
 
-Route::get('/', function () {
-    return view('pages.public.home.index');
-});
-
 Route::get('/detail', function () {
     return view('pages.public.home.detail');
 })->name('detail');
@@ -59,3 +54,11 @@ Route::get('/detail', function () {
 Route::get('/cart', function () {
     return view('pages.public.home.cart');
 })->name('cart');
+
+Route::get('/category', function () {
+    return view('pages.public.home.category');
+})->name('category');
+
+Route::get('/checkout', function () {
+    return view('pages.public.home.checkout');
+})->name('checkout');

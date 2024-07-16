@@ -9462,6 +9462,7 @@ small.form-text {
 
 .custom-control {
   position: relative;
+  padding-left: 2.6rem;
   margin-top: 1rem;
   margin-bottom: 1rem; }
 
