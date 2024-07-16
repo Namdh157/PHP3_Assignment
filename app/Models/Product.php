@@ -26,4 +26,22 @@ class Product extends Model
         'view' => 'integer',
         'is_active' => 'boolean',
     ];
+
+    public function brand() {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function catalogue() {
+        return $this->belongsTo(Catalogue::class);
+    }
+
+    public function productGalleries() {
+        return $this->hasMany(ProductGallery::class);
+    }
+    public function productColors() {
+        return $this->hasMany(ProductColor::class);
+    }
+    public function productSizes() {
+        return $this->hasMany(ProductSize::class);
+    }
 }
