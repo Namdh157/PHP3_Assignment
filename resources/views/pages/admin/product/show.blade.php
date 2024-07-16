@@ -1,6 +1,4 @@
 @extends('layouts.admin')
-@section('title', 'Products Detail')
-
 
 <!-- content -->
 @section('content')
@@ -40,10 +38,6 @@
                                     <td>{{ $product->catalogue->name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Description</th>
-                                    <td>{{ $product->description }}</td>
-                                </tr>
-                                <tr>
                                     <th>Sell</th>
                                     <td>{{ $product->sell_count }}</td>
                                 </tr>
@@ -52,8 +46,8 @@
                                     <td>{{ $product->view }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Variants</th>
-                                    <td>{{ $product->view }}</td>
+                                    <th>Description</th>
+                                    <td>{{ $product->description }}</td>
                                 </tr>
                             </table>
                         </div>

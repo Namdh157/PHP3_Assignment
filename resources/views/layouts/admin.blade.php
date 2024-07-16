@@ -31,6 +31,7 @@
 
     .sidebar .nav-link.active {
         color: #2470dc;
+        background-color: #aaaaaa85;
     }
 
     .sidebar-heading {
@@ -128,5 +129,14 @@
     </div>
 </div>
 
+<!-- Confirm -->
+<script>
+    function confirmDelete(event) {
+        event.preventDefault();
+        if (confirm('Are you sure to DELETE this item?')) {
+            event.target.submit();
+        }
+    }
+</script>
 
 @endsection

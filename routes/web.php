@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashBoardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Models\Bill;
 use App\Models\Brand;
@@ -12,11 +13,6 @@ use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 
-
-Route::post('/register', function () {
-    return view('pages.public.auth.register');
-})->name('register.hadle');
-
 // admin
 Route::prefix('admin')->middleware('auth.middleware')->name('admin.')->group(function () {
     Route::resource('catalogue', Catalogue::class);
@@ -27,9 +23,11 @@ Route::prefix('admin')->middleware('auth.middleware')->name('admin.')->group(fun
     Route::resource('comment', Comment::class);
     Route::resource('user', User::class);
     Route::resource('voucher', Voucher::class);
+
+    Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
 });
 
-
+// Auth
 Route::controller(AuthController::class)->group(function(){
     Route::get('/login', 'loginForm')->name('login.form');
     Route::post('/login', 'loginHandle')->name('login.handle');
@@ -38,12 +36,7 @@ Route::controller(AuthController::class)->group(function(){
     Route::get('/logout', 'logout')->name('logout');
 });
 
-Route::prefix('admin')->middleware('auth.middleware')->group(function () {
-    Route::get('/', function () {
-        return view('pages.admin.dashboard.index');
-    })->name('admin.dashboard');
-});
-
+// Public
 Route::get('/', function () {
     return view('pages.public.home.index');
 })->name('home');
