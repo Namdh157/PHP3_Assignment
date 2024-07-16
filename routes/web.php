@@ -18,7 +18,7 @@ Route::post('/register', function () {
 })->name('register.hadle');
 
 // admin
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware('auth.middleware')->name('admin.')->group(function () {
     Route::resource('catalogue', Catalogue::class);
     Route::resource('brand', Brand::class);
     Route::resource('product', ProductController::class);
