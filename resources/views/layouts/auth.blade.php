@@ -10,5 +10,6 @@
         margin-left: 15px;
         font-weight: 600;
     }
+
 </style>
 @yield('content')

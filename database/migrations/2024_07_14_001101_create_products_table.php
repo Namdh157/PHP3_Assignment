@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Catalogue::class)->constrained();
             $table->foreignIdFor(Brand::class)->constrained();
+            $table->string('name');
             $table->string('slug')->unique()->comment('Đường dẫn thân thiện'); 
             $table->string('sku')->unique()->comment('Mã sản phẩm');
             $table->string('image_thumbnail');
