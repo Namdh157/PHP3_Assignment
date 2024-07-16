@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Product;
 use App\Models\ProductSize;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,7 +14,6 @@ class ProductSizeFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_id' => Product::factory(),
             'size' => $this->faker->randomElement(['S', 'M', 'L', 'XL', 'XXL']),
         ];
     }

@@ -38,7 +38,9 @@ class ProductController extends Controller
     public function show(Product $product)
     {
 
-        $product = Product::with(['brand', 'catalogue', 'productGalleries', 'productColors', 'productSizes'])->find($product->id);
+        $product = Product::with(['brand', 'catalogue', 'productGalleries', 'productVariants.variantColor', 'productVariants.variantSize'])->find($product->id);
+        echo $product;
+        // dd($product);
         return view(self::PATH_VIEW . __FUNCTION__, [
             'product' => $product,
         ]);
