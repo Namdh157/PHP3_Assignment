@@ -10,7 +10,7 @@
             <ul class="nav flex-column">
                 <!-- Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('admin.dashboard')}}">
+                    <a class="nav-link d-flex align-items-center gap-2 {{$sidebar=='dashboard'?'active':''}}" aria-current="page" href="{{route('admin.dashboard')}}">
                         <svg class="bi">
                             <use xlink:href="#house-fill" />
                         </svg>
@@ -20,7 +20,7 @@
 
                 <!-- Product -->
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="{{route('admin.product.index')}}">
+                    <a class="nav-link d-flex align-items-center gap-2 {{$sidebar=='product'?'active':''}}" href="{{route('admin.product.index')}}">
                         <svg class="bi">
                             <use xlink:href="#cart" />
                         </svg>
@@ -30,7 +30,7 @@
 
                 <!-- User -->
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="{{route('admin.user.index')}}">
+                    <a class="nav-link d-flex align-items-center gap-2 {{$title=='Customer'?'active':''}}" href="{{route('admin.user.index')}}">
                         <svg class="bi">
                             <use xlink:href="#people" />
                         </svg>
@@ -39,7 +39,7 @@
                 </li>
                 <!-- Bill -->
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="{{route('admin.bill.index')}}">
+                    <a class="nav-link d-flex align-items-center gap-2 {{$title=='Bill'?'active':''}}" href="{{route('admin.bill.index')}}">
                         <svg class="bi">
                             <use xlink:href="#file-earmark" />
                         </svg>
