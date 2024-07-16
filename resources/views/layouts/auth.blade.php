@@ -1,16 +1,15 @@
 @extends('layouts.master')
-
+<link href="{{ asset('css/auth.css') }}" rel="stylesheet">
 <style>
-<<<<<<< HEAD
     .background {
-        /* background-image: url('{{ asset('storage/images/wallpaper.jpg') }}'); */
+        background-image: url('{{ asset("storage/images/bg-login.jpg") }}');
     }
-=======
-    /* .background {
-        background-image: url('{{ asset('storage/images/wallpaper.jpg') }}');
-    } */
->>>>>>> 15ba0c3969e656578b67bae711da22bb18c7c247
+    .error{
+        font-size: 14px;
+        color: #ff5858;
+        margin-left: 15px;
+        font-weight: 600;
+    }
+
 </style>
-
 @yield('content')
-
