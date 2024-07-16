@@ -2,7 +2,7 @@
 <link href="{{ asset('css/auth.css') }}" rel="stylesheet">
 <style>
     .background {
-        background-image: url('{{ asset("storage/images/bg-login.jpg") }}');
+        background-image: url('{{ asset("storage/images/wallpaper.jpg") }}');
     }
     .error{
         font-size: 14px;
