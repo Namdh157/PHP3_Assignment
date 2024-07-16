@@ -17,7 +17,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{{route('admin.bill.index')}}">
                         <svg class="bi">
                             <use xlink:href="#file-earmark" />
                         </svg>
@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{{route('admin.product.index')}}">
                         <svg class="bi">
                             <use xlink:href="#cart" />
                         </svg>
@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{{route('admin.user.index')}}">
                         <svg class="bi">
                             <use xlink:href="#people" />
                         </svg>

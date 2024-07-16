@@ -21,10 +21,6 @@
                         <div class="col-md-6">
                             <table class="table">
                                 <tr>
-                                    <th>Name</th>
-                                    <td>{{ $product->name }}</td>
-                                </tr>
-                                <tr>
                                     <th>Price</th>
                                     <td>{{ $product->price }}</td>
                                 </tr>
