@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Product;
 use App\Models\ProductColor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,7 +14,6 @@ class ProductColorFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_id' => Product::factory(),
             'color' => $this->faker->colorName(),
         ];
     }

@@ -11,8 +11,21 @@ class ProductController extends Controller
     const PATH_VIEW = 'pages.admin.product.';
     public function index()
     {
+        $totalPage = ceil(Product::query()->count() / $this->itemPerPage);
+        $curPage = $_GET['page'] ?? 1;
+        if($curPage < 1)  $curPage = 1;
+        if($curPage > $totalPage) $curPage = $totalPage;
+        $curPath = $_SERVER['PATH_INFO'];
+        $pageArray = range(1, $totalPage);
+
+        $products = Product::query()->with('catalogue')->latest('id');
         return view(self::PATH_VIEW . __FUNCTION__, [
-            'products' => Product::all()
+            'products' => $products->paginate(10, '*', 'products', $curPage),
+            'totalPage' => $totalPage,
+            'curPage' => $curPage,
+            'curPath' => $curPath,
+            'pageArray' => $pageArray,
+            'itemPerPage' => $this->itemPerPage
         ]);
     }
 
@@ -38,9 +51,16 @@ class ProductController extends Controller
     public function show(Product $product)
     {
 
-        $product = Product::with(['brand', 'catalogue', 'productGalleries', 'productColors', 'productSizes'])->find($product->id);
+        $product = Product::with(['brand', 'catalogue', 'productGalleries', 'productVariants.variantColor', 'productVariants.variantSize'])->find($product->id);
+        $maxPrice = $product->productVariants->max('price_regular');
+        $minPrice = $product->productVariants->min('price_regular');
+        $totalStock = $product->productVariants->sum('stock');
+        // dd($product->productVariants)->toArray();
         return view(self::PATH_VIEW . __FUNCTION__, [
             'product' => $product,
+            'maxPrice' => $maxPrice,
+            'minPrice' => $minPrice,
+            'totalStock' => $totalStock
         ]);
     }
 
