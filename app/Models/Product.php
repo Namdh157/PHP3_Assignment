@@ -38,12 +38,6 @@ class Product extends Model
     public function productGalleries() {
         return $this->hasMany(ProductGallery::class);
     }
-    public function productColors() {
-        return $this->hasMany(ProductColor::class);
-    }
-    public function productSizes() {
-        return $this->hasMany(ProductSize::class);
-    }
     public function productVariants() {
         return $this->hasMany(ProductVariant::class);
     }

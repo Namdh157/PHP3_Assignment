@@ -23,4 +23,10 @@ class ProductVariant extends Model
     public function product() {
         return $this->belongsTo(Product::class);
     }
+    public function variantColor() {
+        return $this->belongsTo(Color::class, 'product_color_id');
+    }
+    public function variantSize() {
+        return $this->belongsTo(Size::class, 'product_size_id');
+    }
 }

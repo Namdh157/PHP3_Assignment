@@ -10,7 +10,9 @@ class AuthController extends Controller
 {
     public function loginForm()
     {
-        return view('pages.public.auth.login');
+        return view('pages.public.auth.login', [
+            'title' => 'Login'
+        ]);
     }
 
     public function loginHandle(Request $request)
@@ -29,7 +31,9 @@ class AuthController extends Controller
 
     public function registerForm()
     {
-        return view('pages.public.auth.register');
+        return view('pages.public.auth.register',[
+            'title' => 'Register'
+        ]);
     }
 
     public function registerHandle(Request $request)

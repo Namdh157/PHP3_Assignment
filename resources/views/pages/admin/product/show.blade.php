@@ -1,6 +1,4 @@
 @extends('layouts.admin')
-@section('title', 'Products Detail')
-
 
 <!-- content -->
 @section('content')
@@ -8,33 +6,44 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Product Detail</h1>
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex align-items-center gap-3">
+                    <a href="{{ route('admin.product.index') }}" class="fs-6 btn btn-primary">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
                     <h3>{{ $product->name }}</h3>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <img src="{{ asset('storage/images/' . $product->image) }}" alt="" class="img-fluid">
+                        <div class="col-md-6 d-flex justify-content-center">
+                            <img src="{{ $product->image_thumbnail }}" alt="" class="object-fit-contain" style="height: 300px">
                         </div>
+
                         <div class="col-md-6">
                             <table class="table">
                                 <tr>
-                                    <th>Name</th>
-                                    <td>{{ $product->name }}</td>
+                                    <th>SKU</th>
+                                    <td>{{ $product->sku }}</td>
                                 </tr>
                                 <tr>
                                     <th>Price</th>
-                                    <td>{{ $product->productVariants->price_regular }}</td>
+                                    <td>{{ "$minPrice$ - $maxPrice$" }}</td>
                                 </tr>
                                 <tr>
                                     <th>Stock</th>
-                                    <td>{{ $product->stock }}</td>
+                                    <td>{{ $totalStock }}</td>
                                 </tr>
                                 <tr>
                                     <th>Catalogue</th>
                                     <td>{{ $product->catalogue->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Sell</th>
+                                    <td>{{ $product->sell_count }}</td>
+                                </tr>
+                                <tr>
+                                    <th>View</th>
+                                    <td>{{ $product->view }}</td>
                                 </tr>
                                 <tr>
                                     <th>Description</th>
@@ -44,8 +53,46 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <a href="{{ route('admin.product.index') }}" class="btn btn-primary">Back</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Variant -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <h3 class="card-header">Variant</h3>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Color</th>
+                                <th scope="col">Price regular</th>
+                                <th scope="col">Price sale</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Sale status</th>
+                                <th scope="col">Active status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($product->productVariants as $key => $variant)
+                            <tr>
+                                <th scope="row">{{ $key + 1 }}</th>
+                                <td>{{ $variant->variantSize->size }}</td>
+                                <td>
+                                    {{ $variant->variantColor->color}}
+                                </td>
+                                <td>{{ $variant->price_regular }}</td>
+                                <td>{{ $variant->price_sale === null ? 'No' :  $variant->price_sale}}</td>
+                                <td>{{ $variant->stock }}</td>
+                                <td>{{ $variant->is_sale ? 'Yes' : 'No' }}</td>
+                                <td>{{ $variant->is_active ? 'Yes' : 'No' }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
