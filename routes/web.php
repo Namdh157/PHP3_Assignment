@@ -10,6 +10,7 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Voucher;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Public\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -37,6 +38,4 @@ Route::controller(AuthController::class)->group(function(){
 });
 
 // Public
-Route::get('/', function () {
-    return view('pages.public.home.index');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('public.home');
