@@ -1,19 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Public;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    const PATH_VIEW = 'pages.public.home.';
     public function __construct()
     {
-        $this->middleware('auth');
+        
     }
 
     /**
@@ -21,8 +18,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    // public function index()
-    // {
-    //     return view('home');
-    // }
+    public function index()
+    {
+        $title = 'Trang chủ';
+        return view(self::PATH_VIEW . __FUNCTION__, [
+            'title' => $title,
+
+        ]);
+    }
 }

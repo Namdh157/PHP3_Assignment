@@ -12,6 +12,7 @@ class ProductController extends Controller
     const SIDE_BAR = 'product';
     public function index()
     {
+
         $totalPage = ceil(Product::query()->count() / $this->itemPerPage);
         $curPage = $_GET['page'] ?? 1;
         if($curPage < 1)  $curPage = 1;
@@ -37,6 +38,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+
         return view(self::PATH_VIEW . __FUNCTION__, [
             'title' => 'Add Product',
             'sidebar' => self::SIDE_BAR,
@@ -56,6 +58,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+
 
         $product = Product::with(['brand', 'catalogue', 'productGalleries', 'productVariants.variantColor', 'productVariants.variantSize'])->find($product->id);
         $maxPrice = $product->productVariants->max('price_regular') ?? 0;

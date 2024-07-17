@@ -10,6 +10,7 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Voucher;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Public\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,8 +26,11 @@ Route::prefix('admin')->middleware('auth.middleware')->name('admin.')->group(fun
     Route::resource('voucher', Voucher::class);
 
     Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
+
+    Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
 });
 
+// Auth
 // Auth
 Route::controller(AuthController::class)->group(function(){
     Route::get('/login', 'loginForm')->name('login.form');
@@ -37,6 +41,4 @@ Route::controller(AuthController::class)->group(function(){
 });
 
 // Public
-Route::get('/', function () {
-    return view('pages.public.home.index');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('public.home');
