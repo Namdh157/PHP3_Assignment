@@ -26,8 +26,11 @@ Route::prefix('admin')->middleware('auth.middleware')->name('admin.')->group(fun
     Route::resource('voucher', Voucher::class);
 
     Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
+
+    Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
 });
 
+// Auth
 // Auth
 Route::controller(AuthController::class)->group(function(){
     Route::get('/login', 'loginForm')->name('login.form');
