@@ -20,13 +20,16 @@ class ProductVariant extends Model
         'is_active' => 'boolean',
     ];
 
-    public function product() {
+    public function product()
+    {
         return $this->belongsTo(Product::class);
     }
-    public function variantColor() {
-        return $this->belongsTo(ProductColor::class, 'product_color_id');
+    public function variantColor()
+    {
+        return $this->belongsTo(Color::class, 'color_id');
     }
-    public function variantSize() {
-        return $this->belongsTo(ProductSize::class, 'product_size_id');
+    public function variantSize()
+    {
+        return $this->belongsTo(Size::class, 'size_id');
     }
 }

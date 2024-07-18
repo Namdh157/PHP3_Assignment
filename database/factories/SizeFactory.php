@@ -2,15 +2,15 @@
 
 namespace Database\Factories;
 
-use App\Models\ProductSize;
+use App\Models\Size;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProductSize>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Size>
  */
-class ProductSizeFactory extends Factory
+class SizeFactory extends Factory
 {
-    protected $model = ProductSize::class;
+    protected $model = Size::class;
     public function definition(): array
     {
         return [
