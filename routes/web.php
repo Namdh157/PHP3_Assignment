@@ -38,5 +38,5 @@ Route::controller(AuthController::class)->group(function(){
 
 // Public
 Route::get('/', function () {
-    return view('pages.public.home.index');
+    return redirect('login');
 })->name('home');

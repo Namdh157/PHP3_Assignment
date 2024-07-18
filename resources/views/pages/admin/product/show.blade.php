@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-center">
-                            <img src="{{ $product->image_thumbnail }}" alt="" class="object-fit-contain" style="height: 300px">
+                            <img src="{{ $product->image_thumbnail }}" alt="" class="object-fit-contain rounded" style="height: 300px">
                         </div>
 
                         <div class="col-md-6">
@@ -47,7 +47,10 @@
                                 </tr>
                                 <tr>
                                     <th>Description</th>
-                                    <td>{{ $product->description }}</td>
+                                    <td>
+                                        <textarea class="form-control" aria-label="With textarea" disabled>{{ $product->description }}</textarea>
+                                    </td>
+
                                 </tr>
                             </table>
                         </div>
@@ -84,11 +87,19 @@
                                 <td>
                                     {{ $variant->variantColor->color}}
                                 </td>
-                                <td>{{ $variant->price_regular }}</td>
-                                <td>{{ $variant->price_sale === null ? 'No' :  $variant->price_sale}}</td>
+                                <td>{{ $variant->price_regular }}$</td>
+                                <td>{{ $variant->price_sale === null ? 'No' :  $variant->price_sale}}$</td>
                                 <td>{{ $variant->stock }}</td>
-                                <td>{{ $variant->is_sale ? 'Yes' : 'No' }}</td>
-                                <td>{{ $variant->is_active ? 'Yes' : 'No' }}</td>
+                                <td>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled {{$variant->is_sale ? 'checked' : ''}}>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled {{$variant->is_active ? 'checked' : ''}}>
+                                    </div>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

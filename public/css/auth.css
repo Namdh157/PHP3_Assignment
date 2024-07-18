@@ -39,7 +39,7 @@ form {
     padding: 20px;
     border: 1px solid white;
     border-radius: 10px;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(5px);
     box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.3);
 }
 

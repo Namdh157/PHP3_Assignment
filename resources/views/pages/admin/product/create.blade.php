@@ -20,12 +20,17 @@
                     </div>
 
                     <!-- Slug - Sku -->
-                    <div class="input-group gap-2 mb-3">
-                        <div class="mb-3 flex-fill">
+                    <div class="row mb-3">
+                        <div class="mb-3 col-6">
                             <label for="sku" class="form-label">SKU</label>
-                            <input type="text" class="form-control" id="sku" name="sku">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="sku" name="sku">
+                                <button class="btn btn-secondary input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-shuffle"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="mb-3 flex-fill">
+                        <div class="mb-3 col-6">
                             <label for="slug" class="form-label">Slug</label>
                             <input type="text" class="form-control" id="slug" name="slug">
                         </div>
@@ -35,6 +40,12 @@
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea class="form-control" aria-label="With textarea" name="description" placeholder="Type your description..."></textarea>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content</label>
+                        <textarea class="form-control" rows="10" aria-label="With textarea" name="content" placeholder="Type your content..."></textarea>
                     </div>
                 </div>
             </div>
@@ -53,17 +64,29 @@
                     </button>
                 </div>
             </div>
+
         </div>
 
         <div class="col-5">
+            <!-- Media -->
             <div class="card shadow">
                 <!-- Media -->
                 <div class="card-header">Media</div>
                 <div class="card-body">
-                    <input class="form-control" type="file" id="formFileMultiple" multiple />
-                    <!-- Image container -->
-                    <div id="image-container" class="d-flex gap-2 mt-2 flex-wrap">
+                    <!-- Thumbnail -->
+                    <div class="mb-3">
+                        <label for="thumbnail" class="form-label">Thumbnail</label>
+                        <input class="form-control" type="file" id="thumbnail-input" accept="image" />
+                        <img src="" class="object-fit-contain mt-3 img-thumbnail" style="height: 100px;" id="thumbnail-img" alt="">
+                    </div>
 
+                    <!-- Image container -->
+                    <div class="mb-3 mt-5">
+                        <label for="gallery" class="form-label">Gallery</label>
+                        <input class="form-control" type="file" id="gallery" accept="image" multiple />
+                        <div id="image-container" class="d-flex gap-2 mt-2 flex-wrap">
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -107,7 +130,9 @@
     (() => {
         // Show image when user select
         const imageContainer = document.getElementById('image-container');
-        const formFileMultiple = document.getElementById('formFileMultiple');
+        const thumbnailImg = document.getElementById('thumbnail-img');
+        const formFileMultiple = document.getElementById('gallery');
+        const formFileSingle = document.getElementById('thumbnail-input');
         formFileMultiple.addEventListener('change', (e) => {
             const files = e.target.files;
             for (let i = 0; i < files.length; i++) {
@@ -122,6 +147,14 @@
                 }
                 reader.readAsDataURL(file);
             }
+        });
+        formFileSingle.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                thumbnailImg.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
         });
     })();
 </script>
