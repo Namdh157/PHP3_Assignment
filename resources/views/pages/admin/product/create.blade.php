@@ -23,7 +23,7 @@
                     <div class="input-group gap-2 mb-3">
                         <div class="mb-3 flex-fill">
                             <label for="sku" class="form-label">SKU</label>
-                            <input type="text" class="form-control" id="sku" name="sku">
+                            <input type="text" class="form-control" disabled id="sku" name="sku" value="{{ $sku }}">
                         </div>
                         <div class="mb-3 flex-fill">
                             <label for="slug" class="form-label">Slug</label>

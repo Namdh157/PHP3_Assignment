@@ -15,8 +15,8 @@ class ProductController extends Controller
 
         $totalPage = ceil(Product::query()->count() / $this->itemPerPage);
         $curPage = $_GET['page'] ?? 1;
-        if($curPage < 1)  $curPage = 1;
-        if($curPage > $totalPage) $curPage = $totalPage;
+        if ($curPage < 1)  $curPage = 1;
+        if ($curPage > $totalPage) $curPage = $totalPage;
         $curPath = $_SERVER['PATH_INFO'];
         $pageArray = range(1, $totalPage);
 
@@ -38,10 +38,12 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $sku = $this->generateSKU();
 
         return view(self::PATH_VIEW . __FUNCTION__, [
             'title' => 'Add Product',
             'sidebar' => self::SIDE_BAR,
+            'sku' => $sku
         ]);
     }
 
@@ -50,7 +52,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        
     }
 
     /**
@@ -97,9 +98,17 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $destroy = Product::destroy($product->id);
-        if($destroy){
+        if ($destroy) {
             return redirect()->back()->with('success', 'Product has been deleted');
         }
         return redirect()->back()->with('error', 'Product failed to delete');
+    }
+
+    public function generateSKU()
+    {
+        $sku = 'SKU';
+        $sku .= date('YmdHis'); 
+        $sku .= rand(100, 999);
+        return $sku;
     }
 }
