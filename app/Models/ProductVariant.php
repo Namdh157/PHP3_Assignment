@@ -10,14 +10,14 @@ class ProductVariant extends Model
     use HasFactory;
 
     protected $fillable = [
+        'product_id',
+        'color_id',
+        'size_id',
         'price_regular',
         'price_sale',
         'stock',
-    ];
-
-    protected $casts = [
-        'is_sale' => 'boolean',
-        'is_active' => 'boolean',
+        'is_active',
+        'is_sale'
     ];
 
     public function product()

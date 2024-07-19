@@ -25,7 +25,9 @@ class Bill extends Model
     
 
     protected $fillable = [
-        'item',
+        'user_id',
+        'payment_method',
+        'status',
         'quantity',
         'total_discount',
         'total_price',

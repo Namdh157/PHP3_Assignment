@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header d-flex align-items-center gap-3">
-                    <a href="{{ route('admin.product.index') }}" class="fs-6 btn btn-primary">
+                    <a href="{{ $httpReferer }}" class="fs-6 btn btn-primary">
                         <i class="fa-solid fa-arrow-left"></i>
                     </a>
                     <h3>{{ $product->name }}</h3>
@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-center">
-                            <img src="{{ $product->image_thumbnail }}" alt="" class="object-fit-contain rounded" style="height: 300px">
+                            <img src="{{ asset($product->image_thumbnail) }}" alt="" class="object-fit-contain rounded" style="height: 300px">
                         </div>
 
                         <div class="col-md-6">
@@ -88,7 +88,7 @@
                                     {{ $variant->variantColor->color}}
                                 </td>
                                 <td>{{ $variant->price_regular }}$</td>
-                                <td>{{ $variant->price_sale === null ? 'No' :  $variant->price_sale}}$</td>
+                                <td>{{ $variant->price_sale === null ? $variant->price_regular :  $variant->price_sale}}$</td>
                                 <td>{{ $variant->stock }}</td>
                                 <td>
                                     <div class="form-check form-switch">

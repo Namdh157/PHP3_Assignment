@@ -27,7 +27,7 @@
                     <th scope="row">{{$index + 1 + ($curPage - 1) * $itemPerPage }}</th>
                     <td>{{ $product->sku }}</td>
                     <td>
-                        <img src="{{$product->image_thumbnail}}" alt="" class="object-fit-contain rounded" style="width: 50px; height: 50px">
+                        <img src="{{asset($product->image_thumbnail)}}" alt="" class="object-fit-contain rounded" style="width: 50px; height: 50px">
                         {{ $product->name }}
                     </td>
                     <td>{{ $product->catalogue->name }}</td>
