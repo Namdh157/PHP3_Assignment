@@ -61,12 +61,25 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // echo json_encode($request->get('catalogue_id'));die;
-        // Validate Product
+        // echo json_encode(['success'=>'Success']);die;
+        // Validate
+        $validateErrors = [];
         $validateProduct = self::validateProduct($request);
-        if ($validateProduct !== true) {
-            return response()->json($validateProduct);
+        $variants = json_decode($request->get('variants'), true);
+
+        if (!empty($variants)) {
+            $validateVariant = self::validateVariant($variants);
+            $validateVariant !== true && $validateErrors['variant'] = $validateVariant;
         }
+        $validateProduct !== true && $validateErrors['product'] = $validateProduct;
+
+        if (!empty($validateErrors)) {
+            return response()->json([
+                "error" => "Failed to validate",
+                "data" => $validateErrors
+            ])->setStatusCode(500);
+        }
+
         // Upload Thumbnail
         $file = $request->file('thumbnail');
         $thumbnailPath = self::uploadImage($file);
@@ -98,7 +111,7 @@ class ProductController extends Controller
 
         // upload galleries
         $galery = $request->file('gallery');
-        if(!empty($galery)){
+        if (!empty($galery)) {
             foreach ($galery as $key => $file) {
                 $galleryPath = self::uploadImage($file);
                 if ($galleryPath === false) {
@@ -115,15 +128,7 @@ class ProductController extends Controller
         }
 
         // Validate Variants
-        $variants = json_decode($request->get('variants'), true);
         if (!empty($variants)) {
-            $validateVariant = self::validateVariant($variants);
-            if ($validateVariant !== true) {
-                return response()->json([
-                    "error" => $validateVariant
-                ])->setStatusCode(500);
-            }
-
             foreach ($variants as $key => $variant) {
                 // Add Size
                 $size = Size::firstOrCreate(['size' => $variant['size']]);
@@ -158,16 +163,9 @@ class ProductController extends Controller
             }
         }
         return response()->json([
-            "success" => "Product has been created"
+            "success" => "Product has been created",
+            "data" => $product
         ])->setStatusCode(200);
-
-        // Add Attribute
-
-
-        // else echo json_encode($variants);
-        // return response()->json($request->get('variants'));
-        // $validator = self::validateProduct($request);
-        // echo json_encode($validator->errors());
     }
 
     /**
@@ -245,7 +243,7 @@ class ProductController extends Controller
             '*.color' => 'required',
             '*.size' => 'required',
             '*.price_regular' => 'required|numeric',
-            '*.price_sale' => 'required|numeric',
+            '*.price_sale' => 'required|numeric|lte:*.price_regular',
             '*.stock' => 'required|numeric',
             '*.is_active' => 'required|boolean',
         ];

@@ -129,6 +129,42 @@
     </div>
 </div>
 
+<!-- Post FormData - Set error validate -->
+<script>
+    async function postFormData(route, formData, callBackSuccess = null, callBackError = null) {
+        loading().on;
+        try {
+            const response = await fetch(route, {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            if (result.success) {
+                ToastCustom(result.success);
+                callBackSuccess && callBackSuccess(result.data);
+            } else throw new Error(JSON.stringify(result));
+        } catch (error) {
+            const response = JSON.parse(error.message);
+            console.log('Error:', response);
+            callBackError && callBackError(response.data);
+            ToastCustom(response.error || 'Something went wrong', 'error');
+        }
+        finally {
+            loading().off;
+        }
+    }
+
+    function setErrorValidate(fieldsNeedValid, errors = {}) {
+        for (const field in fieldsNeedValid) {
+            const error = fieldsNeedValid[field].closest('.group').querySelector('.error');
+            let errorText = '';
+            if(errors[field]) {
+                errorText = errors[field][0].replace(/\d+\./g, '')
+            }
+            error.innerHTML = errorText;
+        }
+    }
+</script>
 <!-- Confirm -->
 <script>
     function confirmDelete(event) {

@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 @section('content')
 
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <div class="container mt-3">
     <div class="d-flex justify-content-between">
         <div class="d-flex gap-2 align-items-center">
@@ -21,45 +20,56 @@
                 <div class="card-body">
                     <!-- Name -->
                     <div class="row mb-3">
-                        <div class="col">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                        <div class="group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                                <button class="btn btn-secondary input-group-text" id="basic-addon1" onclick="onRenderSlug(this)">
+                                    <i class="fa-solid fa-link"></i>
+                                    <span> Use as Slug</span>
+                                </button>
+                            </div>
+                            <div class="error"></div>
                         </div>
                     </div>
 
                     <!-- Brand - Catalogue -->
                     <div class="row mb-3">
-                        <div class="col-6">
+                        <div class="col-6 group">
                             <select class="form-select" name="brand" id="brand">
                                 <option selected>Choose Brand</option>
                                 @foreach ($allBrands as $key => $brand)
                                 <option value="{{$brand->id}}">{{$brand->name}}</option>
                                 @endforeach
                             </select>
+                            <div class="error"></div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 group">
                             <select class="form-select" name="catalogue" id="catalogue">
                                 <option selected>Choose Catalogue</option>
                                 @foreach ($allCatalogues as $key => $catalogue)
                                 <option value="{{$catalogue->id}}">{{$catalogue->name}}</option>
                                 @endforeach
                             </select>
+                            <div class="error"></div>
                         </div>
                     </div>
 
                     <!-- Slug - Sku -->
                     <div class="row mb-3">
-                        <div class="col-6">
+                        <div class="col-6 group">
                             <label for="sku" class="form-label fw-bold">SKU</label>
-                            <div class="input-group mb-3">
+                            <div class="input-group">
                                 <input type="text" class="form-control" id="sku" name="sku" placeholder="ex: 2U99VABUKZ">
                                 <button class="btn btn-secondary input-group-text" id="basic-addon1" onclick="generateRandomSku()">
                                     <i class="fa-solid fa-shuffle"></i>
                                 </button>
                             </div>
+                            <div class="error"></div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 group">
                             <label for="slug" class="form-label fw-bold">Slug</label>
                             <input type="text" class="form-control" id="slug" name="slug" placeholder="ex: t-shirt-1998">
+                            <div class="error"></div>
                         </div>
                     </div>
 
@@ -110,10 +120,11 @@
                 <div class="card-header fw-bold">Media</div>
                 <div class="card-body">
                     <!-- Thumbnail -->
-                    <div class="mb-3">
+                    <div class="mb-3 group">
                         <label for="thumbnail" class="form-label">Thumbnail</label>
                         <input class="form-control" type="file" id="thumbnail-input" accept="image/*" />
                         <img src="" class="object-fit-contain mt-3 img-thumbnail" style="height: 100px;" id="thumbnail-img" alt="">
+                        <div class="error"></div>
                     </div>
 
                     <!-- Image container -->
@@ -134,109 +145,118 @@
     @csrf
 </form>
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <!-- Add Product -->
 <script>
     const onAddProduct = function() {
-        const name = document.getElementById('name').value;
-        const brand = document.getElementById('brand').value;
-        const catalogue = document.getElementById('catalogue').value;
-        const sku = document.getElementById('sku').value;
-        const slug = document.getElementById('slug').value;
-        const description = document.querySelector('textarea[name="description"]').value;
-        const content = document.querySelector('textarea[name="content"]').value;
+        // Product Information
+        const name = document.getElementById('name');
+        const brand_id = document.getElementById('brand');
+        const catalogue_id = document.getElementById('catalogue');
+        const sku = document.getElementById('sku');
+        const slug = document.getElementById('slug');
+        const description = document.querySelector('textarea[name="description"]');
+        const content = document.querySelector('textarea[name="content"]');
         const is_active = document.getElementById('is_active').checked ? 1 : 0;
-        const thumbnail = document.getElementById('thumbnail-input').files[0];
+        const thumbnail = document.getElementById('thumbnail-input');
         const gallery = document.getElementById('gallery').files;
         const variants = [];
         const variantItems = document.querySelectorAll('#variant-container > [data-variant]');
+        const fieldsInforNeedValid = {
+            name,
+            brand_id,
+            catalogue_id,
+            sku,
+            slug,
+            thumbnail
+        }
 
-
-        variantItems.forEach(variant => {
-            const size = variant.querySelector('input[name="size"]').value;
-            const color = variant.querySelector('input[name="color"]').value;
-            const stock = variant.querySelector('input[name="stock"]').value;
-            const price_regular = variant.querySelector('input[name="price_regular"]').value;
-            const price_sale = variant.querySelector('input[name="price_sale"]').value;
+        // Variant
+        const fieldsVariantNeedValid = [];
+        variantItems.forEach((variant, index) => {
+            const size = variant.querySelector('input[name="size"]');
+            const color = variant.querySelector('input[name="color"]');
+            const stock = variant.querySelector('input[name="stock"]');
+            const price_regular = variant.querySelector('input[name="price_regular"]');
+            const price_sale = variant.querySelector('input[name="price_sale"]');
             const is_active = variant.querySelector('input[name="is_active"]').checked;
+
+            let field = {};
+            field[`${index}.size`] = size;
+            field[`${index}.color`] = color;
+            field[`${index}.stock`] = stock;
+            field[`${index}.price_regular`] = price_regular;
+            field[`${index}.price_sale`] = price_sale;
+            fieldsVariantNeedValid.push(field);
+
             variants.push({
-                size: size.toUpperCase(),
-                color: color.toLowerCase(),
-                stock,
-                price_regular,
-                price_sale,
-                is_active
+                size: size.value.toUpperCase(),
+                color: color.value.toLowerCase(),
+                stock: stock.value,
+                price_regular: price_regular.value,
+                price_sale: price_sale.value === '' ? price_regular.value : price_sale.value,
+                is_active: is_active ? 1 : 0
             });
         })
-        console.log("Variants: ", variants);
 
-        // Validate same variant
         const isSameVariant = variants.some((variant, index) => {
             return variants.findIndex((v, i) => {
                 return v.size === variant.size && v.color === variant.color && i !== index;
             }) !== -1;
         });
         if (isSameVariant) {
-            alert('Please check your variant');
+            ToastCustom('Exist the same variant', 'error');
             return;
         }
 
         const formData = new FormData(document.querySelector('#addForm'));
-        formData.append('name', name);
-        formData.append('brand_id', brand);
-        formData.append('catalogue_id', catalogue);
-        formData.append('sku', sku);
-        formData.append('slug', slug);
-        formData.append('description', description);
-        formData.append('content', content);
+        formData.append('name', name.value);
+        formData.append('brand_id', brand_id.value);
+        formData.append('catalogue_id', catalogue_id.value);
+        formData.append('sku', sku.value);
+        formData.append('slug', slug.value);
+        formData.append('description', description.value);
+        formData.append('content', content.value);
         formData.append('is_active', is_active);
-        formData.append('thumbnail', thumbnail);
+        formData.append('thumbnail', thumbnail.files[0]);
         for (let i = 0; i < gallery.length; i++) {
             formData.append('gallery[]', gallery[i]);
         }
         formData.append('variants', JSON.stringify(variants));
 
-        fetch("{{ route('admin.product.store') }}", {
-                method: 'POST',
-                body: formData
-            }).then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    Toastify({
-                        text: data.success,
-                        duration: 3000,
-                        destination: "https://github.com/apvarun/toastify-js",
-                        newWindow: true,
-                        close: true,
-                        gravity: "top", // `top` or `bottom`
-                        position: "right", // `left`, `center` or `right`
-                        style: {
-                            background: "green",
-                        }
-                    }).showToast();
+        // Handle Request
+        const successCallback = function(res) {
+            console.log("Success Callback ", res);
+            ToastCustom('Add product success');
+            setTimeout(() => {
+                if (confirm('Do you want to add more product?')) {
+                    window.location.reload();
+                } else {
+                    window.location.href = "{{ $httpReferer }}";
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Toastify({
-                    text: "Something went wrong",
-                    duration: 3000,
-                    destination: "https://github.com/apvarun/toastify-js",
-                    newWindow: true,
-                    close: true,
-                    gravity: "top", // `top` or `bottom`
-                    position: "right", // `left`, `center` or `right`
-                    style: {
-                        background: "red",
-                    }
-                }).showToast();
-            });
+            },1000);
+        }
+        const errorCallback = function(errors) {
+            setErrorValidate(fieldsInforNeedValid, errors.product || {});
+            if (fieldsVariantNeedValid.length > 0) {
+                fieldsVariantNeedValid.forEach((field, index) => {
+                    setErrorValidate(field, errors.variant || {});
+                });
+            }
+        }
+        postFormData("{{ route('admin.product.store') }}", formData, successCallback, errorCallback);
     }
 </script>
 
 <!-- Event Handlers -->
 <script>
-    const onChangeActive = function(checkbox) {
+    function onRenderSlug(button) {
+        const slug = document.getElementById('slug');
+        const name = button.closest('.group').querySelector('input[name="name"]').value;
+        const slugValue = name.toLowerCase().replace(/ /g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+        slug.value = slugValue;
+    }
+
+    function onChangeActive(checkbox) {
         const activeContainer = document.getElementById('active-container');
         if (checkbox.checked) activeContainer.classList.add('bg-info');
         else activeContainer.classList.contains('bg-info') && activeContainer.classList.remove('bg-info');
@@ -266,29 +286,35 @@
             variant.id = `variant-${variantIndex}`;
             variant.dataset.variant = variantIndex;
             variant.innerHTML = `
-                <div class="mb-3 col mx-0">
+                <div class="mb-3 col mx-0 group">
                     <input type="text" class="form-control" id="size-${variantIndex}" name="size" placeholder="Size">
+                    <div class="error"></div>
                 </div>
-                <div class="mb-3 col mx-0">
+                <div class="mb-3 col mx-0 group">
                     <input type="text" class="form-control" id="color-${variantIndex}" name="color" placeholder="Color">
+                    <div class="error"></div>
                 </div>
-                <div class="mb-3 col mx-0">
+                <div class="mb-3 col mx-0 group">
                     <input type="number" class="form-control" id="stock-${variantIndex}" name="stock" placeholder="Stock">
+                    <div class="error"></div>
                 </div>
-                <div class="mb-3 col-6 mx-0">
-                    <div class="input-group mb-3">
-                        <input type="numer" class="form-control" id="price_regular-${variantIndex}" name="price_regular" placeholder="Price Original">
+                <div class="mb-3 pb-3 col-6 mx-0 group">
+                    <div class="input-group">
+                        <input type="numer" class="form-control" id="price_regular-${variantIndex}" name="price_regular" placeholder="Origin Price">
                         <span class="input-group-text">$</span>
                     </div>
+                    <div class="error"></div>
                 </div>
-                <div class="mb-3 col-6 mx-0">
-                    <div class="input-group mb-3">
+                <div class="mb-3 pb-3 col-6 mx-0 group">
+                    <div class="input-group">
                         <input type="number" class="form-control" id="price_sale-${variantIndex}" name="price_sale" placeholder="Price Sale">
                         <span class="input-group-text">$</span>
                     </div>
+                    <div class="error"></div>
                 </div>
                 <button class="btn btn-outline-danger p-1 px-2 position-absolute" style="font-size: 14px; top: 3px; right: 3px; width: max-content" onclick="deleteVariant(this)">X</button>
                 <div class="form-check form-switch position-absolute" style="top: 3px; left: 10px">
+                    <span class="ms-2 fw-bold">Variant ${variantIndex + 1}</span>
                     <input class="form-check-input" type="checkbox" name="is_active" checked>
                 </div>
             `;
