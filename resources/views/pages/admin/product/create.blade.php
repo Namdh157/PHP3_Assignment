@@ -224,18 +224,16 @@
         formData.append('variants', JSON.stringify(variants));
 
         // Handle Request
-        const successCallback = function(res) {
-            console.log("Success Callback ", res);
-            ToastCustom('Add product success');
+        function successCallback (res) {
             setTimeout(() => {
                 if (confirm('Do you want to add more product?')) {
                     window.location.reload();
                 } else {
                     window.location.href = "{{ $httpReferer }}";
                 }
-            },1000);
+            },1500);
         }
-        const errorCallback = function(errors) {
+        function errorCallback(errors) {
             setErrorValidate(fieldsInforNeedValid, errors.product || {});
             if (fieldsVariantNeedValid.length > 0) {
                 fieldsVariantNeedValid.forEach((field, index) => {
@@ -243,6 +241,7 @@
                 });
             }
         }
+        // Send request
         postFormData("{{ route('admin.product.store') }}", formData, successCallback, errorCallback);
     }
 </script>

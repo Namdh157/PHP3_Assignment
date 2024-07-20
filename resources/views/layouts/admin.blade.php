@@ -165,6 +165,7 @@
         }
     }
 </script>
+
 <!-- Confirm -->
 <script>
     function confirmDelete(event) {

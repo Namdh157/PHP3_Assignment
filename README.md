@@ -7,6 +7,11 @@
 # Run server
 `php artisan serve`
 
+# Controller Method
+ - 
+   <!-- @return: path <String> | false -->
+   `uploadImage ($file)`
+
 # Common Method
  -  
     <!-- @message: String -->

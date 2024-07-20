@@ -13,12 +13,13 @@
         <table class="table">
             <thead>
                 <tr class="table-primary">
-                    <th class="col-1">#</th>
-                    <th class="col-2">SKU</th>
-                    <th class="col-3">Product</th>
-                    <th class="col-2">Catalogue</th>
-                    <th class="col-2">Status</th>
-                    <th class="col">Action</th>
+                    <th class="">#</th>
+                    <th class="">SKU</th>
+                    <th class="">Product</th>
+                    <th class="">Catalogue</th>
+                    <th class="">Variant</th>
+                    <th class="">Status</th>
+                    <th class="">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,7 @@
                         {{ $product->name }}
                     </td>
                     <td>{{ $product->catalogue->name }}</td>
+                    <td>{{ $product->productVariants->count() }}</td>
                     <td>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" {{$product->is_active ? 'checked':''}} />

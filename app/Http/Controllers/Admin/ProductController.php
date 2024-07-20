@@ -19,6 +19,7 @@ class ProductController extends Controller
     const SIDE_BAR = 'product';
     public function index()
     {
+        // Pagination
         $totalPage = ceil(Product::query()->count() / $this->itemPerPage);
         $curPage = $_GET['page'] ?? 1;
         if ($curPage < 1)  $curPage = 1;
@@ -26,7 +27,8 @@ class ProductController extends Controller
         $curPath = $_SERVER['PATH_INFO'];
         $pageArray = range(1, $totalPage);
 
-        $products = Product::query()->with('catalogue')->latest('id');
+        // Get Data
+        $products = Product::query()->with(['catalogue', 'productVariants'])->latest('id');
         return view(self::PATH_VIEW . __FUNCTION__, [
             'title' => 'All Product',
             'sidebar' => self::SIDE_BAR,
@@ -61,7 +63,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // echo json_encode(['success'=>'Success']);die;
         // Validate
         $validateErrors = [];
         $validateProduct = self::validateProduct($request);
@@ -77,7 +78,7 @@ class ProductController extends Controller
             return response()->json([
                 "error" => "Failed to validate",
                 "data" => $validateErrors
-            ])->setStatusCode(500);
+            ]);
         }
 
         // Upload Thumbnail
@@ -86,7 +87,7 @@ class ProductController extends Controller
         if ($thumbnailPath === false) {
             return response()->json([
                 "error" => "Failed to upload thumbnail"
-            ])->setStatusCode(500);
+            ]);
         }
 
         // Create Product
@@ -106,7 +107,7 @@ class ProductController extends Controller
         if (!$product) {
             return response()->json([
                 "error" => "Failed to create product"
-            ])->setStatusCode(500);
+            ]);
         }
 
         // upload galleries
@@ -117,7 +118,7 @@ class ProductController extends Controller
                 if ($galleryPath === false) {
                     return response()->json([
                         "error" => "Failed to upload gallery"
-                    ])->setStatusCode(500);
+                    ]);
                 } else {
                     ProductGallery::create([
                         'product_id' => $product->id,
@@ -135,14 +136,14 @@ class ProductController extends Controller
                 if (!$size) {
                     return response()->json([
                         "error" => "Failed to create size"
-                    ])->setStatusCode(500);
+                    ]);
                 }
                 // Add Color
                 $color = Color::firstOrCreate(['color' => $variant['color']]);
                 if (!$color) {
                     return response()->json([
                         "error" => "Failed to create color"
-                    ])->setStatusCode(500);
+                    ]);
                 }
                 // Add Variant
                 $variant = ProductVariant::create([
@@ -158,7 +159,7 @@ class ProductController extends Controller
                 if (!$variant) {
                     return response()->json([
                         "error" => "Failed to create variant"
-                    ])->setStatusCode(500);
+                    ]);
                 }
             }
         }
