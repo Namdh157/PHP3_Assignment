@@ -4,10 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthMiddleware
+class AuthLoggedMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,10 +15,9 @@ class AuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::user();
-        // echo "Middleware Auth: {$user->email}<br>";
+        $user = $request->user();
         if (!$user) {
-            return redirect()->route('home')->with('error', 'You are not allowed to access this page');
+            return redirect()->route('login.form')->with('error', 'You need to login to access this page');
         }
         return $next($request);
     }

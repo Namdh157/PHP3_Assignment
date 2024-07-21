@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,12 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->route('admin.dashboard')->with('success', 'Welcome back, ' . Auth::user()->name);
+            if(Auth::user()->role === User::TYPE_ADMIN) {
+                return redirect()->route('admin.dashboard')->with('success', 'Welcome back, ' . Auth::user()->name);
+            }
+            else {
+                return redirect()->route('home')->with('success', 'Welcome back, ' . Auth::user()->name);
+            }
         }
 
         return redirect()->back()->with('error', 'Email or password is incorrect');
@@ -45,4 +51,5 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('login.form')->with('success', 'You have been logged out');
     }
+
 }

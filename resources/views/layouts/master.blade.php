@@ -199,8 +199,12 @@
         function loading() {
             const loadingSpiner = document.getElementById('loading-spiner');
             return {
-                on: loadingSpiner.classList.add('active'),
-                off: loadingSpiner.classList.contains('active') && loadingSpiner.classList.remove('active')
+                on: () => {
+                    loadingSpiner.classList.add('active')
+                },
+                off: () => {
+                    loadingSpiner.classList.contains('active') && loadingSpiner.classList.remove('active')
+                }
             }
         }
     </script>

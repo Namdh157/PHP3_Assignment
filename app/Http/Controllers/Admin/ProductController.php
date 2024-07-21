@@ -17,27 +17,39 @@ class ProductController extends Controller
 {
     const PATH_VIEW = 'pages.admin.product.';
     const SIDE_BAR = 'product';
+    private $model;
+    function __construct()
+    {
+        $this->model = new Product();
+    }
     public function index()
     {
-        // Pagination
-        $totalPage = ceil(Product::query()->count() / $this->itemPerPage);
+        // Get Data
         $curPage = $_GET['page'] ?? 1;
         if ($curPage < 1)  $curPage = 1;
-        if ($curPage > $totalPage) $curPage = $totalPage;
-        $curPath = $_SERVER['PATH_INFO'];
+        $products = $this->model->query()
+            ->with(['catalogue'])
+            ->withCount('productVariants')
+            ->latest('id')
+            ->paginate($this->model->getPerPage(), '*', 'products', $curPage);
+
+        // Pagination
+        $totalPage = $products->lastPage();
+        $curPath = $products->path();
         $pageArray = range(1, $totalPage);
 
-        // Get Data
-        $products = Product::query()->with(['catalogue', 'productVariants'])->latest('id');
         return view(self::PATH_VIEW . __FUNCTION__, [
             'title' => 'All Product',
             'sidebar' => self::SIDE_BAR,
-            'products' => $products->paginate(10, '*', 'products', $curPage),
+            'products' => $products,
             'totalPage' => $totalPage,
             'curPage' => $curPage,
             'curPath' => $curPath,
             'pageArray' => $pageArray,
-            'itemPerPage' => $this->itemPerPage
+            'itemPerPage' => $this->model->getPerPage(),
+            'breadcrumb' => [
+                ['title' => 'Product', 'route' => 'admin.product.index']
+            ]
         ]);
     }
 
@@ -54,7 +66,11 @@ class ProductController extends Controller
             'sidebar' => self::SIDE_BAR,
             'httpReferer' => $httpReferer,
             'allBrands' => $allBrands,
-            'allCatalogues' => $allCatalogues
+            'allCatalogues' => $allCatalogues,
+            'breadcrumb' => [
+                ['title' => 'Product', 'route' => 'admin.product.index'],
+                ['title' => 'Add', 'route' => 'admin.product.create']
+            ]
         ]);
     }
 
@@ -66,14 +82,17 @@ class ProductController extends Controller
         // Validate
         $validateErrors = [];
         $validateProduct = self::validateProduct($request);
-        $variants = json_decode($request->get('variants'), true);
+        $variants = json_decode($request->get('variants'), true); // Convert JSON to Array
 
+        // Nếu có variants thì validate
         if (!empty($variants)) {
             $validateVariant = self::validateVariant($variants);
             $validateVariant !== true && $validateErrors['variant'] = $validateVariant;
         }
+        // Nếu Product chưa valid thì push vào mảng validateErrors
         $validateProduct !== true && $validateErrors['product'] = $validateProduct;
 
+        // Nếu tất cả chưa valid thì trả về lỗi
         if (!empty($validateErrors)) {
             return response()->json([
                 "error" => "Failed to validate",
@@ -128,24 +147,23 @@ class ProductController extends Controller
             }
         }
 
-        // Validate Variants
+        // Nếu có variants thì tạo
         if (!empty($variants)) {
             foreach ($variants as $key => $variant) {
-                // Add Size
+                // Tạo size, color. Nếu đã có thì lấy ra
                 $size = Size::firstOrCreate(['size' => $variant['size']]);
                 if (!$size) {
                     return response()->json([
                         "error" => "Failed to create size"
                     ]);
                 }
-                // Add Color
                 $color = Color::firstOrCreate(['color' => $variant['color']]);
                 if (!$color) {
                     return response()->json([
                         "error" => "Failed to create color"
                     ]);
                 }
-                // Add Variant
+                // Tạo variant
                 $variant = ProductVariant::create([
                     'product_id' => $product->id,
                     'size_id' => $size->id,
@@ -163,6 +181,7 @@ class ProductController extends Controller
                 }
             }
         }
+        // Trả về thông báo thành công với data
         return response()->json([
             "success" => "Product has been created",
             "data" => $product
@@ -175,11 +194,13 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $httpReferer = $_SERVER['HTTP_REFERER'];
-        $product = Product::with(['brand', 'catalogue', 'productGalleries', 'productVariants.variantColor', 'productVariants.variantSize'])->find($product->id);
+        $product = Product::
+            with(['brand', 'catalogue', 'productGalleries', 'productVariants.variantColor', 'productVariants.variantSize'])
+            ->find($product->id);
         $maxPrice = $product->productVariants->max('price_regular') ?? 0;
         $minPrice = $product->productVariants->min('price_regular') ?? 0;
         $totalStock = $product->productVariants->sum('stock');
-        // dd($product->productVariants)->toArray();
+
         return view(self::PATH_VIEW . __FUNCTION__, [
             'title' => 'Product Detail',
             'sidebar' => self::SIDE_BAR,
@@ -187,7 +208,11 @@ class ProductController extends Controller
             'maxPrice' => $maxPrice,
             'minPrice' => $minPrice,
             'totalStock' => $totalStock,
-            'httpReferer' => $httpReferer
+            'httpReferer' => $httpReferer,
+            'breadcrumb' => [
+                ['title' => 'Product', 'route' => 'admin.product.index'],
+                ['title' => 'Detail', 'route' => 'admin.product.show', 'params' => $product->sku]
+            ]
         ]);
     }
 

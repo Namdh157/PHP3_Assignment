@@ -2,14 +2,8 @@
 @section('content')
 
 <div class="container mt-3">
-    <div class="d-flex justify-content-between">
-        <div class="d-flex gap-2 align-items-center">
-            <a href="{{ $httpReferer }}" class="fs-6 btn btn-primary">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
-            <h3>Add Product</h3>
-        </div>
-        <button class="btn btn-success" onclick="onAddProduct()">Save</button>
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-success px-4" onclick="onAddProduct()">Save</button>
     </div>
     <hr>
     <div class="row">

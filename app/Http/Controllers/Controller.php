@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
-    protected $itemPerPage = 10;
 
     /**
      * Summary of uploadImage
