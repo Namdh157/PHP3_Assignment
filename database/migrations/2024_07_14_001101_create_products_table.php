@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Brand::class)->constrained();
             $table->string('name');
             $table->string('slug')->unique()->comment('Đường dẫn thân thiện'); 
-            $table->string('sku')->unique()->comment('Mã sản phẩm');
+            $table->string('sku', 10)->unique()->comment('Mã sản phẩm');
             $table->string('image_thumbnail');
             $table->string('description')->nullable();
             $table->text('content')->nullable();
