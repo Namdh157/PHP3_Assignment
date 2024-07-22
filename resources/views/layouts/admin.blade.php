@@ -112,6 +112,23 @@
     .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
     }
+    :root{
+        --bs-body-font-size: 0.9rem;
+    }
+    .btn{
+        --bs-btn-font-size: 0.9rem;
+    }
+    .form-select{
+        --bs-form-select-font-size: 0.9rem;
+        font-size: 0.9rem;
+    }
+    .form-control{
+        --bs-form-control-font-size: 0.9rem;
+        font-size: 0.9rem;
+    }
+    .dropdown-menu{
+        --bs-dropdown-font-size: 0.9rem;
+    }
 </style>
 
 <!-- @include('pages.admin.components.header') -->
@@ -131,24 +148,23 @@
                         </a>
                     </li>
                     @foreach ($breadcrumb as $key => $item)
-                        @if ($key == count($breadcrumb) - 1)
-                            <li class="breadcrumb-item active" aria-current="page">
-                                {{ $item['title'] }}
-                            </li>
-                        @endif
-                        @if ($key < count($breadcrumb) - 1)
-                            <li class="breadcrumb-item">
-                                <a class="link-body-emphasis fw-semibold text-decoration-none" href="{{route($item['route'])}}">
-                                    {{ $item['title'] }}
-                                </a>
-                            </li>
+                    @if ($key == count($breadcrumb) - 1)
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {{ $item['title'] }}
+                    </li>
+                    @endif
+                    @if ($key < count($breadcrumb) - 1) <li class="breadcrumb-item">
+                        <a class="link-body-emphasis fw-semibold text-decoration-none" href="{{route($item['route'])}}">
+                            {{ $item['title'] }}
+                        </a>
+                        </li>
                         @endif
                         @if (isset($item['params']))
-                            <li class="breadcrumb-item active" aria-current="page">
-                                {{ $item['params'] }}
-                            </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{ $item['params'] }}
+                        </li>
                         @endif
-                    @endforeach
+                        @endforeach
                 </ol>
             </nav>
 
@@ -162,12 +178,23 @@
 
 <!-- Post FormData - Set error validate -->
 <script>
-    async function postFormData(route, formData, callBackSuccess = null, callBackError = null) {
+    async function postFormData(route, formData , callBackSuccess = null, callBackError = null, method = 'POST') {
+        // Transform method to POST if method is DELETE, PATCH, PUT
+        const otherMethod = ['DELETE', 'PATCH', 'PUT'];
+        if(otherMethod.includes(method.toUpperCase())){
+            formData.set('_method', method);
+            method = 'POST';
+        }
+
         loading().on();
         try {
             const response = await fetch(route, {
-                method: 'POST',
-                body: formData
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json',
+                },
+                method,
+                body: formData,
             });
             const result = await response.json();
             if (result.success) {

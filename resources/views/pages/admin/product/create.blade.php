@@ -203,19 +203,19 @@
         }
 
         const formData = new FormData(document.querySelector('#addForm'));
-        formData.append('name', name.value);
-        formData.append('brand_id', brand_id.value);
-        formData.append('catalogue_id', catalogue_id.value);
-        formData.append('sku', sku.value);
-        formData.append('slug', slug.value);
-        formData.append('description', description.value);
-        formData.append('content', content.value);
-        formData.append('is_active', is_active);
-        formData.append('thumbnail', thumbnail.files[0]);
+        formData.set('name', name.value);
+        formData.set('brand_id', brand_id.value);
+        formData.set('catalogue_id', catalogue_id.value);
+        formData.set('sku', sku.value);
+        formData.set('slug', slug.value);
+        formData.set('description', description.value);
+        formData.set('content', content.value);
+        formData.set('is_active', is_active);
+        formData.set('thumbnail', thumbnail.files[0]);
         for (let i = 0; i < gallery.length; i++) {
             formData.append('gallery[]', gallery[i]);
         }
-        formData.append('variants', JSON.stringify(variants));
+        formData.set('variants', JSON.stringify(variants));
 
         // Handle Request
         function successCallback (res) {

@@ -3,10 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Bill;
-use App\Models\BillStatus;
-use App\Models\PaymentMethod;
-use App\Models\Product;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +14,11 @@ class BillFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'customer_id' => $this->faker->numberBetween(1, 10),
+            'customer_name' => $this->faker->name,
+            'customer_phone' => $this->faker->phoneNumber,
+            'customer_email' => $this->faker->email,
+            'customer_address' => $this->faker->address,
             'quantity' => $this->faker->numberBetween(1, 5),
             'total_discount' => $this->faker->randomFloat(2, 10, 100),
             'total_price' => $this->faker->randomFloat(2, 20, 200),

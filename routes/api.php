@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\ProductApiController;
+use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+Route::middleware('auth.admin')->group(function () {
+    Route::patch('product/update-status', [ProductApiController::class, 'updateStatus'])
+        ->name('api.product.updateStatus');
+    Route::delete('product/delete-many', [ProductApiController::class, 'deleteMany'])
+        ->name('api.product.deleteMany');
 });

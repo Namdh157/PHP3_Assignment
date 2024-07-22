@@ -17,8 +17,11 @@ class AuthAdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
+        // dd($request->expectsJson());
         if (!$user || !$user->role || $user->role !== User::TYPE_ADMIN) {
-            return redirect()->route('home')->with('error', 'You are not allowed to access this page');
+            return $request->expectsJson() 
+                ? response()->json(['error' => 'You are not allowed to access this page'])
+                : redirect()->route('home')->with('error', 'You are not allowed to access this page');
         }
         return $next($request);
     }
