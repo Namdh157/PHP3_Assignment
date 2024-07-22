@@ -32,7 +32,7 @@
     <!-- @formData: FormData -->
     <!-- @callBackSuccess: function (data) { // } -->
     <!-- @callBackError: function (errors) { // } -->
-    `postFormData (route, formData, callBackSuccess = null, callBackError = null)`
+    `postFormData (route, formData, callBackSuccess = null, callBackError = null, method = 'POST')`
 
  - 
    <!-- @fieldsNeedValid: Object - this has key === key of errors -->

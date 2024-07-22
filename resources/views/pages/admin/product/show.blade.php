@@ -15,10 +15,16 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-7">
-                        <img src="{{ asset($product->image_thumbnail) }}" alt="" class="object-fit-contain rounded" style="height: 300px">
-                        @foreach ($product->productGalleries as $image)
-                            <img src="{{asset($image['image'])}}" alt="" class="object-fit-contain rounded" style="height: 70px">
-                        @endforeach
+                        <div id="image-detail">
+                            <div class="d-flex justify-content-center">
+                                <img src="{{ asset($product->image_thumbnail) }}" alt="" class="object-fit-contain rounded" style="height: 300px; max-width: 100%; object-position: center;" id="large-image">
+                            </div>
+                            <div id="small-image-container" class="mt-3 d-flex gap-2 border border-1 border-black p-2">
+                                @foreach ($product->productGalleries as $image)
+                                <img src="{{asset($image['image'])}}" alt="" class="object-fit-contain rounded" style="height: 70px">
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-5">
@@ -95,14 +101,10 @@
                             <td>{{ $variant->price_sale === null ? $variant->price_regular :  $variant->price_sale}}$</td>
                             <td>{{ $variant->stock }}</td>
                             <td>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled {{$variant->is_sale ? 'checked' : ''}}>
-                                </div>
+                                <input class="form-check-input" type="checkbox" onclick="((e)=>{e.preventDefault()})(event)" {{$variant->is_sale ? 'checked' : ''}}>
                             </td>
                             <td>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled {{$variant->is_active ? 'checked' : ''}}>
-                                </div>
+                                <input class="form-check-input" type="checkbox" onclick="((e)=>{e.preventDefault()})(event)" {{$variant->is_active ? 'checked' : ''}}>
                             </td>
                         </tr>
                         @endforeach
@@ -114,6 +116,7 @@
 </div>
 
 @endsection
+
 
 <!-- file Javascript -->
 @section('script')
