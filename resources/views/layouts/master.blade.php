@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#712cf9">
     <title>{{$title}}</title>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -15,117 +16,20 @@
     <!-- cdn toast -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
-    <meta name="theme-color" content="#712cf9">
+    <!-- Link custom -->
+    <link rel="stylesheet" href="{{asset('css/master/master.css')}}">
     <!-- csrf -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-<style>
-    .btn-bd-primary {
-        --bd-violet-bg: #712cf9;
-        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-        --bs-btn-font-weight: 600;
-        --bs-btn-color: var(--bs-white);
-        --bs-btn-bg: var(--bd-violet-bg);
-        --bs-btn-border-color: var(--bd-violet-bg);
-        --bs-btn-hover-color: var(--bs-white);
-        --bs-btn-hover-bg: #6528e0;
-        --bs-btn-hover-border-color: #6528e0;
-        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-        --bs-btn-active-color: var(--bs-btn-hover-color);
-        --bs-btn-active-bg: #5a23c8;
-        --bs-btn-active-border-color: #5a23c8;
-    }
-
-    .error {
-        font-size: 12px;
-        color: #ff5858;
-        margin-left: 15px;
-        font-weight: 600;
-    }
-
-    #loading-spiner {
-        background-color: #0000006b;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 9999;
-        display: none;
-    }
-
-    #loading-spiner.active {
-        display: block;
-    }
-
-    .simple-spinner {
-        width: 30px;
-        height: 30px;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .simple-spinner span {
-        display: block;
-        width: 30px;
-        height: 30px;
-        border: 3px solid transparent;
-        border-radius: 50%;
-        border-right-color: rgba(255, 255, 255, 0.7);
-        animation: spinner-anim 0.8s linear infinite;
-    }
-
-    @keyframes spinner-anim {
-        from {
-            transform: rotate(0);
-        }
-
-        to {
-            transform: rotate(360deg);
-        }
-    }
-</style>
 
 <body>
-    <!-- Toast cnd -->
+    <!-- cnd toast js -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script>
-        function ToastCustom(message, type = 'success') {
-            let bg = '#198754';
-            switch (type) {
-                case 'success':
-                    bg = '#198754';
-                    break;
-                case 'error':
-                    bg = '#dc3545';
-                    break;
-                case 'warning':
-                    bg = '#ffc107';
-                    break;
-                case 'info':
-                    bg = '#0dcaf0';
-                    break;
-            }
+    <script src="{{asset('js/master/master.js')}}"></script>
 
-            Toastify({
-                text: message,
-                duration: 3000,
-                newWindow: true,
-                close: true,
-                gravity: "top",
-                position: 'right',
-                style: {
-                    background: bg,
-                },
-                stopOnFocus: true,
-            }).showToast();
-        }
-    </script>
 
     @yield('layout')
+
 
     <!-- Theme -->
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -143,9 +47,12 @@
             <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
         </symbol>
     </svg>
-
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-        <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+        <button 
+            class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" 
+            id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)"
+            style="background-color: var(--bs-btn-hover-bg); color: var(--bs-btn-hover-color);"
+        >
             <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
                 <use href="#circle-half"></use>
             </svg>
@@ -188,114 +95,17 @@
         </ul>
     </div>
 
-
     <!-- Loading Spiner -->
     <div id="loading-spiner">
         <div class="simple-spinner">
             <span></span>
         </div>
     </div>
-    <script>
-        function loading() {
-            const loadingSpiner = document.getElementById('loading-spiner');
-            return {
-                on: () => {
-                    loadingSpiner.classList.add('active')
-                },
-                off: () => {
-                    loadingSpiner.classList.contains('active') && loadingSpiner.classList.remove('active')
-                }
-            }
-        }
-    </script>
-
-    <!-- Custom Confirm -->
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-    </button>
-
 
     @yield('script')
+
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <!-- Change Theme Script -->
-    <script>
-        (() => {
-            'use strict'
-
-            const getStoredTheme = () => localStorage.getItem('theme')
-            const setStoredTheme = theme => localStorage.setItem('theme', theme)
-
-            const getPreferredTheme = () => {
-                const storedTheme = getStoredTheme()
-                if (storedTheme) {
-                    return storedTheme
-                }
-
-                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-            }
-
-            const setTheme = theme => {
-                if (theme === 'auto') {
-                    document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
-                } else {
-                    document.documentElement.setAttribute('data-bs-theme', theme)
-                }
-            }
-
-            setTheme(getPreferredTheme())
-
-            const showActiveTheme = (theme, focus = false) => {
-                const themeSwitcher = document.querySelector('#bd-theme')
-
-                if (!themeSwitcher) {
-                    return
-                }
-
-                const themeSwitcherText = document.querySelector('#bd-theme-text')
-                const activeThemeIcon = document.querySelector('.theme-icon-active use')
-                const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
-                const svgOfActiveBtn = btnToActive.querySelector('svg use').getAttribute('href')
-
-                document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
-                    element.classList.remove('active')
-                    element.setAttribute('aria-pressed', 'false')
-                })
-
-                btnToActive.classList.add('active')
-                btnToActive.setAttribute('aria-pressed', 'true')
-                activeThemeIcon.setAttribute('href', svgOfActiveBtn)
-                const themeSwitcherLabel = `${themeSwitcherText.textContent} (${btnToActive.dataset.bsThemeValue})`
-                themeSwitcher.setAttribute('aria-label', themeSwitcherLabel)
-
-                if (focus) {
-                    themeSwitcher.focus()
-                }
-            }
-
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-                const storedTheme = getStoredTheme()
-                if (storedTheme !== 'light' && storedTheme !== 'dark') {
-                    setTheme(getPreferredTheme())
-                }
-            })
-
-            window.addEventListener('DOMContentLoaded', () => {
-                showActiveTheme(getPreferredTheme())
-
-                document.querySelectorAll('[data-bs-theme-value]')
-                    .forEach(toggle => {
-                        toggle.addEventListener('click', () => {
-                            const theme = toggle.getAttribute('data-bs-theme-value')
-                            setStoredTheme(theme)
-                            setTheme(theme)
-                            showActiveTheme(theme, true)
-                        })
-                    })
-            })
-        })()
-    </script>
 </body>
 
 </html>

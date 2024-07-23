@@ -5,8 +5,6 @@ html {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
-
 form {
     width: 300px;
 }
@@ -16,18 +14,7 @@ form {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-    /* padding: 50px 0px; */
 }
-
-/* .login-container {
-    background: rgb(255 255 255 / 10%);
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-} */
 
 .login-box {
     position: fixed;
@@ -70,7 +57,3 @@ form {
     color: #fff;
     margin-left: 10px;
 }
-
-/* .login-box a {
-    color: #ffffff;
-} */
