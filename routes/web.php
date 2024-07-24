@@ -47,3 +47,7 @@ Route::get('/', function () {
         'title' => 'Home'
     ]);
 })->name('home');
+
+Route::get('/product/{slug}', function () {
+    return view('pages.public.productDetail.index');
+})->name('public.product.detail');

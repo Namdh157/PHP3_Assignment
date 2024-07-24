@@ -193,27 +193,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $httpReferer = $_SERVER['HTTP_REFERER'];
-        $product = Product::
-            with(['brand', 'catalogue', 'productGalleries', 'productVariants.variantColor', 'productVariants.variantSize'])
-            ->find($product->id);
-        $maxPrice = $product->productVariants->max('price_regular') ?? 0;
-        $minPrice = $product->productVariants->min('price_regular') ?? 0;
-        $totalStock = $product->productVariants->sum('stock');
-
-        return view(self::PATH_VIEW . __FUNCTION__, [
-            'title' => 'Product Detail',
-            'sidebar' => self::SIDE_BAR,
-            'product' => $product,
-            'maxPrice' => $maxPrice,
-            'minPrice' => $minPrice,
-            'totalStock' => $totalStock,
-            'httpReferer' => $httpReferer,
-            'breadcrumb' => [
-                ['title' => 'Product', 'route' => 'admin.product.index'],
-                ['title' => 'Detail', 'route' => 'admin.product.show', 'params' => $product->sku]
-            ]
-        ]);
+        return redirect()->route('public.product.detail', ['slug' => $product->slug]);
     }
 
     /**
