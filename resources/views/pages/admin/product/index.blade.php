@@ -31,6 +31,8 @@
                     <th class="">Brand</th>
                     <th class="">Variant</th>
                     <th class="">Active</th>
+                    <th class="">Updated</th>
+                    <th class="">Created</th>
                     <th class="">Action</th>
                 </tr>
             </thead>
@@ -53,6 +55,12 @@
                     <td>{{ $product->product_variants_count }}</td>
                     <td>
                         <input class="form-check-input" type="checkbox" onclick="((e)=>{e.preventDefault()})(event)" {{$product->is_active ? 'checked':''}} name="active-item">
+                    </td>
+                    <td>
+                        <span class="text-muted text-nowrap">{{ $product->updated_at->diffForHumans() }}</span>
+                    </td>
+                    <td>
+                        <span class="text-muted text-nowrap">{{ $product->created_at->diffForHumans() }}</span>
                     </td>
                     <td>
                         <a href="{{ route('admin.product.edit', $product) }}" class="btn btn-outline-info">
@@ -89,6 +97,7 @@
 <script>
     const routeUpdate = "{{ route('api.product.updateStatus') }}";
     const routeDelete = "{{ route('api.product.deleteMany') }}";
+    const httpReferer = "{{isset($httpReferer)? $httpReferer : asset('admin.product.index')}}"
 </script>
 <script src="{{asset('js/admin/selectIndex.js')}}"></script>
 @endsection
