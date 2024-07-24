@@ -112,22 +112,116 @@
     .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
     }
+    :root{
+        --bs-body-font-size: 0.9rem;
+    }
+    .btn{
+        --bs-btn-font-size: 0.9rem;
+    }
+    .form-select{
+        --bs-form-select-font-size: 0.9rem;
+        font-size: 0.9rem;
+    }
+    .form-control{
+        --bs-form-control-font-size: 0.9rem;
+        font-size: 0.9rem;
+    }
+    .dropdown-menu{
+        --bs-dropdown-font-size: 0.9rem;
+    }
 </style>
 
-@include('pages.admin.components.icon')
-@include('pages.admin.components.header')
+<!-- @include('pages.admin.components.header') -->
 
-<div class="container-fluid">
-    <div class="row position-relative">
+<div class="container-fluid ps-0">
+    <div class="d-flex position-relative">
         <!-- Include Sidebar -->
         @include('pages.admin.components.sidebar')
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="px-0 flex-fill">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary">
+                    <li class="breadcrumb-item">
+                        <a class="link-body-emphasis" href="{{route('admin.dashboard')}}">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </a>
+                    </li>
+                    @foreach ($breadcrumb as $key => $item)
+                    @if ($key == count($breadcrumb) - 1)
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {{ $item['title'] }}
+                    </li>
+                    @endif
+                    @if ($key < count($breadcrumb) - 1) <li class="breadcrumb-item">
+                        <a class="link-body-emphasis fw-semibold text-decoration-none" href="{{route($item['route'])}}">
+                            {{ $item['title'] }}
+                        </a>
+                        </li>
+                        @endif
+                        @if (isset($item['params']))
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{ $item['params'] }}
+                        </li>
+                        @endif
+                        @endforeach
+                </ol>
+            </nav>
+
             <!-- Content -->
-            @yield('content')
-        </main>
+            <main class="ms-sm-auto px-md-4">
+                @yield('content')
+            </main>
+        </div>
     </div>
 </div>
+
+<!-- Post FormData - Set error validate -->
+<script>
+    async function postFormData(route, formData , callBackSuccess = null, callBackError = null, method = 'POST') {
+        // Transform method to POST if method is DELETE, PATCH, PUT
+        const otherMethod = ['DELETE', 'PATCH', 'PUT'];
+        if(otherMethod.includes(method.toUpperCase())){
+            formData.set('_method', method);
+            method = 'POST';
+        }
+
+        loading().on();
+        try {
+            const response = await fetch(route, {
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json',
+                },
+                method,
+                body: formData,
+            });
+            const result = await response.json();
+            if (result.success) {
+                ToastCustom(result.success);
+                callBackSuccess && callBackSuccess(result.data);
+            } else throw new Error(JSON.stringify(result));
+        } catch (error) {
+            const response = JSON.parse(error.message);
+            console.log('Error:', response);
+            callBackError && callBackError(response.data);
+            ToastCustom(response.error || 'Something went wrong', 'error');
+        } finally {
+            loading().off();
+        }
+    }
+
+    function setErrorValidate(fieldsNeedValid, errors = {}) {
+        for (const field in fieldsNeedValid) {
+            const error = fieldsNeedValid[field].closest('.group').querySelector('.error');
+            let errorText = '';
+            if (errors[field]) {
+                errorText = errors[field][0].replace(/\d+\./g, '')
+            }
+            error.innerHTML = errorText;
+        }
+    }
+</script>
 
 <!-- Confirm -->
 <script>

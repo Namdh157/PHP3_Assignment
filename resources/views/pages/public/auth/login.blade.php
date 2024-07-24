@@ -13,7 +13,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-form-label text-light">Password</label>
-                    <input id="password" type="password" class="form-control rounded-pill border border-2 " name="password" placeholder="Password" required autocomplete="current-password">
+                    <input value="password" id="password" type="password" class="form-control rounded-pill border border-2 " name="password" placeholder="Password" required autocomplete="current-password">
                 </div>
                 <div class="d-flex gap-2">
                     <button type="reset" class="btn btn-secondary btn-block mt-3 rounded-pill p-2 flex-fill">

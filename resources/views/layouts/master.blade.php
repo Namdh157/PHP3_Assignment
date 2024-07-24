@@ -12,6 +12,8 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <!-- Cdn Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- cdn toast -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     <meta name="theme-color" content="#712cf9">
     <!-- csrf -->
@@ -34,9 +36,94 @@
         --bs-btn-active-bg: #5a23c8;
         --bs-btn-active-border-color: #5a23c8;
     }
+
+    .error {
+        font-size: 12px;
+        color: #ff5858;
+        margin-left: 15px;
+        font-weight: 600;
+    }
+
+    #loading-spiner {
+        background-color: #0000006b;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        display: none;
+    }
+
+    #loading-spiner.active {
+        display: block;
+    }
+
+    .simple-spinner {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .simple-spinner span {
+        display: block;
+        width: 30px;
+        height: 30px;
+        border: 3px solid transparent;
+        border-radius: 50%;
+        border-right-color: rgba(255, 255, 255, 0.7);
+        animation: spinner-anim 0.8s linear infinite;
+    }
+
+    @keyframes spinner-anim {
+        from {
+            transform: rotate(0);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
 </style>
 
 <body>
+    <!-- Toast cnd -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        function ToastCustom(message, type = 'success') {
+            let bg = '#198754';
+            switch (type) {
+                case 'success':
+                    bg = '#198754';
+                    break;
+                case 'error':
+                    bg = '#dc3545';
+                    break;
+                case 'warning':
+                    bg = '#ffc107';
+                    break;
+                case 'info':
+                    bg = '#0dcaf0';
+                    break;
+            }
+
+            Toastify({
+                text: message,
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: 'right',
+                style: {
+                    background: bg,
+                },
+                stopOnFocus: true,
+            }).showToast();
+        }
+    </script>
 
     @yield('layout')
 
@@ -101,13 +188,35 @@
         </ul>
     </div>
 
-    <!-- Toast -->
-    @if (session('status'))
 
-    @endif
+    <!-- Loading Spiner -->
+    <div id="loading-spiner">
+        <div class="simple-spinner">
+            <span></span>
+        </div>
+    </div>
+    <script>
+        function loading() {
+            const loadingSpiner = document.getElementById('loading-spiner');
+            return {
+                on: () => {
+                    loadingSpiner.classList.add('active')
+                },
+                off: () => {
+                    loadingSpiner.classList.contains('active') && loadingSpiner.classList.remove('active')
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Confirm -->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button>
+
 
     @yield('script')
-
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- Change Theme Script -->

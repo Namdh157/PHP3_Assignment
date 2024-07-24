@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             'brand_id' => Brand::factory(),
             'name' => $this->faker->name(), 
             'slug' => $this->generateSlug(),
-            'sku' => $this->faker->unique()->regexify('[A-Z0-9]{8}'),
+            'sku' => $this->faker->unique()->regexify('[A-Z0-9]{10}'),
             'image_thumbnail' => 'https://picsum.photos/640/480',
             'description' => $this->faker->sentence(),
             'content' => $this->faker->text(),
