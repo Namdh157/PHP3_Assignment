@@ -89,6 +89,7 @@
 <script>
     const routeUpdate = "{{ route('api.product.updateStatus') }}";
     const routeDelete = "{{ route('api.product.deleteMany') }}";
+    const httpReferer = "{{isset($httpReferer)? $httpReferer : asset('admin.product.index')}}"
 </script>
 <script src="{{asset('js/admin/selectIndex.js')}}"></script>
 @endsection
