@@ -35,11 +35,11 @@
         <hr>
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{{Auth::user()->image}}" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong>{{Auth::user()->name}}</strong>
+                <img src="{{ asset(Auth::user()->image) }}" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>{{ Auth::user()->name }}</strong>
             </a>
-            <ul class="dropdown-menu text-small shadow" style="">
-                <li><a class="dropdown-item" href="{{asset('profile')}}">Profile</a></li>
+            <ul class="dropdown-menu text-small shadow">
+                <li><a class="dropdown-item" href="{{asset('public.profile')}}">Profile</a></li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>

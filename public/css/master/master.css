@@ -1,3 +1,21 @@
+:root{
+    --bs-body-font-size: 0.9rem;
+}
+.btn{
+    --bs-btn-font-size: 0.9rem;
+}
+.form-select{
+    --bs-form-select-font-size: 0.9rem;
+    font-size: 0.9rem;
+}
+.form-control{
+    --bs-form-control-font-size: 0.9rem;
+    font-size: 0.9rem;
+}
+.dropdown-menu{
+    --bs-dropdown-font-size: 0.9rem;
+}
+
 .btn-bd-primary {
     --bd-violet-bg: #712cf9;
     --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
