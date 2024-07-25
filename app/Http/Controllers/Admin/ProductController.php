@@ -208,8 +208,9 @@ class ProductController extends Controller
         $httpReferer = $_SERVER['HTTP_REFERER'] ?? route('admin.product.index');
         $allBrands = Brand::all();
         $allCatalogues = Catalogue::all();
-        $gallery = ProductGallery::where('product_id', $product->id)->get();
-        $variants = ProductVariant::where('product_id', $product->id)->with(['variantColor', 'variantSize'])->get();
+        $product = Product::with(['productGalleries', 'productVariants.variantColor', 'productVariants.variantSize'])->find($product->id);
+        $gallery = $product->productGalleries;
+        $variants = $product->productVariants->sortByDesc('created_at');
 
         return view(self::PATH_VIEW . 'product', [
             'title' => 'Edit Product',
@@ -239,6 +240,7 @@ class ProductController extends Controller
         $thumbnail = $request->file('thumbnail'); // Lấy ảnh ra nếu có
         $deleteGallery = json_decode($request->get('deleteGallery'), true); // Lấy mảng id gallery cần xóa
         $deleteVariant = json_decode($request->get('deleteVariant'), true); // Lấy mảng id variant cần xóa
+        $hasUpdate = false; // Biến kiểm tra xem có update không
 
         // Mảng chứa Validate errors
         $validateErrors = [];
@@ -305,9 +307,10 @@ class ProductController extends Controller
                     ]);
                 }
             }
+            $hasUpdate = true;
         }
 
-        // Nếu có variants thì tạo hoac update 
+        // Nếu có variants thì tạo hoặc update 
         if (!empty($variants)) {
             foreach ($variants as $key => $variant) {
                 // Tạo size, color. Nếu đã có thì lấy ra
@@ -325,7 +328,7 @@ class ProductController extends Controller
                 }
 
                 // Update nếu đã có variant
-                if(isset($variant['variant_id'])) {
+                if (isset($variant['variant_id'])) {
                     $variantUpdate = ProductVariant::find($variant['variant_id']);
                     $variantUpdate->size_id = $size->id;
                     $variantUpdate->color_id = $color->id;
@@ -341,7 +344,7 @@ class ProductController extends Controller
                     }
                 }
                 // Nếu chưa có variant thì tạo mới
-                else{
+                else {
                     $variant = ProductVariant::create([
                         'product_id' => $product->id,
                         'size_id' => $size->id,
@@ -359,6 +362,7 @@ class ProductController extends Controller
                     }
                 }
             }
+            $hasUpdate = true;
         }
 
         // Xóa gallery
@@ -367,15 +371,19 @@ class ProductController extends Controller
                 return response()->json([
                     "error" => "Failed to delete gallery"
                 ]);
+            $hasUpdate = true;
         }
 
         // Xóa variant
         if (!empty($deleteVariant)) {
-            if(!ProductVariant::whereIn('id', $deleteVariant)->delete())
+            if (!ProductVariant::whereIn('id', $deleteVariant)->delete())
                 return response()->json([
                     "error" => "Failed to delete variant"
                 ]);
+            $hasUpdate = true;
         }
+
+        $hasUpdate && $product->touch(); // Update updated_at
 
         return response()->json([
             "success" => "Update product success",

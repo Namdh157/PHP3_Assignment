@@ -66,13 +66,3 @@ selectSubmit.onclick = function () {
     }
     postFormData(route, formData, callBackSuccess, null, method);
 }
-
-// Hover table
-document.querySelectorAll('tbody tr')?.forEach(tr => {
-    tr.onmouseover = function () {
-        tr.classList.add('table-success');
-    }
-    tr.onmouseleave = function () {
-        tr.classList.contains('table-success') && tr.classList.remove('table-success');
-    }
-})

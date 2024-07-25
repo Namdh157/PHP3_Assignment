@@ -38,7 +38,7 @@ Route::middleware('auth.notlogged')->controller(AuthController::class)->group(fu
 // Route cần đăng nhập để thực hiện các chức năng
 Route::middleware('auth.logged')->group(function(){
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('public.profile');
 });
 
 // Route public
@@ -46,7 +46,7 @@ Route::get('/', function () {
     return view('pages.public.home.index', [
         'title' => 'Home'
     ]);
-})->name('home');
+})->name('public.home');
 
 Route::get('/product/{slug}', function () {
     return view('pages.public.productDetail.index');

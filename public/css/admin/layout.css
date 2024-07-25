@@ -108,20 +108,3 @@
 .bd-mode-toggle .dropdown-menu .active .bi {
     display: block !important;
 }
-:root{
-    --bs-body-font-size: 0.9rem;
-}
-.btn{
-    --bs-btn-font-size: 0.9rem;
-}
-.form-select{
-    --bs-form-select-font-size: 0.9rem;
-    font-size: 0.9rem;
-}
-.form-control{
-    --bs-form-control-font-size: 0.9rem;
-    font-size: 0.9rem;
-}
-.dropdown-menu{
-    --bs-dropdown-font-size: 0.9rem;
-}

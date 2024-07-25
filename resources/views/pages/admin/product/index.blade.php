@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <table class="table">
+        <table class="table table-hover table-bordered align-middle">
             <thead>
                 <tr class="table-primary">
                     <th class="">
@@ -44,16 +44,16 @@
                         <input class="form-check-input" type="checkbox" value="{{$product->id}}" name="check-item" id="check-item-{{$index}}">
                     </td>
                     <td>{{ $product->sku }}</td>
-                    <td>
+                    <td style="max-width: 250px">
                         <img src="{{asset($product->image_thumbnail)}}" alt="" class="object-fit-contain rounded-3" style="width: 50px; height: 50px">
                         <a href="{{ route('public.product.detail', $product->slug) }}" class="link-offset-2 text-decoration-none" style="--bs-link-hover-color-rgb: 25, 135, 84;">
                             <span class="fw-bold">{{ $product->name }}</span>
                         </a>
                     </td>
-                    <td>{{ $product->catalogue->name }}</td>
-                    <td>{{ $product->brand->name }}</td>
-                    <td>{{ $product->product_variants_count }}</td>
-                    <td>
+                    <td style="max-width: 100px">{{ $product->catalogue->name }}</td>
+                    <td style="max-width: 100px">{{ $product->brand->name }}</td>
+                    <td class="text-center">{{ $product->product_variants_count }}</td>
+                    <td class="text-center">
                         <input class="form-check-input" type="checkbox" onclick="((e)=>{e.preventDefault()})(event)" {{$product->is_active ? 'checked':''}} name="active-item">
                     </td>
                     <td>
