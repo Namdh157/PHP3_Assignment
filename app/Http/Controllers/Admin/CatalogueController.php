@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Catalogue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CatalogueController extends Controller
 {
@@ -47,7 +48,16 @@ class CatalogueController extends Controller
      */
     public function create()
     {
-        //
+        return view(self::PATH_VIEW . 'catalogue', [
+            'title' => 'Create Catalogue',
+            'sidebar' => self::SIDE_BAR,
+            'breadcrumb' => [
+                ['title' => 'Catalogue', 'route' => 'admin.catalogue.index']
+            ],
+            'httpReferer' => route('admin.catalogue.index'),
+            'routePostTo' => route('admin.catalogue.store'),
+            'method' => 'POST',
+        ]);
     }
 
     /**
@@ -55,7 +65,21 @@ class CatalogueController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $error = [];
+        $rule = [
+            'name' => 'required|min:3',
+            'is_active' => 'required|boolean',
+        ];
+
+        $valid = Validator::make($request->all(), $rule);
+        if ($valid->fails()) {
+            $error = $valid->errors();
+        }
+
+        return response()->json([
+            'data' => $error,
+            'error' => 'Catalogue failed to create',
+        ]);   
     }
 
     /**
@@ -93,4 +117,5 @@ class CatalogueController extends Controller
         }
         return redirect()->back()->with('error', 'Catalogue failed to delete');
     }
+
 }
