@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\api\CatalogueApiController;
 use App\Http\Controllers\Api\ProductApiController;
-use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +23,10 @@ Route::middleware('auth.admin')->group(function () {
         ->name('api.product.updateStatus');
     Route::delete('product/delete-many', [ProductApiController::class, 'deleteMany'])
         ->name('api.product.deleteMany');
+
+    //catalogues
+    Route::patch('catalogue/update-status', [CatalogueApiController::class, 'updateStatus'])
+        ->name('api.catalogue.updateStatus');
+    Route::delete('catalogue/delete-many', [CatalogueApiController::class, 'deleteMany'])
+        ->name('api.catalogue.deleteMany');
 });

@@ -11,6 +11,12 @@
                     Dashboard
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 {{$sidebar=='catalogue'?'active':''}}" aria-current="page" href="{{route('admin.catalogue.index')}}">
+                    <i class="fa-solid fa-list"></i>
+                    Catalogue
+                </a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link d-flex align-items-center gap-2 {{$sidebar=='product'?'active':''}}" href="{{route('admin.product.index')}}">
