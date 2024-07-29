@@ -10,23 +10,26 @@ class ProductVariant extends Model
     use HasFactory;
 
     protected $fillable = [
+        'product_id',
+        'color_id',
+        'size_id',
         'price_regular',
         'price_sale',
         'stock',
+        'is_active',
+        'is_sale'
     ];
 
-    protected $casts = [
-        'is_sale' => 'boolean',
-        'is_active' => 'boolean',
-    ];
-
-    public function product() {
+    public function product()
+    {
         return $this->belongsTo(Product::class);
     }
-    public function variantColor() {
-        return $this->belongsTo(ProductColor::class, 'product_color_id');
+    public function variantColor()
+    {
+        return $this->belongsTo(Color::class, 'color_id');
     }
-    public function variantSize() {
-        return $this->belongsTo(ProductSize::class, 'product_size_id');
+    public function variantSize()
+    {
+        return $this->belongsTo(Size::class, 'size_id');
     }
 }

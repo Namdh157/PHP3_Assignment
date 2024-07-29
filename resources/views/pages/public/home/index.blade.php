@@ -132,7 +132,7 @@
                             }'>
                         <div class="product product-7 text-center">
                             <figure class="product-media">
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-1-2.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-3-1.jpg"
@@ -147,7 +147,7 @@
                                 <div class="product-cat">
                                     <a href="#">Clothing</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Denim jacket</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Denim jacket</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     500.000vnđ
@@ -157,7 +157,7 @@
 
                         <div class="product product-7 text-center">
                             <figure class="product-media">
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-2-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-2-2.jpg"
@@ -175,7 +175,7 @@
                                 <div class="product-cat">
                                     <a href="#">Shoes</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Sandals</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Sandals</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     500.000vnđ
@@ -186,7 +186,7 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <span class="product-label label-sale">sale</span>
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-3-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-3-2.jpg"
@@ -204,7 +204,7 @@
                                 <div class="product-cat">
                                     <a href="#">Clothing</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Printed sweatshirt</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Printed sweatshirt</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     <span class="new-price">Now 450.000vnđ/span>
@@ -215,7 +215,7 @@
 
                         <div class="product product-7 text-center">
                             <figure class="product-media">
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-4-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-4-2.jpg"
@@ -233,7 +233,7 @@
                                 <div class="product-cat">
                                     <a href="#">Clothing</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Linen-blend paper bag trousers</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Linen-blend paper bag trousers</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     500.000vnđ
@@ -243,7 +243,7 @@
 
                         <div class="product product-7 text-center">
                             <figure class="product-media">
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-1-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-1-2.jpg"
@@ -261,7 +261,7 @@
                                 <div class="product-cat">
                                     <a href="#">Clothing</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Denim jacket</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Denim jacket</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     500.000vnđ
@@ -302,7 +302,7 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <span class="product-label label-sale">sale</span>
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-3-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-3-2.jpg"
@@ -320,7 +320,7 @@
                                 <div class="product-cat">
                                     <a href="#">Clothing</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Printed sweatshirt</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Printed sweatshirt</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     <span class="new-price">Now 450.000vnđ/span>
@@ -331,7 +331,7 @@
 
                         <div class="product product-7 text-center">
                             <figure class="product-media">
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-4-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-4-2.jpg"
@@ -349,7 +349,7 @@
                                 <div class="product-cat">
                                     <a href="#">Clothing</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Linen-blend paper bag trousers</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Linen-blend paper bag trousers</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     500.000vnđ
@@ -359,7 +359,7 @@
 
                         <div class="product product-7 text-center">
                             <figure class="product-media">
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-1-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-1-2.jpg"
@@ -377,7 +377,7 @@
                                 <div class="product-cat">
                                     <a href="#">Clothing</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Denim jacket</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Denim jacket</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     500.000vnđ
@@ -418,7 +418,7 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <span class="product-label label-sale">sale</span>
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-3-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-3-2.jpg"
@@ -436,7 +436,7 @@
                                 <div class="product-cat">
                                     <a href="#">Clothing</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Printed sweatshirt</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Printed sweatshirt</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     <span class="new-price">Now 450.000vnđ/span>
@@ -464,7 +464,7 @@
                         <div class="row deal-products">
                             <div class="col-6 deal-product text-center">
                                 <figure class="product-media">
-                                    <a href="{{ route('detail')}}">
+                                    <a href="{{route('public.product.detail',"aaa")}}">
                                         <img src="{{ asset('storage/images') }}/products/product-1-2.jpg"
                                             alt="Product image" class="product-image">
                                     </a>
@@ -472,7 +472,7 @@
                                 </figure><!-- End .product-media -->
 
                                 <div class="product-body">
-                                    <h3 class="product-title"><a href="{{ route('detail')}}">Elasticated cotton shorts</a></h3>
+                                    <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Elasticated cotton shorts</a></h3>
                                     <!-- End .product-title -->
                                     <div class="product-price">
                                         <span class="new-price">Now 350.000vnđ</span>
@@ -483,7 +483,7 @@
                             </div>
                             <div class="col-6 deal-product text-center">
                                 <figure class="product-media">
-                                    <a href="{{ route('detail')}}">
+                                    <a href="{{route('public.product.detail',"aaa")}}">
                                         <img src="{{ asset('storage/images') }}/products/product-3-1.jpg"
                                             alt="Product image" class="product-image">
                                     </a>
@@ -491,7 +491,7 @@
                                 </figure><!-- End .product-media -->
 
                                 <div class="product-body">
-                                    <h3 class="product-title"><a href="{{ route('detail')}}">Fine-knit jumper</a></h3>
+                                    <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Fine-knit jumper</a></h3>
                                     <!-- End .product-title -->
                                     <div class="product-price">
                                         <span class="new-price">Now 350.000vnđ/span>
@@ -570,7 +570,7 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <span class="product-label label-sale">Sale</span>
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-5-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-5-2.jpg"
@@ -588,7 +588,7 @@
                                 <div class="product-cat">
                                     <a href="#">Clothing</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Tie-detail top</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Tie-detail top</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     <span class="new-price">Now 450.000vnđ/span>
@@ -601,7 +601,7 @@
                     <div class="col-6 col-md-4 col-lg-3">
                         <div class="product product-7 text-center">
                             <figure class="product-media">
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-6-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-6-2.jpg"
@@ -619,7 +619,7 @@
                                 <div class="product-cat">
                                     <a href="#">Shoes</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Sandals</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Sandals</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     500.000vnđ
@@ -631,7 +631,7 @@
                     <div class="col-6 col-md-4 col-lg-3">
                         <div class="product product-7 text-center">
                             <figure class="product-media">
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-7-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-7-2.jpg"
@@ -649,7 +649,7 @@
                                 <div class="product-cat">
                                     <a href="#">Bags</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Small bucket bag</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Small bucket bag</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     500.000vnđ
@@ -661,7 +661,7 @@
                     <div class="col-6 col-md-4 col-lg-3">
                         <div class="product product-7 text-center">
                             <figure class="product-media">
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-8-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-8-2.jpg"
@@ -679,7 +679,7 @@
                                 <div class="product-cat">
                                     <a href="#">Clothing</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Denim jacket</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Denim jacket</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     500.000vnđ
@@ -691,7 +691,7 @@
                     <div class="col-6 col-md-4 col-lg-3">
                         <div class="product product-7 text-center">
                             <figure class="product-media">
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-9-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-9-2.jpg"
@@ -709,7 +709,7 @@
                                 <div class="product-cat">
                                     <a href="#">Clothing</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">BShort wrap dress</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">BShort wrap dress</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     500.000vnđ
@@ -721,7 +721,7 @@
                     <div class="col-6 col-md-4 col-lg-3">
                         <div class="product product-7 text-center">
                             <figure class="product-media">
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-10-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-10-2.jpg"
@@ -739,7 +739,7 @@
                                 <div class="product-cat">
                                     <a href="#">Clothing</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Biker jacket</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Biker jacket</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     500.000vnđ
@@ -751,7 +751,7 @@
                     <div class="col-6 col-md-4 col-lg-3">
                         <div class="product product-7 text-center">
                             <figure class="product-media">
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-11-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-11-2.jpg"
@@ -769,7 +769,7 @@
                                 <div class="product-cat">
                                     <a href="#">Shoes</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Loafers</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Loafers</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     500.000vnđ                                </div><!-- End .product-price -->
@@ -781,7 +781,7 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <span class="product-label label-sale">sale</span>
-                                <a href="{{ route('detail')}}">
+                                <a href="{{route('public.product.detail',"aaa")}}">
                                     <img src="{{ asset('storage/images') }}/products/product-12-1.jpg"
                                         alt="Product image" class="product-image">
                                     <img src="{{ asset('storage/images') }}/products/product-12-2.jpg"
@@ -799,7 +799,7 @@
                                 <div class="product-cat">
                                     <a href="#">Clothing</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="{{ route('detail')}}">Super Skinny High Jeggings</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Super Skinny High Jeggings</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
                                     <span class="new-price">Now 450.000vnđ</span>

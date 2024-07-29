@@ -134,7 +134,7 @@
                                             <div class="menu-col">
                                                 <div class="menu-title">Product Details</div><!-- End .menu-title -->
                                                 <ul>
-                                                    <li><a href="{{ route('detail')}}">Default</a></li>
+                                                    <li><a href="{{route('public.product.detail',"aaa")}}">Default</a></li>
                                                     <li><a href="#">Centered</a></li>
                                                     <li><a href="#">Gallery</a></li>
                                                     <li><a href="#">Sticky Info</a></li>

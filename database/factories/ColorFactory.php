@@ -2,15 +2,15 @@
 
 namespace Database\Factories;
 
-use App\Models\ProductColor;
+use App\Models\Color;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProductColor>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Color>
  */
-class ProductColorFactory extends Factory
+class ColorFactory extends Factory
 {
-    protected $model = ProductColor::class;
+    protected $model = Color::class;
     public function definition(): array
     {
         return [

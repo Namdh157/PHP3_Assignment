@@ -1,8 +1,8 @@
 <?php
 
 use App\Models\Product;
-use App\Models\ProductColor;
-use App\Models\ProductSize;
+use App\Models\Color;
+use App\Models\Size;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,9 +16,9 @@ return new class extends Migration
     {
         Schema::create('product_variants', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Product::class)->constrained();
-            $table->foreignIdFor(ProductColor::class)->constrained();
-            $table->foreignIdFor(ProductSize::class)->constrained();
+            $table->foreignIdFor(Product::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Color::class)->constrained();
+            $table->foreignIdFor(Size::class)->constrained();
             $table->double('price_regular');
             $table->double('price_sale')->nullable();
             $table->unsignedInteger('stock');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->timestamps();
 
-            $table->unique(['product_id', 'product_color_id', 'product_size_id'], 'product_variants_unique');
+            $table->unique(['product_id', 'color_id', 'size_id'], 'product_variants_unique');
         });
     }
 

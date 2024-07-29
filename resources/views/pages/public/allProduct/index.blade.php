@@ -37,7 +37,7 @@
                                     <div class="product product-7 text-center">
                                         <figure class="product-media">
                                             <span class="product-label label-new">New</span>
-                                            <a href="{{ route('detail')}}">
+                                            <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
                                                     alt="Product image" class="product-image">
                                             </a>
@@ -50,7 +50,7 @@
                                             <div class="product-cat">
                                                 <a href="#">Women</a>
                                             </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{ route('detail')}}">Brown paperbag waist pencil
+                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Brown paperbag waist pencil
                                                     skirt</a></h3><!-- End .product-title -->
                                             <div class="product-price">
                                                 $60.00
@@ -62,7 +62,7 @@
                                 <div class="col-6 col-md-4 col-lg-4">
                                     <div class="product product-7 text-center">
                                         <figure class="product-media">
-                                            <a href="{{ route('detail')}}">
+                                            <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
                                                     alt="Product image" class="product-image">
                                             </a>
@@ -75,7 +75,7 @@
                                             <div class="product-cat">
                                                 <a href="#">Dresses</a>
                                             </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{ route('detail')}}">Dark yellow lace cut out swing
+                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Dark yellow lace cut out swing
                                                     dress</a></h3><!-- End .product-title -->
                                             <div class="product-price">
                                                 $84.00
@@ -88,7 +88,7 @@
                                     <div class="product product-7 text-center">
                                         <figure class="product-media">
                                             <span class="product-label label-out">Out of Stock</span>
-                                            <a href="{{ route('detail')}}">
+                                            <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
                                                     alt="Product image" class="product-image">
                                             </a>
@@ -102,7 +102,7 @@
                                             <div class="product-cat">
                                                 <a href="#">Jackets</a>
                                             </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{ route('detail')}}">Khaki utility boiler
+                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Khaki utility boiler
                                                     jumpsuit</a></h3><!-- End .product-title -->
                                             <div class="product-price">
                                                 <span class="out-price">$120.00</span>
@@ -114,7 +114,7 @@
                                 <div class="col-6 col-md-4 col-lg-4">
                                     <div class="product product-7 text-center">
                                         <figure class="product-media">
-                                            <a href="{{ route('detail')}}">
+                                            <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
                                                     alt="Product image" class="product-image">
                                             </a>
@@ -128,7 +128,7 @@
                                             <div class="product-cat">
                                                 <a href="#">Jeans</a>
                                             </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{ route('detail')}}">Blue utility pinafore denim
+                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Blue utility pinafore denim
                                                     dress</a></h3><!-- End .product-title -->
                                             <div class="product-price">
                                                 $76.00
@@ -141,7 +141,7 @@
                                     <div class="product product-7 text-center">
                                         <figure class="product-media">
                                             <span class="product-label label-new">New</span>
-                                            <a href="{{ route('detail')}}">
+                                            <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
                                                     alt="Product image" class="product-image">
                                             </a>
@@ -155,7 +155,7 @@
                                             <div class="product-cat">
                                                 <a href="#">Shoes</a>
                                             </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{ route('detail')}}">Beige knitted elastic runner
+                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Beige knitted elastic runner
                                                     shoes</a></h3><!-- End .product-title -->
                                             <div class="product-price">
                                                 $84.00
@@ -167,7 +167,7 @@
                                 <div class="col-6 col-md-4 col-lg-4">
                                     <div class="product product-7 text-center">
                                         <figure class="product-media">
-                                            <a href="{{ route('detail')}}">
+                                            <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
                                                     alt="Product image" class="product-image">
                                             </a>
@@ -181,7 +181,7 @@
                                             <div class="product-cat">
                                                 <a href="#">Bags</a>
                                             </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{ route('detail')}}">Orange saddle lock front
+                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Orange saddle lock front
                                                     chain cross body bag</a></h3><!-- End .product-title -->
                                             <div class="product-price">
                                                 $84.00
@@ -194,7 +194,7 @@
                                     <div class="product product-7 text-center">
                                         <figure class="product-media">
                                             <span class="product-label label-top">Top</span>
-                                            <a href="{{ route('detail')}}">
+                                            <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
                                                     alt="Product image" class="product-image">
                                             </a>
@@ -208,7 +208,7 @@
                                             <div class="product-cat">
                                                 <a href="#">Shoes</a>
                                             </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{ route('detail')}}">Light brown studded Wide fit
+                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Light brown studded Wide fit
                                                     wedges</a></h3><!-- End .product-title -->
                                             <div class="product-price">
                                                 $110.00
@@ -220,7 +220,7 @@
                                 <div class="col-6 col-md-4 col-lg-4">
                                     <div class="product product-7 text-center">
                                         <figure class="product-media">
-                                            <a href="{{ route('detail')}}">
+                                            <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
                                                     alt="Product image" class="product-image">
                                             </a>
@@ -234,7 +234,7 @@
                                             <div class="product-cat">
                                                 <a href="#">Jumpers</a>
                                             </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{ route('detail')}}">Yellow button front tea
+                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Yellow button front tea
                                                     top</a></h3><!-- End .product-title -->
                                             <div class="product-price">
                                                 $56.00
@@ -246,7 +246,7 @@
                                 <div class="col-6 col-md-4 col-lg-4">
                                     <div class="product product-7 text-center">
                                         <figure class="product-media">
-                                            <a href="{{ route('detail')}}">
+                                            <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
                                                     alt="Product image" class="product-image">
                                             </a>
@@ -260,7 +260,7 @@
                                             <div class="product-cat">
                                                 <a href="#">Bags</a>
                                             </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{ route('detail')}}">Black soft RI weekend travel
+                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Black soft RI weekend travel
                                                     bag</a></h3><!-- End .product-title -->
                                             <div class="product-price">
                                                 $68.00

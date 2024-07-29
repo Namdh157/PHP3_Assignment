@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('check_vouchers', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(Voucher::class)->constrained();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Voucher::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

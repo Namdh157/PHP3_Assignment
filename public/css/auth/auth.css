@@ -1,50 +1,31 @@
-body,
-html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-
-
 form {
     width: 300px;
 }
 
 .background {
-    height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-    /* padding: 50px 0px; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
 }
 
-/* .login-container {
-    background: rgb(255 255 255 / 10%);
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-} */
-
 .login-box {
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 4rem auto 0;
     width: max-content;
     background: rgb(67 67 67 / 50%);
     padding: 20px;
-    border: 1px solid white;
     border-radius: 10px;
     backdrop-filter: blur(5px);
     box-shadow: 10px 20px 15px rgba(0, 0, 0, 0.3);
 }
 
 .login-box h2 {
-    color: #fff;
+    color: rgb(51, 215, 255) !important;
 }
 
 .login-box .form-control {
@@ -70,7 +51,3 @@ form {
     color: #fff;
     margin-left: 10px;
 }
-
-/* .login-box a {
-    color: #ffffff;
-} */
