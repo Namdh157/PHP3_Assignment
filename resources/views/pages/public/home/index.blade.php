@@ -14,7 +14,7 @@
                         }
                     }'>
                 <div class="intro-slide"
-                    style="background-image: url({{ asset('storage/images') }}/demos/demo-6/slider/slide-1.jpg);">
+                    style="background-image: url({{ asset('storage/images') }}/slider/slide-1.jpg);">
                     <div class="container intro-content text-center">
                         <h3 class="intro-subtitle text-white">You're Looking Good</h3><!-- End .h3 intro-subtitle -->
                         <h1 class="intro-title text-white">New Lookbook</h1><!-- End .intro-title -->
@@ -26,7 +26,7 @@
                 </div><!-- End .intro-slide -->
 
                 <div class="intro-slide"
-                    style="background-image: url({{ asset('storage/images') }}/demos/demo-6/slider/slide-2.jpg);">
+                    style="background-image: url({{ asset('storage/images') }}/slider/slide-2.jpg);">
                     <div class="container intro-content text-center">
                         <h3 class="intro-subtitle text-white">Don’t Miss</h3><!-- End .h3 intro-subtitle -->
                         <h1 class="intro-title text-white">Mysrety Deals</h1><!-- End .intro-title -->
@@ -47,7 +47,7 @@
                     <div class="col-sm-6">
                         <div class="banner banner-overlay">
                             <a href="#">
-                                <img src="{{ asset('storage/images') }}/demos/demo-6/banners/banner-1.jpg" alt="Banner">
+                                <img src="{{ asset('storage/images') }}/banners/banner-1.jpg" alt="Banner">
                             </a>
 
                             <div class="banner-content banner-content-center">
@@ -63,7 +63,7 @@
                     <div class="col-sm-6">
                         <div class="banner banner-overlay">
                             <a href="#">
-                                <img src="{{ asset('storage/images') }}/demos/demo-6/banners/banner-2.jpg" alt="Banner">
+                                <img src="{{ asset('storage/images') }}/banners/banner-2.jpg" alt="Banner">
                             </a>
 
                             <div class="banner-content banner-content-center">
@@ -133,9 +133,9 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-1-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-1-2.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-1-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-3-1.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
                                 <div class="product-action">
@@ -158,9 +158,9 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-2-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-2-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-2-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-2-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -187,9 +187,9 @@
                             <figure class="product-media">
                                 <span class="product-label label-sale">sale</span>
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-3-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-3-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-3-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-3-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -216,9 +216,9 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-4-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-4-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-4-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-4-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -244,9 +244,9 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-1-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-1-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-1-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-1-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -303,9 +303,9 @@
                             <figure class="product-media">
                                 <span class="product-label label-sale">sale</span>
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-3-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-3-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-3-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-3-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -332,9 +332,9 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-4-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-4-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-4-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-4-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -360,9 +360,9 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-1-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-1-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-1-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-1-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -419,9 +419,9 @@
                             <figure class="product-media">
                                 <span class="product-label label-sale">sale</span>
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-3-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-3-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-3-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-3-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -452,7 +452,7 @@
         <div class="mb-5"></div><!-- End .mb-5 -->
 
         <div class="deal bg-image pt-8 pb-8"
-            style="background-image: url({{ asset('storage/images') }}/demos/demo-6/deal/bg-1.jpg);">
+            style="background-image: url({{ asset('storage/images') }}/deal/bg-1.jpg);">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-sm-12 col-md-8 col-lg-6">
@@ -465,7 +465,7 @@
                             <div class="col-6 deal-product text-center">
                                 <figure class="product-media">
                                     <a href="{{ route('detail')}}">
-                                        <img src="{{ asset('storage/images') }}/demos/demo-6/deal/product-1.jpg"
+                                        <img src="{{ asset('storage/images') }}/products/product-1-2.jpg"
                                             alt="Product image" class="product-image">
                                     </a>
 
@@ -484,7 +484,7 @@
                             <div class="col-6 deal-product text-center">
                                 <figure class="product-media">
                                     <a href="{{ route('detail')}}">
-                                        <img src="{{ asset('storage/images') }}/demos/demo-6/deal/product-2.jpg"
+                                        <img src="{{ asset('storage/images') }}/products/product-3-1.jpg"
                                             alt="Product image" class="product-image">
                                     </a>
 
@@ -571,9 +571,9 @@
                             <figure class="product-media">
                                 <span class="product-label label-sale">Sale</span>
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-5-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-5-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-5-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-5-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -602,9 +602,9 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-6-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-6-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-6-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-6-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -632,9 +632,9 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-7-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-7-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-7-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-7-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -662,9 +662,9 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-8-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-8-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-8-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-8-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -692,9 +692,9 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-9-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-9-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-9-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-9-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -722,9 +722,9 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-10-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-10-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-10-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-10-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -752,9 +752,9 @@
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-11-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-11-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-11-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-11-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -782,9 +782,9 @@
                             <figure class="product-media">
                                 <span class="product-label label-sale">sale</span>
                                 <a href="{{ route('detail')}}">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-12-1.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-12-1.jpg"
                                         alt="Product image" class="product-image">
-                                    <img src="{{ asset('storage/images') }}/demos/demo-6/products/product-12-2.jpg"
+                                    <img src="{{ asset('storage/images') }}/products/product-12-2.jpg"
                                         alt="Product image" class="product-image-hover">
                                 </a>
 
@@ -882,7 +882,7 @@
                     <div class="col-lg-6 banner-overlay-div">
                         <div class="banner banner-overlay">
                             <a href="#">
-                                <img src="{{ asset('storage/images') }}/demos/demo-6/banners/banner-3.jpg"
+                                <img src="{{ asset('storage/images') }}/banners/banner-3.jpg"
                                     alt="Banner">
                             </a>
 
@@ -948,8 +948,8 @@
                         }'>
                     <article class="entry">
                         <figure class="entry-media">
-                            <a href="single.html">
-                                <img src="{{ asset('storage/images') }}/demos/demo-6/blog/post-1.jpg" alt="image desc">
+                            <a href="#">
+                                <img src="{{ asset('storage/images') }}/products/1.jpg" alt="image desc">
                             </a>
                         </figure><!-- End .entry-media -->
 
@@ -971,7 +971,7 @@
                     <article class="entry">
                         <figure class="entry-media">
                             <a href="single.html">
-                                <img src="{{ asset('storage/images') }}/demos/demo-6/blog/post-2.jpg" alt="image desc">
+                                <img src="{{ asset('storage/images') }}/products/product-4.jpg" alt="image desc">
                             </a>
                         </figure><!-- End .entry-media -->
 
@@ -993,7 +993,7 @@
                     <article class="entry">
                         <figure class="entry-media">
                             <a href="single.html">
-                                <img src="{{ asset('storage/images') }}/demos/demo-6/blog/post-3.jpg" alt="image desc">
+                                <img src="{{ asset('storage/images') }}/products/product-5-1.jpg" alt="image desc">
                             </a>
                         </figure><!-- End .entry-media -->
 

@@ -48,17 +48,17 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/detail', function () {
-    return view('pages.public.home.detail');
+    return view('pages.public.productDetail.index');
 })->name('detail');
 
 Route::get('/cart', function () {
-    return view('pages.public.home.cart');
+    return view('pages.public.cart.index');
 })->name('cart');
 
-Route::get('/category', function () {
-    return view('pages.public.home.category');
-})->name('category');
+Route::get('/allproduct', function () {
+    return view('pages.public.allProduct.index');
+})->name('allproduct');
 
 Route::get('/checkout', function () {
-    return view('pages.public.home.checkout');
+    return view('pages.public.checkout.index');
 })->name('checkout');

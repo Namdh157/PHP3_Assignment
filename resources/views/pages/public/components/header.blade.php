@@ -51,7 +51,7 @@
                 </div>
                 <div class="header-center">
                     <a href="/" class="logo">
-                        <img src="{{ asset('storage/images') }}/demos/demo-6/logo.png" alt="Molla Logo" width="82"
+                        <img src="{{ asset('storage/images') }}/components/logo.png" alt="Molla Logo" width="82"
                             height="20">
                     </a>
                 </div>
@@ -85,7 +85,7 @@
                                                         <div class="menu-title">Shop with sidebar</div>
                                                         <!-- End .menu-title -->
                                                         <ul>
-                                                            <li><a href="{{ route('category')}}">Shop List</a></li>
+                                                            <li><a href="{{ route('allproduct')}}">Shop List</a></li>
                                                             <li><a href="#">Shop Grid 2 Columns</a>
                                                             </li>
                                                             <li><a href="#">Shop Grid 3 Columns</a></li>
@@ -110,7 +110,7 @@
                                         <div class="col-md-4">
                                             <div class="banner banner-overlay">
                                                 <a href="category.html" class="banner banner-menu">
-                                                    <img src="{{ asset('storage/images') }}/menu/banner-1.jpg"
+                                                    <img src="{{ asset('storage/images') }}/components/header/menu/banner-1.jpg"
                                                         alt="Banner">
 
                                                     <div class="banner-content banner-content-top">
@@ -148,7 +148,7 @@
                                         <div class="col-md-6">
                                             <div class="banner banner-overlay">
                                                 <a href="category.html">
-                                                    <img src="{{ asset('storage/images') }}/menu/banner-2.jpg"
+                                                    <img src="{{ asset('storage/images') }}/components/header/menu/banner-2.jpg"
                                                         alt="Banner">
 
                                                     <div class="banner-content banner-content-bottom">
