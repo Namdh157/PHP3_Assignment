@@ -12,6 +12,9 @@ class DashBoardController extends Controller
         return view('pages.admin.dashboard.index', [
             'title' => 'Dashboard',
             'sidebar' => self::SIDE_BAR,
+            'breadcrumb' => [
+                ['title' => 'Dashboard', 'route' => 'admin.dashboard']
+            ]
         ]);
     }
 }

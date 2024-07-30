@@ -1,15 +1,26 @@
 @extends('layouts.master')
-<link href="{{ asset('css/auth.css') }}" rel="stylesheet">
+
+@section('layout')
 <style>
     .background {
-        background-image: url('{{ asset("storage/images/login.jpg") }}');
+        background-image: url('{{ asset("storage/images/wallpaper.jpg") }}');
     }
-    .error{
+    .error {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         font-size: 14px;
-        color: #ff5858;
-        margin-left: 15px;
-        font-weight: 600;
+        margin-top: 5px;
+        margin-left: 10px;
     }
-
 </style>
+<link href="{{ asset('css/auth/auth.css') }}" rel="stylesheet">
+
 @yield('content')
+
+<script>
+    document.querySelector('form').onsubmit = function(e) {
+        e.preventDefault();
+        loading().on();
+        e.target.submit();
+    }
+</script>
+@endsection

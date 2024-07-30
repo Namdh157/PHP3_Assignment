@@ -19,13 +19,12 @@ class Voucher extends Model
         'quantity',
         'used',
         'max_use',
-        'max_use_per_user',
+        'is_active',
         'start_at',
         'end_at',
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
         'start_at' => 'datetime',
         'end_at' => 'datetime',
     ];
