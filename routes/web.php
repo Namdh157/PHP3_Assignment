@@ -10,6 +10,7 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Voucher;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Public\ProductController as PublicProductController;
 use App\Http\Controllers\Public\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,16 @@ Route::get('/', function () {
     ]);
 })->name('public.home');
 
-Route::get('/product/{slug}', function () {
-    return view('pages.public.productDetail.index');
-})->name('public.product.detail');
+Route::get('/product/detail/{slug}', [PublicProductController::class, 'detail'])->name('public.product.detail');
+
+Route::get('/cart', function () {
+    return view('pages.public.cart.index');
+})->name('cart');
+
+Route::get('/allproduct', function () {
+    return view('pages.public.allProduct.index');
+})->name('allproduct');
+
+Route::get('/checkout', function () {
+    return view('pages.public.checkout.index');
+})->name('checkout');

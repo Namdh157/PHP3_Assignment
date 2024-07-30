@@ -4,7 +4,7 @@
 
 <div class="background">
     <div class="login-box">
-        <h2 class="text-center text-primary fw-bold">REGISTER</h2>
+        <h2 class="text-center fw-bold">REGISTER</h2>
         <div class="card-body">
             <form method="POST" action="{{ route('register.handle') }}">
                 @csrf
