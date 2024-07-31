@@ -46,5 +46,5 @@
     </div>
 </div>
 
-<script src="{{asset('js/admin/layout.js')}}"></script>
+<script src="{{asset('js/admin/common.js')}}"></script>
 @endsection

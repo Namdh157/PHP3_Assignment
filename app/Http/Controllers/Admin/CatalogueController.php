@@ -38,7 +38,7 @@ class CatalogueController extends Controller
             'curPath' => $curPath,
             'pageArray' => $pageArray,
             'breadcrumb' => [
-                ['title' => 'Catalogue', 'route' => 'admin.catalogue.index']
+                ['title' => 'Catalogue', 'route' => 'admin.catalogue.index'],
             ]
         ]);
     }
@@ -51,12 +51,13 @@ class CatalogueController extends Controller
         return view(self::PATH_VIEW . 'catalogue', [
             'title' => 'Create Catalogue',
             'sidebar' => self::SIDE_BAR,
-            'breadcrumb' => [
-                ['title' => 'Catalogue', 'route' => 'admin.catalogue.index']
-            ],
             'httpReferer' => route('admin.catalogue.index'),
             'routePostTo' => route('admin.catalogue.store'),
             'method' => 'POST',
+            'breadcrumb' => [
+                ['title' => 'Catalogue', 'route' => 'admin.catalogue.index'],
+                ['title' => 'Create', 'route' => 'admin.catalogue.create'],
+            ],
         ]);
     }
 
