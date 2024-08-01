@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Voucher extends Model
 {
     use HasFactory;
-
-    const TYPE_PERCENT = 'PERCENT';
-    const TYPE_FIXED = 'FIXED';
-
+    const TYPE = [
+        'percent' => 'Percent',
+        'fixed' => 'Fixed',
+    ];
     protected $fillable = [
         'code',
         'value',
@@ -24,13 +24,8 @@ class Voucher extends Model
         'end_at',
     ];
 
-    protected $casts = [
-        'start_at' => 'datetime',
-        'end_at' => 'datetime',
-    ];
-
-    public function bill()
+    public function checkVoucher()
     {
-        return $this->hasMany(Bill::class);
+        return $this->hasMany(CheckVoucher::class);
     }
 }

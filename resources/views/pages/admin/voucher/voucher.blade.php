@@ -17,7 +17,7 @@
                     <div class="row mb-3">
                         <div class="group">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ isset($product) ? $product->name : ''}}">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ isset($voucher) ? $voucher->name : ''}}">
                                 <button class="btn btn-secondary input-group-text" id="basic-addon1" onclick="onRenderSlug(this)">
                                     <i class="fa-solid fa-link"></i>
                                     <span> Use as Slug</span>
@@ -31,18 +31,18 @@
                     <div class="row mb-3">
                         <div class="col-6 group">
                             <select class="form-select" name="brand" id="brand">
-                                <option {{isset($product)?'':'selected'}}>Choose Brand</option>
+                                <option {{isset($voucher)?'':'selected'}}>Choose Brand</option>
                                 @foreach ($allBrands as $key => $brand)
-                                <option value="{{$brand->id}}" {{ isset($product) && $product->brand_id == $brand->id ? 'selected' : ''}}>{{$brand->name}}</option>
+                                <option value="{{$brand->id}}" {{ isset($voucher) && $voucher->brand_id == $brand->id ? 'selected' : ''}}>{{$brand->name}}</option>
                                 @endforeach
                             </select>
                             <div class="error"></div>
                         </div>
                         <div class="col-6 group">
                             <select class="form-select" name="catalogue" id="catalogue">
-                                <option {{isset($product)?'':'selected'}}>Choose Catalogue</option>
+                                <option {{isset($voucher)?'':'selected'}}>Choose Catalogue</option>
                                 @foreach ($allCatalogues as $key => $catalogue)
-                                <option value="{{$catalogue->id}}" {{ isset($product) && $product->catalogue_id == $catalogue->id ? 'selected' : ''}}>{{$catalogue->name}}</option>
+                                <option value="{{$catalogue->id}}" {{ isset($voucher) && $voucher->catalogue_id == $catalogue->id ? 'selected' : ''}}>{{$catalogue->name}}</option>
                                 @endforeach
                             </select>
                             <div class="error"></div>
@@ -54,7 +54,7 @@
                         <div class="col-6 group">
                             <label for="sku" class="form-label fw-bold">SKU</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="sku" name="sku" placeholder="ex: 2U99VABUKZ" value="{{ isset($product) ? $product->sku : ''}}">
+                                <input type="text" class="form-control" id="sku" name="sku" placeholder="ex: 2U99VABUKZ" value="{{ isset($voucher) ? $voucher->sku : ''}}">
                                 <button class="btn btn-secondary input-group-text" id="basic-addon1" onclick="generateRandomSku()">
                                     <i class="fa-solid fa-shuffle"></i>
                                 </button>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-6 group">
                             <label for="slug" class="form-label fw-bold">Slug</label>
-                            <input type="text" class="form-control" id="slug" name="slug" placeholder="ex: t-shirt-1998" value="{{ isset($product) ? $product->slug : ''}}">
+                            <input type="text" class="form-control" id="slug" name="slug" placeholder="ex: t-shirt-1998" value="{{ isset($voucher) ? $voucher->slug : ''}}">
                             <div class="error"></div>
                         </div>
                     </div>
@@ -71,13 +71,13 @@
                     <!-- Description -->
                     <div class="mb-3">
                         <!-- <label for="description" class="form-label">Description</label> -->
-                        <textarea class="form-control" name="description" placeholder="Type your description...">{{ isset($product) ? $product->description : ''}}</textarea>
+                        <textarea class="form-control" name="description" placeholder="Type your description...">{{ isset($voucher) ? $voucher->description : ''}}</textarea>
                     </div>
 
                     <!-- Content -->
                     <div class="mb-3">
                         <!-- <label for="content" class="form-label">Content</label> -->
-                        <textarea class="form-control" rows="5" name="content" placeholder="Type your content...">{{ isset($product) ? $product->description : ''}}</textarea>
+                        <textarea class="form-control" rows="5" name="content" placeholder="Type your content...">{{ isset($voucher) ? $voucher->description : ''}}</textarea>
                     </div>
                 </div>
             </div>
@@ -151,10 +151,10 @@
         <div class="col-5">
             <!-- Active status -->
             <div class="card shadow">
-                <div class="card-header fw-bold d-flex justify-content-between {{ isset($product) && $product->is_active ? 'bg-info' : ''}}" id="active-container">
+                <div class="card-header fw-bold d-flex justify-content-between {{ isset($voucher) && $voucher->is_active ? 'bg-info' : ''}}" id="active-container">
                     <span>Active</span>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" {{ isset($product) && $product->is_active ? 'checked' : ''}} onchange="onChangeActive(this)">
+                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" {{ isset($voucher) && $voucher->is_active ? 'checked' : ''}} onchange="onChangeActive(this)">
                     </div>
                 </div>
             </div>
@@ -168,7 +168,7 @@
                         <label for="thumbnail-input" class="form-label">Thumbnail</label>
                         <input class="form-control" type="file" id="thumbnail-input" accept="image/*" onchange="onChangeSingleImage(event)" />
                         <label for="thumbnail-input">
-                            <img src="{{isset($product)?asset($product->image_thumbnail):''}}" class="object-fit-contain mt-3 img-thumbnail" style="height: 100px;" id="thumbnail-img" alt="">
+                            <img src="{{isset($voucher)?asset($voucher->image_thumbnail):''}}" class="object-fit-contain mt-3 img-thumbnail" style="height: 100px;" id="thumbnail-img" alt="">
                         </label>
                         <div class="error"></div>
                     </div>
@@ -205,7 +205,7 @@
 <!-- Show fullview image -->
 @include('common.fullView')
 
-<form action="{{route('admin.product.store')}}" method="post" id="postForm">
+<form method="post" id="postForm">
     @csrf
 </form>
 @endsection
@@ -216,9 +216,7 @@
     const routePost = "{{ $routePostTo }}";
     const method = "{{ $method }}";
     const httpReferer = "{{ $httpReferer }}";
-    let variantIndex = Number("{{isset($variants)?count($variants):0}}");
 </script>
 <!-- Handler script -->
-<script src="{{$js}}"></script>
-<script src="{{asset('js/admin/product/product.js')}}"></script>
+<script src="{{asset('js/admin/voucher/voucher.js')}}"></script>
 @endsection

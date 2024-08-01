@@ -10,7 +10,6 @@ async function postFormData(route, formData , callBackSuccess = null, callBackEr
     try {
         const response = await fetch(route, {
             headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
                 'Accept': 'application/json',
             },
             method,
@@ -48,4 +47,8 @@ function confirmDelete(event) {
         event.target.submit();
         loading().on();
     }
+}
+
+function onChangeSort(target) {
+    if(target.value) target.form.submit();
 }

@@ -65,7 +65,7 @@
     </div>
 </div>
 
-<form action="" id="form-data">
+<form action="" id="checkbox-form">
     @csrf
 </form>
 <script>

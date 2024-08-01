@@ -13,7 +13,7 @@ function onChangeSelect(e) {
 }
 
 function onChangeStatus(target) {
-    const formData = new FormData(document.querySelector('#apiForm'));
+    const formData = new FormData(document.querySelector('#change-status-form'));
     formData.set('status', target.value);
     formData.set('prev_status', prevSelect);
     formData.set('id', target.getAttribute('data-bill-id'));
@@ -25,7 +25,7 @@ function onChangeStatus(target) {
     function callBackSuccess() {
         setBgSelect(target);
     }
-    postFormData(route, formData, callBackSuccess, callBackError, 'PATCH');
+    postFormData(routeUpdateOne, formData, callBackSuccess, callBackError, 'PATCH');
 }
 
 function onChooseBill(url) {

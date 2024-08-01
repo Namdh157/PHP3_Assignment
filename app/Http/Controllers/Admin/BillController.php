@@ -22,27 +22,42 @@ class BillController extends Controller
     }
     public function index()
     {
-        $curPage = $_GET['page'] ?? 1;
+        $sort = request('sort');
+        $curPage = request('page') ?? 1;
+        $id = request('id');
+
         if ($curPage < 1)  $curPage = 1;
-        $bills = $this->model->query()->paginate($this->model->getPerPage(), '*', 'page', $curPage);
+        $paramsOrder = match ($sort) {
+            'user' => ['customer_name', 'asc'],
+            'price_up' => ['total_price', 'asc'],
+            'price_down' => ['total_price', 'desc'],
+            'created_up' => ['created_at', 'asc'],
+            'created_down' => ['created_at', 'desc'],
+            default => ['id', 'desc'],
+        };
+        // Get bill
+        $bills = $id
+            ? $this->model->query()->where('id', '=', $id)->paginate($this->model->getPerPage())
+            : $this->model->query()->orderBy(...$paramsOrder)->paginate($this->model->getPerPage(), '*', 'page', $curPage);
+
         $billStatus = Bill::STATUS;
         $paymentMethod = Bill::PAYMENT_METHOD;
         // Pagination
         $totalPage = $bills->lastPage();
-        $curPath = $bills->path();
+        $curPath = $bills->path() . '?' . ($sort ? "sort=$sort" : '');
         $pageArray = range(1, $totalPage);
 
         return view(self::VIEW_PATH . __FUNCTION__, [
             'title' => 'All Bill',
             'sidebar' => self::SIDE_BAR,
             'bills' => $bills,
+            'sort' => $sort,
             'billStatus' => $billStatus,
             'paymentMethod' => $paymentMethod,
             'pageArray' => $pageArray,
             'curPage' => $curPage,
             'curPath' => $curPath,
             'totalPage' => $totalPage,
-            'routePostTo' => route('admin.bill.update', 1),
             'breadcrumb' => [
                 ['title' => 'Bill', 'route' => 'admin.bill.index'],
             ]

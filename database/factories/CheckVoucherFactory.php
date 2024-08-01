@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Bill;
 use App\Models\CheckVoucher;
 use App\Models\User;
 use App\Models\Voucher;
@@ -18,6 +19,7 @@ class CheckVoucherFactory extends Factory
         return [
             'user_id' => User::factory(),
             'voucher_id' => Voucher::factory(),
+            'bill_id' => Bill::factory(),
         ];
     }
 }

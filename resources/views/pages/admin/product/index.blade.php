@@ -10,7 +10,7 @@
             </a>
             <div class="d-flex gap-2" style="height: max-content">
                 <select class="form-select" id="select-action">
-                    <option value="" selected>Action</option>
+                    <option value="" selected>-- Action --</option>
                     <option value="published">Published</option>
                     <option value="draft">Draft</option>
                     <option value="delete">Delete</option>
@@ -86,18 +86,20 @@
     </div>
 </div>
 
-<form action="" id="form-data">
+<form action="" id="checkbox-form">
     @csrf
 </form>
 
 
 @endsection
-<!-- file Javascript -->
+
 @section('script')
+<!-- Config Script -->
 <script>
     const routeUpdate = "{{ route('api.product.updateStatus') }}";
     const routeDelete = "{{ route('api.product.deleteMany') }}";
     const httpReferer = "{{isset($httpReferer)? $httpReferer : asset('admin.product.index')}}"
 </script>
+<!-- Handler -->
 <script src="{{asset('js/admin/selectIndex.js')}}"></script>
 @endsection
