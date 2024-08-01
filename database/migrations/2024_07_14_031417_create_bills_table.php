@@ -16,15 +16,15 @@ return new class extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
             // $table->foreignIdFor(User::class)->constrained();
-            
+
             $table->bigInteger('customer_id')->unsigned()->comment('ID khách hàng');
             $table->string('customer_name')->comment('Tên khách hàng');
             $table->string('customer_phone')->comment('Số điện thoại khách hàng');
             $table->string('customer_email')->comment('Email khách hàng');
             $table->string('customer_address')->comment('Địa chỉ khách hàng');
 
-            $table->enum( 'payment_method' ,[Bill::METHOD_TRANSFER, Bill::METHOD_COD])->default(Bill::METHOD_COD)->comment('Phương thức thanh toán');
-            $table->enum('status', [BILL::PENDING, BILL::CONFIRMED, BILL::SHIPPING, BILL::SUCCESS, BILL::CANCEL])->default(BILL::PENDING)->comment('Trạng thái hóa đơn');
+            $table->enum('payment_method', array_keys(Bill::PAYMENT_METHOD))->default(array_keys(Bill::PAYMENT_METHOD)[0])->comment('Phương thức thanh toán');
+            $table->enum('status', array_keys(BILL::STATUS))->default(array_keys(BILL::STATUS)[0])->comment('Trạng thái hóa đơn');
             $table->integer('quantity')->comment('Số lượng hàng có trong hóa đơn');
             $table->decimal('total_discount')->comment('Số tiền được áp dụng giảm giá');
             $table->decimal('total_price')->comment('Tổng giá trị hóa đơn sau khi áp giảm giá');

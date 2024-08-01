@@ -43,7 +43,7 @@ const onPostProduct = function () {
 
         let obj = {
             size: size.value.toUpperCase(),
-            color: color.value.toLowerCase(),
+            color: color.value,
             stock: stock.value,
             price_regular: price_regular.value,
             price_sale: price_sale.value === '' ? price_regular.value : price_sale.value,
@@ -55,7 +55,7 @@ const onPostProduct = function () {
 
     const isSameVariant = variants.some((variant, index) => {
         return variants.findIndex((v, i) => {
-            return v.size === variant.size && v.color === variant.color && i !== index;
+            return v.size === variant.size && v.color.toLowerCase() === variant.color.toLowerCase() && i !== index;
         }) !== -1;
     });
     if (isSameVariant) {

@@ -17,7 +17,7 @@ class AuthNotLoggedMiddleware
     {
         $user = $request->user();
         if ($user) {
-            return redirect()->route('home')->with('error', 'You need to logout to access this page');
+            return redirect()->route('public.home')->with('error', 'You need to logout to access this page');
         }
         return $next($request);
     }

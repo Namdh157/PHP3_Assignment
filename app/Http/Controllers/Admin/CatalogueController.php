@@ -40,7 +40,7 @@ class CatalogueController extends Controller
             'curPath' => $curPath,
             'pageArray' => $pageArray,
             'breadcrumb' => [
-                ['title' => 'Catalogue', 'route' => 'admin.catalogue.index']
+                ['title' => 'Catalogue', 'route' => 'admin.catalogue.index'],
             ]
         ]);
     }
