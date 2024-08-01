@@ -2,45 +2,29 @@
 
 @section('content')
     <main class="main">
-        <div class="intro-slider-container">
-            <div class="intro-slider owl-carousel owl-theme owl-nav-inside owl-light" data-toggle="owl"
-                data-owl-options='{
-                        "dots": false,
-                        "nav": false, 
-                        "responsive": {
-                            "992": {
-                                "nav": true
-                            }
-                        }
-                    }'>
-                <div class="intro-slide"
-                    style="background-image: url({{ asset('storage/images') }}/slider/slide-1.jpg);">
-                    <div class="container intro-content text-center">
-                        <h3 class="intro-subtitle text-white">You're Looking Good</h3><!-- End .h3 intro-subtitle -->
-                        <h1 class="intro-title text-white">New Lookbook</h1><!-- End .intro-title -->
-
-                        <a href="category.html" class="btn btn-outline-white-4">
-                            <span>Discover More</span>
-                        </a>
-                    </div><!-- End .intro-content -->
-                </div><!-- End .intro-slide -->
-
-                <div class="intro-slide"
-                    style="background-image: url({{ asset('storage/images') }}/slider/slide-2.jpg);">
-                    <div class="container intro-content text-center">
-                        <h3 class="intro-subtitle text-white">Don’t Miss</h3><!-- End .h3 intro-subtitle -->
-                        <h1 class="intro-title text-white">Mysrety Deals</h1><!-- End .intro-title -->
-
-                        <a href="category.html" class="btn btn-outline-white-4">
-                            <span>Discover More</span>
-                        </a>
-                    </div><!-- End .intro-content -->
-                </div><!-- End .intro-slide -->
-            </div><!-- End .intro-slider owl-carousel owl-theme -->
-
-            <span class="slider-loader"></span><!-- End .slider-loader -->
+        <div class="intro-slider-container h-100">
+            <!-- intro-slider owl-carousel owl-theme -->
+            <div class="slide">
+                <img class="d-block" src="{{ asset('storage/images/slider') }}/slide-1.jpg" alt="" id="anh">
+                <div class="container intro-content carousel-caption d-none d-md-block">
+                    <h3 class="intro-subtitle text-white">You're Looking Good</h3><!-- End .h3 intro-subtitle -->
+                    <h1 class="intro-title text-white">New Lookbook</h1>
+                    <a href="#" class="btn btn-outline-white-4">
+                        <span>Discover More</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="controlBtn">
+                    <button class="carousel-control-prev" type="button" onclick="previousImg()">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" onclick="nextImg()">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                </div>
         </div><!-- End .intro-slider-container -->
-
         <div class="pt-2 pb-3">
             <div class="container">
                 <div class="row">
@@ -452,7 +436,7 @@
         <div class="mb-5"></div><!-- End .mb-5 -->
 
         <div class="deal bg-image pt-8 pb-8"
-            style="background-image: url({{ asset('storage/images') }}/deal/bg-1.jpg);">
+            style="background-image: url({{ asset('storage/images') }}/bg-1.jpg);">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-sm-12 col-md-8 col-lg-6">
@@ -821,30 +805,7 @@
 
                 <h2 class="title text-center mb-4">shop by brands</h2><!-- End .title text-center -->
 
-                <div class="owl-carousel owl-simple" data-toggle="owl"
-                    data-owl-options='{
-                            "nav": false, 
-                            "dots": false,
-                            "margin": 30,
-                            "loop": false,
-                            "responsive": {
-                                "0": {
-                                    "items":2
-                                },
-                                "420": {
-                                    "items":3
-                                },
-                                "600": {
-                                    "items":4
-                                },
-                                "900": {
-                                    "items":5
-                                },
-                                "1024": {
-                                    "items":6
-                                }
-                            }
-                        }'>
+                <div class="d-flex justify-content-around">
                     <a href="#" class="brand">
                         <img src="{{ asset('storage/images') }}/brands/1.png" alt="Brand Name">
                     </a>
