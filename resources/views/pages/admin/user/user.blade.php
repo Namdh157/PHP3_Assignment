@@ -2,7 +2,7 @@
 @section('content')
 <div class="container mt-3">
     <div class="d-flex justify-content-end">
-        <button class="btn btn btn-success px-4" onclick="onPostCatalogue()">Save</button>
+        <button class="btn btn btn-success px-4" onclick="onPostUser()">Save</button>
     </div>
     <hr>
     <div class="row">
@@ -10,13 +10,13 @@
         <div class="col-7">
             <!-- Infor -->
             <div class="card shadow">
-                <div class="card-header fw-bold">Catalogue information</div>
+                <div class="card-header fw-bold">User information</div>
                 <div class="card-body">
                     <!-- Name -->
                     <div class="row mb-3">
                         <div class="group">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ isset($catalogue) ? $catalogue->name : ''}}">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ $user->name}}">
                             </div>
                             <div class="error"></div>
                         </div>
@@ -29,10 +29,9 @@
         <div class="col-5">
             <!-- Active status -->
             <div class="card shadow">
-                <div class="card-header fw-bold d-flex justify-content-between {{ isset($catalogue) && $catalogue->is_active ? 'bg-info' : ''}}" id="active-container">
+                <div class="card-header fw-bold d-flex justify-content-between " id="active-container">
                     <span>Active</span>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" {{ isset($catalogue) && $catalogue->is_active ? 'checked' : ''}} onchange="onChangeActive(this)">
                     </div>
                 </div>
             </div>
@@ -40,6 +39,9 @@
     </div>
 </div>
 @endsection
+
+<!-- Show fullview image -->
+@include('common.fullView')
 
 <form action="{{route('admin.catalogue.store')}}" method="post" id="postForm">
     @csrf
@@ -50,24 +52,19 @@
     const route = "{{ $routePostTo }}";
     const method = "{{ $method }}";
     const httpReferer = "{{ $httpReferer }}";
-    const isConfirm = "@json($isConfirm)";
 </script>
 
 <!-- Handler script -->
 <script>
     function successCallback(res) {
-        setTimeout(() => {
-            if (isConfirm !== false) {
-                if (confirm('Do you want to add more catalogue?')) {
-                    window.location.reload();
-                } else {
-                    window.location.href = httpReferer;
-                }
-            } else {
-                window.location.href = httpReferer;
-            }
-        }, 1500);
-    }
+    setTimeout(() => {
+        if (confirm('Do you want to add more product?')) {
+            window.location.reload();
+        } else {
+            window.location.href = httpReferer;
+        }
+    }, 1500);
+}
 
     function onChangeActive(checkbox) {
         const activeContainer = document.getElementById('active-container');
@@ -78,7 +75,7 @@
         const fieldsInforNeedValid = {
             name: document.getElementById('name'),
         }
-        // Catalogue Information
+        // User Information
         const is_active = document.getElementById('is_active').checked ? 1 : 0
         const formData = new FormData(document.querySelector('#postForm'));
         formData.set('name', fieldsInforNeedValid.name.value);
@@ -90,6 +87,7 @@
             setErrorValidate(fieldsInforNeedValid, errors || {}); // Set error for catalogue information
         }
         // Send request
+        console.log(route);
         postFormData(route, formData, successCallback, errorCallback, method);
     }
 </script>

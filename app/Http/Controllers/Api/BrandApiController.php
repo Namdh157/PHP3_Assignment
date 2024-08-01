@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Catalogue;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
-class CatalogueApiController extends Controller
+class BrandApiController extends Controller
 {
     private $model;
     public function __construct(){
-        $this->model = new Catalogue();
+        $this->model = new Brand();
     }
     public function updateStatus(Request $request) {
         $checkedIds = json_decode($request->get('checkedIds'), true);
         if(empty($checkedIds)){
             return response()->json([
-                'error' => 'No catalogue selected'
+                'error' => 'No brand selected'
             ]);
         }
         $is_active = $request->get('is_active');
@@ -40,17 +40,17 @@ class CatalogueApiController extends Controller
         $checkedIds = json_decode($request->get('checkedIds'), true);
         if(empty($checkedIds)){
             return response()->json([
-                'error' => 'No catalogue selected'
+                'error' => 'No brand selected'
             ]);
         }
         $delete = $this->model->whereIn('id', $checkedIds)->delete();
         if(!$delete){
             return response()->json([
-                'error' => 'Failed to delete catalogue'
+                'error' => 'Failed to delete brand'
             ]);
         }
         return response()->json([
-            'success' => 'Delete catalogue success',
+            'success' => 'Delete brand success',
             'data' => $delete
         ]);
     }

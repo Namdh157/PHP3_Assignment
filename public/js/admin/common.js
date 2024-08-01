@@ -10,7 +10,6 @@ async function postFormData(route, formData , callBackSuccess = null, callBackEr
     try {
         const response = await fetch(route, {
             headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
                 'Accept': 'application/json',
             },
             method,
