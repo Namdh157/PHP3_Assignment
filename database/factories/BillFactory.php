@@ -22,6 +22,8 @@ class BillFactory extends Factory
             'quantity' => $this->faker->numberBetween(1, 5),
             'total_discount' => $this->faker->randomFloat(2, 10, 100),
             'total_price' => $this->faker->randomFloat(2, 20, 200),
+            'status' => $this->faker->randomElement(Bill::STATUS),
+            'payment_method' => $this->faker->randomElement(Bill::PAYMENT_METHOD),
         ];
     }
 }
