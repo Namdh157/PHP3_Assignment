@@ -41,9 +41,6 @@
 </div>
 @endsection
 
-<!-- Show fullview image -->
-@include('common.fullView')
-
 <form action="{{route('admin.catalogue.store')}}" method="post" id="postForm">
     @csrf
 </form>
@@ -53,19 +50,24 @@
     const route = "{{ $routePostTo }}";
     const method = "{{ $method }}";
     const httpReferer = "{{ $httpReferer }}";
+    const isConfirm = "@json($isConfirm)";
 </script>
 
 <!-- Handler script -->
 <script>
     function successCallback(res) {
-    setTimeout(() => {
-        if (confirm('Do you want to add more product?')) {
-            window.location.reload();
-        } else {
-            window.location.href = httpReferer;
-        }
-    }, 1500);
-}
+        setTimeout(() => {
+            if (isConfirm !== false) {
+                if (confirm('Do you want to add more catalogue?')) {
+                    window.location.reload();
+                } else {
+                    window.location.href = httpReferer;
+                }
+            } else {
+                window.location.href = httpReferer;
+            }
+        }, 1500);
+    }
 
     function onChangeActive(checkbox) {
         const activeContainer = document.getElementById('active-container');

@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BillController;
 use App\Http\Controllers\Admin\CatalogueController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Public\ProductController as PublicProductController;
 use App\Http\Controllers\Public\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth.admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
     Route::resource('catalogue', CatalogueController::class);
+    Route::resource('brand', BrandController::class);
     Route::resource('product', ProductController::class);
     Route::resource('user', UserController::class);
     Route::resource('comment', CommentController::class);
@@ -46,6 +49,16 @@ Route::get('/', function () {
     ]);
 })->name('public.home');
 
-Route::get('/product/{slug}', function () {
-    return view('pages.public.productDetail.index');
-})->name('public.product.detail');
+Route::get('/product/detail/{slug}', [PublicProductController::class, 'detail'])->name('public.product.detail');
+
+Route::get('/cart', function () {
+    return view('pages.public.cart.index');
+})->name('cart');
+
+Route::get('/allproduct', function () {
+    return view('pages.public.allProduct.index');
+})->name('allproduct');
+
+Route::get('/checkout', function () {
+    return view('pages.public.checkout.index');
+})->name('checkout');

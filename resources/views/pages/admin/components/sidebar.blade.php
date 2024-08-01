@@ -14,6 +14,12 @@
             </li>
             <!-- Catalogue -->
             <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 {{$sidebar=='brand'?'active':''}}" aria-current="page" href="{{route('admin.brand.index')}}">
+                <i class="fa-brands fa-ubuntu"></i>
+                    Brand
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link d-flex align-items-center gap-2 {{$sidebar=='catalogue'?'active':''}}" aria-current="page" href="{{route('admin.catalogue.index')}}">
                     <i class="fa-solid fa-list"></i>
                     Catalogue

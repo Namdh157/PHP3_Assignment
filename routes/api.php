@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\Api\BannerApiController;
 use App\Http\Controllers\api\CatalogueApiController;
 use App\Http\Controllers\Api\ProductApiController;
@@ -47,4 +48,5 @@ Route::middleware('auth.admin')->group(function () {
     //banners
     Route::delete('banner/delete-many', [BannerApiController::class, 'deleteMany'])
         ->name('api.banner.deleteMany');
+
 });
