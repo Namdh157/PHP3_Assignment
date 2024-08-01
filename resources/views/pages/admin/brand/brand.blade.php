@@ -2,7 +2,7 @@
 @section('content')
 <div class="container mt-3">
     <div class="d-flex justify-content-end">
-        <button class="btn btn btn-success px-4" onclick="onPostCatalogue()">Save</button>
+        <button class="btn btn btn-success px-4" onclick="onPostBrand()">Save</button>
     </div>
     <hr>
     <div class="row">
@@ -10,13 +10,13 @@
         <div class="col-7">
             <!-- Infor -->
             <div class="card shadow">
-                <div class="card-header fw-bold">Catalogue information</div>
+                <div class="card-header fw-bold">Brand information</div>
                 <div class="card-body">
                     <!-- Name -->
                     <div class="row mb-3">
                         <div class="group">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ isset($catalogue) ? $catalogue->name : ''}}">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ isset($brand) ? $brand->name : ''}}">
                             </div>
                             <div class="error"></div>
                         </div>
@@ -29,10 +29,10 @@
         <div class="col-5">
             <!-- Active status -->
             <div class="card shadow">
-                <div class="card-header fw-bold d-flex justify-content-between {{ isset($catalogue) && $catalogue->is_active ? 'bg-info' : ''}}" id="active-container">
+                <div class="card-header fw-bold d-flex justify-content-between {{ isset($brand) && $brand->is_active ? 'bg-info' : ''}}" id="active-container">
                     <span>Active</span>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" {{ isset($catalogue) && $catalogue->is_active ? 'checked' : ''}} onchange="onChangeActive(this)">
+                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" {{ isset($brand) && $brand->is_active ? 'checked' : ''}} onchange="onChangeActive(this)">
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
 </div>
 @endsection
 
-<form action="{{route('admin.catalogue.store')}}" method="post" id="postForm">
+<form action="{{route('admin.brand.store')}}" method="post" id="postForm">
     @csrf
 </form>
 @section('script')
@@ -58,7 +58,7 @@
     function successCallback(res) {
         setTimeout(() => {
             if (isConfirm !== false) {
-                if (confirm('Do you want to add more catalogue?')) {
+                if (confirm('Do you want to add more brand?')) {
                     window.location.reload();
                 } else {
                     window.location.href = httpReferer;
@@ -74,20 +74,22 @@
         if (checkbox.checked) activeContainer.classList.add('bg-info');
         else activeContainer.classList.contains('bg-info') && activeContainer.classList.remove('bg-info');
     }
-    const onPostCatalogue = function() {
+
+    const onPostBrand = function() {
         const fieldsInforNeedValid = {
             name: document.getElementById('name'),
         }
-        // Catalogue Information
+        // brand Information
         const is_active = document.getElementById('is_active').checked ? 1 : 0
         const formData = new FormData(document.querySelector('#postForm'));
         formData.set('name', fieldsInforNeedValid.name.value);
         formData.set('is_active', is_active);
+        console.log(fieldsInforNeedValid.name.value);
 
         // Handle Request
         function errorCallback(errors) {
-            console.log(errors);
-            setErrorValidate(fieldsInforNeedValid, errors || {}); // Set error for catalogue information
+            console.log('Error:',  errors);
+            setErrorValidate(fieldsInforNeedValid, errors || {}); // Set error for brand information
         }
         // Send request
         postFormData(route, formData, successCallback, errorCallback, method);

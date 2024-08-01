@@ -1,13 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CatalogueController;
 use App\Http\Controllers\Admin\DashBoardController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
 use App\Models\Bill;
 use App\Models\Brand;
 use App\Models\CartItem;
 use App\Models\Comment;
-use App\Models\User;
 use App\Models\Voucher;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Public\ProfileController;
@@ -17,12 +18,12 @@ use Illuminate\Support\Facades\Route;
 // Route admin
 Route::middleware('auth.admin')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('catalogue', CatalogueController::class);
-    Route::resource('brand', Brand::class);
+    Route::resource('brand', BrandController::class);
     Route::resource('product', ProductController::class);
     Route::resource('bill', Bill::class);
     Route::resource('cart', CartItem::class);
     Route::resource('comment', Comment::class);
-    Route::resource('user', User::class);
+    Route::resource('user', UserController::class);
     Route::resource('voucher', Voucher::class);
     Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
 });
