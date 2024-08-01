@@ -18,6 +18,7 @@ class UserController extends Controller
         $this->model = new User();
     }
 
+
     public function index()
     {
         $curPage = $_GET['page'] ?? 1;

@@ -48,3 +48,7 @@ function confirmDelete(event) {
         loading().on();
     }
 }
+
+function onChangeSort(target) {
+    if(target.value) target.form.submit();
+}

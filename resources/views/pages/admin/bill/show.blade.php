@@ -11,7 +11,7 @@
             <div>Phone: <span class="fw-medium">{{$bill->customer_phone}}</span></div>
             <div>Address: <span class="fw-medium">{{$bill->customer_address}}</span></div>
             <div>Payment method: <span class="fw-medium">{{strtoupper($bill->payment_method)}}</span></div>
-            <div>Status: <span class="fw-medium">{{strtoupper($bill->status)}}</span></div>
+            <div>Status: <span class="fw-medium text-danger">{{strtoupper($bill->status)}}</span></div>
         </div>
         <hr>
         <!-- Detail -->
@@ -54,11 +54,12 @@
             </tbody>
         </table>
     </div>
-    <div class="card-footer bg-primary-subtle">
+    <div class="card-footer bg-primary-subtle pb-3">
         <div class="fw-bold d-flex justify-content-between px-5 fs-6">
-            <span>Voucher discount:</span>
-            <span>-{{$bill->total_discount}}$</span>
+            <span></span>
+            <span class="text-danger">-{{$bill->total_discount}}$</span>
         </div>
+        <hr>
         <div class="fw-bold d-flex justify-content-between px-5 fs-6">
             <span>Total bill price:</span>
             <span>{{$bill->total_price}}$</span>

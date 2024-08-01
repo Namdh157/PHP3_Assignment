@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Banner;
+use App\Models\BannerImage;
 use App\Models\Bill;
 use App\Models\BillDetail;
 use App\Models\Brand;
@@ -39,8 +41,9 @@ class DatabaseSeeder extends Seeder
         CartItem::factory(10)->create();
         Bill::factory(10)->create();
         BillDetail::factory(10)->create();
-        Voucher::factory(10)->create();
-        CheckVoucher::factory(10)->create();
-
+        Voucher::factory(20)->create();
+        CheckVoucher::factory(20)->create();
+        Banner::factory(3)->create();
+        BannerImage::factory(10)->create();
     }
 }

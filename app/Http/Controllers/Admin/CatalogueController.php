@@ -28,7 +28,7 @@ class CatalogueController extends Controller
             ->paginate($this->model->getPerPage(), '*', 'catalogues', $curPage);
         // Pagination
         $totalPage = $catalogues->lastPage();
-        $curPath = $catalogues->path();
+        $curPath = $catalogues->path() . '?';
         $pageArray = range(1, $totalPage);
 
         return view(self::PATH_VIEW . __FUNCTION__, [

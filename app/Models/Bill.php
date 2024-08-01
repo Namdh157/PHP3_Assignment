@@ -32,4 +32,13 @@ class Bill extends Model
         'total_discount',
         'total_price',
     ];
+
+    // Relationship
+    public function user(){
+        return $this->belongsTo(User::class, 'customer_id');
+    }
+    public function checkVouchers()
+    {
+        return $this->hasMany(CheckVoucher::class);
+    }
 }
