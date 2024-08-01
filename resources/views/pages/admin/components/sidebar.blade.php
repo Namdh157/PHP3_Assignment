@@ -26,13 +26,13 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2 {{$title=='Customer'?'active':''}}" href="{{route('admin.user.index')}}">
+                <a class="nav-link d-flex align-items-center gap-2 {{$sidebar=='customer'?'active':''}}" href="{{route('admin.user.index')}}">
                     <i class="fa-solid fa-users"></i>
                     Users
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2 {{$title=='Bill'?'active':''}}" href="{{route('admin.bill.index')}}">
+                <a class="nav-link d-flex align-items-center gap-2 {{$sidebar=='bill'?'active':''}}" href="{{route('admin.bill.index')}}">
                     <i class="fa-solid fa-file-invoice-dollar"></i>
                     Bills
                 </a>

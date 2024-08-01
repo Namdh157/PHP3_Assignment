@@ -18,6 +18,10 @@ checkItems.forEach(checkbox => {
 
 // Submit select
 selectSubmit.onclick = function () {
+    if(!routeDelete && !routeUpdate){
+        ToastCustom('Route update or delete not found', 'error');
+        return;
+    }
     const action = selectAction.value;
     const checkedIds = [];
     checkItems.forEach(checkbox => {
@@ -53,6 +57,10 @@ selectSubmit.onclick = function () {
             formData.set('is_active', 0);
             break;
         case 'delete':
+            if(!routeDelete){
+                ToastCustom('Route delete not found', 'error');
+                return;
+            }
             if (!confirm(`Are you sure you want to DELETE ${checkedIds.length} items?`)) return;
             method = "DELETE";
             route = routeDelete;

@@ -91,11 +91,7 @@
                         <!-- Nếu là edit và có $variant thì hiển thị -->
                         @if (isset($variants))
                         @foreach ($variants as $index => $variant)
-                        <div 
-                            class="mt-3 mb-3 row row-cols-3 shadow mx-3 pt-5 border border-1 rounded position-relative" 
-                            data-variant="{{$index}}"
-                            data-variant-id="{{$variant->id}}"
-                        >
+                        <div class="mt-3 mb-3 row row-cols-3 shadow mx-3 pt-5 border border-1 rounded position-relative" data-variant="{{$index}}" data-variant-id="{{$variant->id}}">
                             <div class="mb-3 col mx-0 group">
                                 <div class="input-group">
                                     <span class="input-group-text">Size</span>
@@ -133,12 +129,7 @@
                                 </div>
                                 <div class="error"></div>
                             </div>
-                            <button 
-                                class="btn btn-outline-danger p-1 px-2 position-absolute" 
-                                style="font-size: 14px; top: 3px; right: 3px; width: max-content" 
-                                onclick="deleteVariant(this)" 
-                                data-variant-id="{{$variant->id}}"
-                            >X</button>
+                            <button class="btn btn-outline-danger p-1 px-2 position-absolute" style="font-size: 14px; top: 3px; right: 3px; width: max-content" onclick="deleteVariant(this)" data-variant-id="{{$variant->id}}">X</button>
                             <div class="form-check form-switch position-absolute" style="top: 3px; left: 10px">
                                 <span class="ms-2 fw-bold">Variant {{$index+1}}</span>
                                 <input class="form-check-input" type="checkbox" name="is_active" {{$variant->is_active == 1 ? 'checked':''}}>
@@ -175,11 +166,7 @@
                     <!-- Thumbnail -->
                     <div class="mb-3 group">
                         <label for="thumbnail-input" class="form-label">Thumbnail</label>
-                        <input 
-                            class="form-control" type="file" 
-                            id="thumbnail-input" accept="image/*" 
-                            onchange="onChangeSingleImage(event)"
-                        />
+                        <input class="form-control" type="file" id="thumbnail-input" accept="image/*" onchange="onChangeSingleImage(event)" />
                         <label for="thumbnail-input">
                             <img src="{{isset($product)?asset($product->image_thumbnail):''}}" class="object-fit-contain mt-3 img-thumbnail" style="height: 100px;" id="thumbnail-img" alt="">
                         </label>
@@ -189,12 +176,7 @@
                     <!-- Image container -->
                     <div class="mb-3 mt-5">
                         <label for="gallery" class="form-label">Gallery</label>
-                        <input 
-                            class="form-control" type="file" 
-                            id="gallery" accept="image/*" multiple 
-                            onchange="onChangeMultipleImage(event)"
-                        
-                        />
+                        <input class="form-control" type="file" id="gallery" accept="image/*" multiple onchange="onChangeMultipleImage(event)" />
                         <div id="image-container" class="d-flex gap-3 column-gap-2 mt-2 flex-wrap">
                             @if (isset($gallery))
                             @foreach ($gallery as $key => $image)
@@ -235,9 +217,8 @@
     const method = "{{ $method }}";
     const httpReferer = "{{ $httpReferer }}";
     let variantIndex = Number("{{isset($variants)?count($variants):0}}");
-
 </script>
 <!-- Handler script -->
 <script src="{{$js}}"></script>
-<script src="{{asset('js/admin/product/main.js')}}"></script>
+<script src="{{asset('js/admin/product/product.js')}}"></script>
 @endsection

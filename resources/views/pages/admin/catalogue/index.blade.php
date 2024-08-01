@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <table class="table">
+        <table class="table table-hover align-middle">
             <thead>
                 <tr class="table-primary">
                     <th class="">

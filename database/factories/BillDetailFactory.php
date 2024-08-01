@@ -17,7 +17,7 @@ class BillDetailFactory extends Factory
     {
         return [
             'bill_id' => Bill::factory(),
-            'product_sku' => $this->faker->unique()->word,
+            'product_sku' => $this->faker->unique()->regexify('[A-Z0-9]{10}'),
             'product_name' => $this->faker->name(),
             'product_size' => $this->faker->randomElement(['S', 'M', 'L', 'XL']),
             'product_color' => $this->faker->randomElement(['Red', 'Green', 'Blue']),
