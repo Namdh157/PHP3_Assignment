@@ -5737,7 +5737,7 @@ a:focus {
   color: #364e7c; }
 .product.product-list .btn-product.btn-cart {
   color: #364e7c;
-  border-bolor: #364e7c; }
+  border-color: #364e7c; }
   .product.product-list .btn-product.btn-cart:hover, .product.product-list .btn-product.btn-cart:focus {
     background-color: #364e7c; }
 
@@ -10685,7 +10685,7 @@ button:focus {
     font-size: 3rem; } }
 @media screen and (min-width: 1200px) {
   .intro-content {
-    left: 100px; }
+    left: 150px; }
     .intro-content .btn {
       font-size: 1.4rem;
       min-width: 150px;

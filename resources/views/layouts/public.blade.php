@@ -10,8 +10,7 @@
  <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
  <link rel="stylesheet" href="{{ asset('assets') }}/css/skins/skin-demo-6.css">
  <link rel="stylesheet" href="{{ asset('assets') }}/css/demos/demo-6.css">
- <link rel="stylesheet" href="{{ asset('assets') }}/css/plugins/owl-carousel/owl.carousel.css">
- <link rel="stylesheet" href="{{ asset('assets') }}/css/plugins/magnific-popup/magnific-popup.css">
+ <link rel="stylesheet" href="{{ asset('assets') }}/css/demos/carousel-layout.css">
  <link rel="stylesheet" href="{{ asset('assets') }}/css/plugins/nouislider/nouislider.css">
 
 @include('pages.public.components.header')
@@ -28,16 +27,15 @@
  <script src="{{ asset('assets') }}/js/jquery.hoverIntent.min.js"></script>
  <script src="{{ asset('assets') }}/js/jquery.waypoints.min.js"></script>
  <script src="{{ asset('assets') }}/js/superfish.min.js"></script>
- <script src="{{ asset('assets') }}/js/owl.carousel.min.js"></script>
  <script src="{{ asset('assets') }}/js/bootstrap-input-spinner.js"></script>
  <script src="{{ asset('assets') }}/js/jquery.plugin.min.js"></script>
  <script src="{{ asset('assets') }}/js/jquery.countdown.min.js"></script>
  <script src="{{ asset('assets') }}/js/bootstrap-input-spinner.js"></script>
- <script src="{{ asset('assets') }}/js/jquery.magnific-popup.min.js"></script>
  <script src="{{ asset('assets') }}/js/superfish.min.js"></script>
  <script src="{{ asset('assets') }}/js/jquery.elevateZoom.min.js"></script>
  <script src="{{ asset('assets') }}/js/jquery.sticky-kit.min.js"></script>
  <script src="{{ asset('assets') }}/js/wNumb.js"></script>
  <script src="{{ asset('assets') }}/js/nouislider.min.js"></script>
+ <script src="{{ asset('assets') }}/js/slider.js"></script>
 @endsection
 
