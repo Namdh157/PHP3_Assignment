@@ -35,7 +35,7 @@ class ProductController extends Controller
 
         // Pagination
         $totalPage = $products->lastPage();
-        $curPath = $products->path();
+        $curPath = $products->path() .  '?';
         $pageArray = range(1, $totalPage);
 
         return view(self::PATH_VIEW . __FUNCTION__, [

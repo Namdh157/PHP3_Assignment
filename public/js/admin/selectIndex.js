@@ -2,22 +2,22 @@ const checkAll = document.getElementById('checked-all');
 const checkItems = document.querySelectorAll('tbody input[name="check-item"]');
 const selectAction = document.getElementById('select-action');
 const selectSubmit = document.getElementById('select-submit');
-const formData = new FormData(document.getElementById('form-data'));
+const formData = new FormData(document.getElementById('checkbox-form'));
 
 // CheckBox event
-checkAll.onchange = function () {
+if(checkAll) checkAll.onchange = function () {
     checkItems.forEach(checkbox => {
         checkbox.checked = checkAll.checked;
     })
 }
-checkItems.forEach(checkbox => {
+if(checkItems) checkItems.forEach(checkbox => {
     checkbox.onchange = function () {
         checkAll.checked = checkItems.length === document.querySelectorAll('tbody input[name="check-item"]:checked').length;
     }
 })
 
 // Submit select
-selectSubmit.onclick = function () {
+if(selectSubmit) selectSubmit.onclick = function () {
     const action = selectAction.value;
     const checkedIds = [];
     checkItems.forEach(checkbox => {
@@ -53,6 +53,10 @@ selectSubmit.onclick = function () {
             formData.set('is_active', 0);
             break;
         case 'delete':
+            if(!routeDelete){
+                ToastCustom('Route delete not found', 'error');
+                return;
+            }
             if (!confirm(`Are you sure you want to DELETE ${checkedIds.length} items?`)) return;
             method = "DELETE";
             route = routeDelete;
@@ -63,6 +67,10 @@ selectSubmit.onclick = function () {
         default:
             ToastCustom('Please select an action', 'error');
             return;
+    }
+    if(!route){
+        ToastCustom('Route not found', 'error');
+        return;
     }
     postFormData(route, formData, callBackSuccess, null, method);
 }

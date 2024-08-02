@@ -91,7 +91,7 @@ const onPostProduct = function () {
         }
     }
     // Send request
-    postFormData(route, formData, successCallback, errorCallback, method);
+    postFormData(routePost, formData, successCallback, errorCallback, method);
 }
 
 // < !--Event Handlers -->

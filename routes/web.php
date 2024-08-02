@@ -1,15 +1,17 @@
 <?php
 
+
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\BillController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CatalogueController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\DashBoardController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Models\Bill;
-use App\Models\Brand;
-use App\Models\CartItem;
-use App\Models\Comment;
-use App\Models\User;
-use App\Models\Voucher;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProductController as PublicProductController;
 use App\Http\Controllers\Public\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,15 +19,15 @@ use Illuminate\Support\Facades\Route;
 
 // Route admin
 Route::middleware('auth.admin')->prefix('admin')->name('admin.')->group(function () {
-    Route::resource('catalogue', CatalogueController::class);
-    Route::resource('brand', Brand::class);
-    Route::resource('product', ProductController::class);
-    Route::resource('bill', Bill::class);
-    Route::resource('cart', CartItem::class);
-    Route::resource('comment', Comment::class);
-    Route::resource('user', User::class);
-    Route::resource('voucher', Voucher::class);
     Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
+    Route::resource('catalogue', CatalogueController::class);
+    Route::resource('brand', BrandController::class);
+    Route::resource('product', ProductController::class);
+    Route::resource('user', UserController::class);
+    Route::resource('comment', CommentController::class);
+    Route::resource('bill', BillController::class);
+    Route::resource('voucher', VoucherController::class);
+    Route::resource('banner', BannerController::class);
 });
 
 // Route không được phép truy cập khi đã đăng nhập
@@ -43,11 +45,8 @@ Route::middleware('auth.logged')->group(function(){
 });
 
 // Route public
-Route::get('/', function () {
-    return view('pages.public.home.index', [
-        'title' => 'Home'
-    ]);
-})->name('public.home');
+Route::get('/', [HomeController::class, 'index'])
+    ->name('public.home');
 
 Route::get('/product/detail/{slug}', [PublicProductController::class, 'detail'])->name('public.product.detail');
 

@@ -16,7 +16,7 @@ class CatalogueApiController extends Controller
         $checkedIds = json_decode($request->get('checkedIds'), true);
         if(empty($checkedIds)){
             return response()->json([
-                'error' => 'No product selected'
+                'error' => 'No catalogue selected'
             ]);
         }
         $is_active = $request->get('is_active');
@@ -40,17 +40,17 @@ class CatalogueApiController extends Controller
         $checkedIds = json_decode($request->get('checkedIds'), true);
         if(empty($checkedIds)){
             return response()->json([
-                'error' => 'No product selected'
+                'error' => 'No catalogue selected'
             ]);
         }
         $delete = $this->model->whereIn('id', $checkedIds)->delete();
         if(!$delete){
             return response()->json([
-                'error' => 'Failed to delete product'
+                'error' => 'Failed to delete catalogue'
             ]);
         }
         return response()->json([
-            'success' => 'Delete product success',
+            'success' => 'Delete catalogue success',
             'data' => $delete
         ]);
     }

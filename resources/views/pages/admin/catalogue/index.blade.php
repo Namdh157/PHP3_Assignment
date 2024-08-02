@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <table class="table">
+        <table class="table table-hover align-middle">
             <thead>
                 <tr class="table-primary">
                     <th class="">
@@ -27,6 +27,8 @@
                     </th>
                     <th class="">Name</th>
                     <th class="">Active</th>
+                    <th class="">Updated</th>
+                    <th class="">Created</th>
                     <th class="">Action</th>
                 </tr>
             </thead>
@@ -40,6 +42,12 @@
                     <td>{{ $catalogue->name }}</td>
                     <td>
                         <input class="form-check-input" type="checkbox" onclick="((e)=>{e.preventDefault()})(event)" {{$catalogue->is_active ? 'checked':''}} name="active-item">
+                    </td>
+                    <td>
+                        {{ $catalogue->updated_at->diffForHumans() }}
+                    </td>
+                    <td>
+                        {{ $catalogue->created_at->diffForHumans() }}
                     </td>
                     <td>
                         <a href="{{ route('admin.catalogue.edit', $catalogue) }}" class="btn btn-outline-info">
@@ -65,7 +73,7 @@
     </div>
 </div>
 
-<form action="" id="form-data">
+<form action="" id="checkbox-form">
     @csrf
 </form>
 <script>

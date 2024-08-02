@@ -41,9 +41,6 @@
 </div>
 @endsection
 
-<!-- Show fullview image -->
-@include('common.fullView')
-
 <form action="{{route('admin.catalogue.store')}}" method="post" id="postForm">
     @csrf
 </form>
@@ -53,20 +50,23 @@
     const route = "{{ $routePostTo }}";
     const method = "{{ $method }}";
     const httpReferer = "{{ $httpReferer }}";
+    let successCallback = () => window.location.href = httpReferer;
 </script>
-
+@if (isset($isContinue) && $isContinue)
+<script>
+    successCallback = function(res) {
+        setTimeout(() => {
+            if (confirm('Do you want to add more catalogue?')) {
+                window.location.reload();
+            } else {
+                window.location.href = httpReferer;
+            }
+        }, 1200);
+    }
+</script>
+@endif
 <!-- Handler script -->
 <script>
-    function successCallback(res) {
-    setTimeout(() => {
-        if (confirm('Do you want to add more product?')) {
-            window.location.reload();
-        } else {
-            window.location.href = httpReferer;
-        }
-    }, 1500);
-}
-
     function onChangeActive(checkbox) {
         const activeContainer = document.getElementById('active-container');
         if (checkbox.checked) activeContainer.classList.add('bg-info');

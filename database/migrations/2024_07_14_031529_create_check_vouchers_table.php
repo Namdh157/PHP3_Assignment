@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Bill;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Database\Migrations\Migration;
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Voucher::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Bill::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

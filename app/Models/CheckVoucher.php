@@ -12,5 +12,17 @@ class CheckVoucher extends Model
     protected $fillable = [
         'user_id',
         'voucher_id',
+        'bill_id',
     ];
+
+    public function voucher()
+    {
+        return $this->belongsTo(Voucher::class, 'voucher_id');
+    }
+    public function bill(){
+        return $this->belongsTo(Bill::class, 'bill_id');
+    }
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

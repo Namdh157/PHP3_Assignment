@@ -14,7 +14,6 @@ class User extends Authenticatable
 
     const TYPE_ADMIN = 'admin';
     const TYPE_MEMBER = 'member';
-
     protected $fillable = [
         'name',
         'email',
@@ -23,12 +22,20 @@ class User extends Authenticatable
         'address',
         'image',
     ];
-
     protected $hidden = [
         'password',
     ];
-
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+    public function bills(){
+        return $this->hasMany(Bill::class);
+    }
+    public function checkVouchers() {
+        return $this->hasMany(CheckVoucher::class);
+    }
 }
