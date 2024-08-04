@@ -149,7 +149,7 @@
                             <a href="{{ route('public.checkout')}}" class="btn btn-outline-primary-2 btn-order btn-block w-100">PROCEED TO CHECKOUT</a>
                         </div><!-- End .summary -->
 
-                        <a href="{{ route('public.allproduct')}}" class="btn btn-outline-dark-2 btn-block mb-3 w-100"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
+                        <a href="{{ route('public.allProduct')}}" class="btn btn-outline-dark-2 btn-block mb-3 w-100"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
                     </aside><!-- End .col-lg-3 -->
                 </div><!-- End .row -->
             </div><!-- End .container -->
