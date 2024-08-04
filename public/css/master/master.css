@@ -83,3 +83,9 @@
         transform: rotate(360deg);
     }
 }
+
+.product-thumbnail {
+    width: 280px !important;
+    height: 300px !important;
+    object-fit: cover;
+}

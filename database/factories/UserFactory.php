@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'phone_number' => $this->faker->phoneNumber,
             'address' => $this->faker->address,
             'image' => $this->faker->imageUrl(640, 480, 'people'), // URL hình ảnh giả lập
-            'role' => $this->faker->randomElement([User::TYPE_ADMIN, User::TYPE_MEMBER]),
+            'role' => $this->faker->randomElement([User::TYPE_USER['admin'], User::TYPE_MEMBER]),
         ];
     }
 

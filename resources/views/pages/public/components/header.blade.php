@@ -57,7 +57,7 @@
                 </div>
                 <div class="header-right">
                     <div class="dropdown cart-dropdown">
-                        <a href="{{ route('cart') }}" class="dropdown-toggle" role="button">
+                        <a href="{{ route('public.cart')}}" class="dropdown-toggle" role="button">
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">2</span>
                         </a>
@@ -85,11 +85,12 @@
                                                         <div class="menu-title">Shop with Brands</div>
                                                         <!-- End .menu-title -->
                                                         <ul>
-                                                            @foreach ($listBrands as $item)
-                                                                <li>
-                                                                    <a href="{{ route('allproduct','brand='.$item->id) }}">{{$item->name}}</a>
-                                                                </li>
-                                                            @endforeach
+                                                            <li><a href="{{ route('public.allProduct')}}">Shop List</a></li>
+                                                            <li><a href="#">Shop Grid 2 Columns</a>
+                                                            </li>
+                                                            <li><a href="#">Shop Grid 3 Columns</a></li>
+                                                            <li><a href="#">Shop Grid 4 Columns</a>
+                                                            </li>
                                                         </ul>
                                                     </div><!-- End .col-md-6 -->
                                                     <div class="col-md-6">

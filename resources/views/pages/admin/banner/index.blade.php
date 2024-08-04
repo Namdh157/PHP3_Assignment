@@ -1,96 +1,76 @@
-@extends ('layouts.admin')
+@extends('layouts.admin')
 
-<!-- content -->
 @section('content')
-<div class="container">
-    <div class="my-3">
-        <div class="d-flex justify-content-between">
-            <a href="{{ route('admin.banner.create') }}" class="btn btn-success my-3">
-                Add new <i class="fa-solid fa-plus"></i>
-            </a>
-            <div class="d-flex gap-2" style="height: max-content">
-                <select class="form-select" id="select-action">
-                    <option value="" selected>Action</option>
-                    <option value="delete">Delete</option>
-                </select>
-                <button class="btn btn-outline-success" id="select-submit">Submit</button>
-            </div>
+<style>
+    .card-hover {
+        transition: 0.2s;
+    }
+
+    .card-hover:hover {
+        transform: scale(1.04);
+    }
+</style>
+
+<div class="d-flex flex-wrap gap-5 px-5">
+    <a href="{{route('admin.banner.create')}}" class="card card-hover border-4 mt-4 text-decoration-none" style="width: 330px; height: 200px">
+        <div class="card-body d-flex align-items-center justify-content-center">
+            <i class="fa-solid fa-plus" style="font-size: 50px;"></i>
         </div>
+    </a>
+    @foreach ($banners as $banner)
+    <div class="card border-0 mt-4" style="width: 330px; ">
+        <a href="{{route('admin.banner.edit', $banner->id)}}" class="card-body p-0 card-hover border-4" style="height: 200px">
+            <img src="{{asset($banner->image)}}" class="w-100 h-100 object-fit-cover rounded" alt="">
+        </a>
+        <div class="fw-bold fs-6 px-3 row gap-2 align-items-center mt-3">
+            <!-- Name -->
+            <input type="text" value="{{$banner->name}}" class="col form-control" readonly>
 
-        <!-- Table -->
-        <table class="table table-hover align-middle">
-            <thead>
-                <tr class="table-primary" style="vertical-align: middle;">
-                    <th class="">
-                        <input class="form-check-input" type="checkbox" id="checked-all">
-                    </th>
-                    <th>Name</th>
-                    <th>Active</th>
-                    <th>Updated at</th>
-                    <th>Created at</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($banners as $index => $banner)
-                <tr role="button">
-                    <td class="position-relative" style="width: 10px">
-                        <label for="check-item-{{$index}}" class="position-absolute top-0 start-0 w-100 h-100 z-3"></label>
-                        <input class="form-check-input" type="checkbox" value="{{$banner->id}}" name="check-item" id="check-item-{{$index}}">
-                    </td>
-                    <td>
-                        <img src="{{asset($banner->thumbnail)}}" alt="" class="object-fit-contain me-2" style="width: 100px">
-                        {{$banner->name}}
-                    </td>
-                    <td class="">
-                        <input class="form-check-input" type="checkbox" onclick="((e)=>{e.preventDefault()})(event)" {{$banner->is_active ? 'checked':''}} name="active-item">
-                    </td>
-                    <td>
-                        <span class="text-muted text-nowrap">{{ $banner->updated_at->diffForHumans() }}</span>
-                    </td>
-                    <td>
-                        <span class="text-muted text-nowrap">{{ $banner->created_at->diffForHumans() }}</span>
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.banner.edit', $banner) }}" class="btn btn-outline-info">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-
-                        <form action="{{ route('admin.banner.destroy', $banner) }}" method="POST" style="display:inline" onsubmit="confirmDelete(event)">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-outline-danger">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-
-        </table>
-
-        <!-- Paginate -->
-        @include('common.pagination')
+            <!-- Active -->
+            <form action="{{route('api.banner.setActiveOn', $banner->id)}}" method="post" class="col-3 p-0" onsubmit="toggleActive(event)" data-active-id="{{$banner->id}}">
+                @csrf
+                @method('put')
+                <button class="btn w-100 {{$banner->is_active?'btn-success':'btn-outline-success'}}" type="{{$banner->is_active?'button':'submit'}}">
+                    Active
+                </button>
+            </form>
+            <!-- Delete -->
+            <form action="{{route('admin.banner.destroy', $banner->id)}}" method="post" class="col-2 p-1" onsubmit="confirmDelete(event)">
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-outline-danger w-100">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </form>
+        </div>
     </div>
+    @endforeach
 </div>
-
-<form action="" id="checkbox-form">
-    @csrf
-</form>
-
 @endsection
-<!-- file Javascript -->
+
 @section('script')
-
-<!-- Config Script -->
 <script>
-    const routePost = "{{route('admin.banner.store')}}";
-    const routeUpdate = null;
-    const routeDelete = "{{ route('api.banner.deleteMany') }}";
-    const httpReferer = "{{isset($httpReferer)? $httpReferer : asset('admin.banner.index')}}"
-</script>
+    function toggleActive(e) {
+        e.preventDefault();
+        if (confirm('Do you want to change active banner?')) {
+            const routeUpdateActive = e.target.action;
+            const formData = new FormData(e.target);
 
-<!-- Handle Script -->
-<script src="{{asset('js/admin/selectIndex.js')}}"></script>
+            const callbackSuccess = (id) => {
+                const prevActive = document.querySelector(`form[data-active-id] button[type="button"]`);
+                const newActive = document.querySelector(`form[data-active-id="${id}"] button`);
+
+                prevActive.classList.toggle('btn-success');
+                prevActive.classList.toggle('btn-outline-success');
+                prevActive.type = 'submit';
+
+                newActive.classList.toggle('btn-success');
+                newActive.classList.toggle('btn-outline-success');
+                newActive.type = 'button';
+            }
+            
+            postFormData(routeUpdateActive, formData, callbackSuccess)
+        }
+    }
+</script>
 @endsection

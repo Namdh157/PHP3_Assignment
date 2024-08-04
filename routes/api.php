@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BrandApiController;
 use App\Http\Controllers\api\CatalogueApiController;
 use App\Http\Controllers\Api\ProductApiController;
 use App\Http\Controllers\Api\CommentApiController;
+use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\VoucherApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,12 +36,19 @@ Route::middleware('auth.admin')->group(function () {
         ->name('api.catalogue.updateStatus');
     Route::delete('catalogue/delete-many', [CatalogueApiController::class, 'deleteMany'])
         ->name('api.catalogue.deleteMany');
-
     //brands
     Route::patch('brand/update-status', [BrandApiController::class, 'updateStatus'])
         ->name('api.brand.updateStatus');
     Route::delete('brand/delete-many', [BrandApiController::class, 'deleteMany'])
         ->name('api.brand.deleteMany');
+
+    //users
+    Route::patch('user/update-status', [UserApiController::class, 'updateStatus'])
+        ->name('api.user.updateStatus');
+    Route::delete('user/delete-many', [UserApiController::class, 'deleteMany'])
+        ->name('api.user.deleteMany');
+    Route::patch('user/update-role', [UserApiController::class, 'updateRole'])
+        ->name('api.user.updateRole');
 
     //comments
     Route::delete('comment/delete-many', [CommentApiController::class, 'deleteMany'])
@@ -53,6 +61,13 @@ Route::middleware('auth.admin')->group(function () {
         ->name('api.voucher.deleteMany');
 
     //banners
-    Route::delete('banner/delete-many', [BannerApiController::class, 'deleteMany'])
-        ->name('api.banner.deleteMany');
+    Route::put('banner/set-active-on/{id}', [BannerApiController::class, 'setActiveOn'])
+        ->name('api.banner.setActiveOn');
 });
+
+//API for public
+Route::get('catalogue/showMore', [CatalogueApiController::class, 'showMore'])
+    ->name('api.catalogue.showMore');
+
+Route::get('brand/showMore', [BrandApiController::class, 'showMore'])
+    ->name('api.brand.showMore');

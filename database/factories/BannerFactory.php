@@ -18,8 +18,7 @@ class BannerFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'thumbnail' => $this->faker->imageUrl(1000, 450),
-            'is_active' => $this->faker->randomNumber(1),
+            'is_active' => $this->faker->boolean,
         ];
     }
 }

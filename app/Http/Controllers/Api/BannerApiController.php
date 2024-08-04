@@ -12,23 +12,16 @@ class BannerApiController extends Controller
     public function __construct(){
         $this->model = new Banner();
     }
-    public function deleteMany(Request $request)
-    {
-        $checkedIds = json_decode($request->get('checkedIds'), true);
-        if(empty($checkedIds)){
+    public function setActiveOn($id){
+        $result = $this->model->setActiveOn($id);
+        if(!$result){
             return response()->json([
-                'error' => 'No banner selected'
-            ]);
-        }
-        $delete = $this->model->whereIn('id', $checkedIds)->delete();
-        if(!$delete){
-            return response()->json([
-                'error' => 'Failed to delete banner'
+                'error' => 'Failed to set banner active'
             ]);
         }
         return response()->json([
-            'success' => 'Delete banner success',
-            'data' => $delete
+            'success' => 'Banner active has been change',
+            'data' => $id
         ]);
     }
     /**
