@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Public\CartController;
+use App\Http\Controllers\Public\AllProductController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProductController as PublicProductController;
 use App\Http\Controllers\Public\ProfileController;
@@ -50,9 +51,7 @@ Route::name('public.')->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/product/detail/{slug}', [PublicProductController::class, 'detail'])->name('product.detail');
     Route::get('/cart', [CartController::class,'index'])->name('cart');
-    Route::get('/allproduct', function () {
-        return view('pages.public.allProduct.index');
-    })->name('allproduct');
+    Route::get('/allProduct', [AllProductController::class, 'index'])->name('allProduct');
     Route::get('/checkout', function () {
         return view('pages.public.checkout.index');
     })->name('checkout');

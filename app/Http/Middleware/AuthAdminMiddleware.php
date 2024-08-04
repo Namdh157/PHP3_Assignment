@@ -18,7 +18,7 @@ class AuthAdminMiddleware
     {
         $user = $request->user();
         // dd($request->expectsJson());
-        if (!$user || !$user->role || $user->role !== User::TYPE_ADMIN) {
+        if (!$user || !$user->role || $user->role !== User::TYPE_USER['admin']) {
             return $request->expectsJson() 
                 ? response()->json(['error' => 'You are not allowed to access this page'])
                 : redirect()->route('public.home')->with('error', 'You are not allowed to access this page');

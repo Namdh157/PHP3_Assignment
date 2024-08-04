@@ -30,4 +30,20 @@ class UserApiController extends Controller
             'data' => $delete
         ]);
     }
+    public function updateRole() {
+        $id = request()->get('id');
+        $role = request()->get('role');
+        $user = $this->model->find($id);
+        if(!$user){
+            return response()->json([
+                'error' => 'User not found'
+            ]);
+        }
+        $user->role = $role;
+        $user->save();
+        return response()->json([
+            'success' => 'Update role success',
+            'data' => $user
+        ]);
+    }
 }
