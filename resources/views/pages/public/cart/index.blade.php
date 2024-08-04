@@ -30,7 +30,7 @@
                                         <div class="product">
                                             <figure class="product-media">
                                                 <a href="#">
-                                                    <img src="{{ asset('storage/images') }}/products/product-5-1.jpg" alt="Product image">
+                                                    <img src="{{ asset('storage/images') }}/products/product-5-1.jpg" alt="Product image product-thumbnail">
                                                 </a>
                                             </figure>
 
@@ -53,7 +53,7 @@
                                         <div class="product">
                                             <figure class="product-media">
                                                 <a href="#">
-                                                    <img src="{{ asset('storage/images') }}/products/product-1-2.jpg" alt="Product image">
+                                                    <img src="{{ asset('storage/images') }}/products/product-1-2.jpg" alt="Product image product-thumbnail">
                                                 </a>
                                             </figure>
 

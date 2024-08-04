@@ -82,10 +82,9 @@
                                             <div class="menu-col">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <div class="menu-title">Shop with sidebar</div>
+                                                        <div class="menu-title">Shop with Brands</div>
                                                         <!-- End .menu-title -->
                                                         <ul>
-
                                                             <li><a href="{{ route('public.allProduct')}}">Shop List</a></li>
                                                             <li><a href="#">Shop Grid 2 Columns</a>
                                                             </li>
@@ -98,10 +97,11 @@
                                                         <div class="menu-title">Product Category</div>
                                                         <!-- End .menu-title -->
                                                         <ul>
-                                                            <li><a href="#">Product Category
-                                                                    Boxed</a></li>
-                                                            <li><a href="#">Product
-                                                                    Category Fullwidth</a></li>
+                                                            @foreach ($listCatalogues as $item)
+                                                            <li>
+                                                                <a href="{{ route('allproduct','catalogue='.$item->id) }}">{{$item->name}}</a>
+                                                            </li>
+                                                            @endforeach
                                                         </ul>
                                                     </div><!-- End .col-md-6 -->
                                                 </div><!-- End .row -->
@@ -125,43 +125,6 @@
                                         </div><!-- End .col-md-4 -->
                                     </div><!-- End .row -->
                                 </div><!-- End .megamenu megamenu-md -->
-                            </li>
-                            <li>
-                                <a href="product.html" class="sf-with-ul">Product</a>
-
-                                <div class="megamenu megamenu-sm">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-6">
-                                            <div class="menu-col">
-                                                <div class="menu-title">Product Details</div><!-- End .menu-title -->
-                                                <ul>
-                                                    <li><a href="{{route('public.product.detail',"aaa")}}">Default</a></li>
-                                                    <li><a href="#">Centered</a></li>
-                                                    <li><a href="#">Gallery</a></li>
-                                                    <li><a href="#">Sticky Info</a></li>
-                                                    <li><a href="#">Boxed With Sidebar</a></li>
-                                                    <li><a href="#">Full Width</a></li>
-                                                    <li><a href="#">Masonry Sticky Info</a></li>
-                                                </ul>
-                                            </div><!-- End .menu-col -->
-                                        </div><!-- End .col-md-6 -->
-
-                                        <div class="col-md-6">
-                                            <div class="banner banner-overlay">
-                                                <a href="category.html">
-                                                    <img src="{{ asset('storage/images') }}/components/header/menu/banner-2.jpg"
-                                                        alt="Banner">
-
-                                                    <div class="banner-content banner-content-bottom">
-                                                        <div class="banner-title text-white">New
-                                                            Trends<br><span><strong>spring 2019</strong></span></div>
-                                                        <!-- End .banner-title -->
-                                                    </div><!-- End .banner-content -->
-                                                </a>
-                                            </div><!-- End .banner -->
-                                        </div><!-- End .col-md-6 -->
-                                    </div><!-- End .row -->
-                                </div><!-- End .megamenu megamenu-sm -->
                             </li>
                             <li>
                                 <a href="#" class="sf-with-ul">Pages</a>

@@ -41,11 +41,10 @@
                         </a>
 
                         <div class="banner-content banner-content-center">
-                            <h4 class="banner-subtitle text-white"><a href="#">New in</a></h4>
+                            <h4 class="banner-subtitle text-white">New in</h4>
                             <!-- End .banner-subtitle -->
-                            <h3 class="banner-title text-white"><a href="#"><strong>Women’s</strong></h3>
+                            <h3 class="banner-title text-white"><strong>Women’s</strong></h3>
                             <!-- End .banner-title -->
-                            <a href="#" class="btn btn-outline-white banner-link underline">Shop Now</a>
                         </div><!-- End .banner-content -->
                     </div><!-- End .banner -->
                 </div><!-- End .col-sm-6 -->
@@ -57,11 +56,10 @@
                         </a>
 
                         <div class="banner-content banner-content-center">
-                            <h4 class="banner-subtitle text-white"><a href="#">New in</a></h4>
+                            <h4 class="banner-subtitle text-white">New in</h4>
                             <!-- End .banner-subtitle -->
-                            <h3 class="banner-title text-white"><a href="#"><strong>Men’s</strong></a></h3>
+                            <h3 class="banner-title text-white"><strong>Men’s</strong></h3>
                             <!-- End .banner-title -->
-                            <a href="#" class="btn btn-outline-white banner-link underline">Shop Now</a>
                         </div><!-- End .banner-content -->
                     </div><!-- End .banner -->
                 </div><!-- End .col-sm-6 -->
@@ -73,343 +71,39 @@
     <div class="mb-5"></div><!-- End .mb-5 -->
     <div class="container">
         <div class="heading heading-center mb-3">
-            <h2 class="title">Trending</h2><!-- End .title -->
-
-            <ul class="nav nav-pills justify-content-center" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="trending-all-link" data-toggle="tab" href="#trending-all-tab" role="tab" aria-controls="trending-all-tab" aria-selected="true">All</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="trending-women-link" data-toggle="tab" href="#trending-women-tab" role="tab" aria-controls="trending-women-tab" aria-selected="false">Women</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="trending-men-link" data-toggle="tab" href="#trending-men-tab" role="tab" aria-controls="trending-men-tab" aria-selected="false">Men</a>
-                </li>
-            </ul>
+            <h2 class="title text-center mb-4">Trending</h2><!-- End .title -->
+            <div class="products">
+                <div class="row justify-content-center">
+                    @foreach ($trendingProducts as $item)
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="product product-7 text-center">
+                            <figure class="product-media">
+                                <a href="{{route('public.product.detail',$item->slug)}}">
+                                    <img src="{{$item->image_thumbnail}}" alt="Product image" class="product-image product-thumbnail">
+                                </a>
+                                <div class="product-action">
+                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                </div><!-- End .product-action -->
+                            </figure><!-- End .product-media -->
+    
+                            <div class="product-body">
+                                <div class="product-cat">
+                                    <a href="#">{{$item->catalogue->name}}</a>
+                                </div><!-- End .product-cat -->
+                                <h3 class="product-title"><a href="{{route('public.product.detail',$item->slug)}}">{{$item->name}}</a></h3>
+                                <!-- End .product-title -->
+                                <div class="product-price">
+                                    <span class="new-price">Now {{$item->productVariants->min('price_sale')}} $</span>
+                                        <span class="old-price">Was {{$item->productVariants->min('price_regular')}} $</span>
+                                </div><!-- End .product-price -->
+                            </div><!-- End .product-body -->
+                        </div><!-- End .product -->
+                    </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                    @endforeach
+                </div><!-- End .row -->
+            </div><!-- End .products -->
+    
         </div><!-- End .heading -->
-
-        <div class="tab-content tab-content-carousel">
-            <div class="tab-pane p-0 fade show active" id="trending-all-tab" role="tabpanel" aria-labelledby="trending-all-link">
-                <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
-                                "nav": false, 
-                                "dots": true,
-                                "margin": 20,
-                                "loop": false,
-                                "responsive": {
-                                    "0": {
-                                        "items":2
-                                    },
-                                    "480": {
-                                        "items":2
-                                    },
-                                    "768": {
-                                        "items":3
-                                    },
-                                    "992": {
-                                        "items":4
-                                    },
-                                    "1200": {
-                                        "items":4,
-                                        "nav": true,
-                                        "dots": false
-                                    }
-                                }
-                            }'>
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-1-2.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-3-1.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Clothing</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Denim jacket</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                500.000vnđ
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-2-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-2-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Shoes</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Sandals</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                500.000vnđ
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <span class="product-label label-sale">sale</span>
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-3-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-3-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Clothing</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Printed sweatshirt</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="new-price">Now 450.000vnđ/span>
-                                    <span class="old-price">Was 500.000vnđ</span>
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-4-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-4-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Clothing</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Linen-blend paper bag trousers</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                500.000vnđ
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-1-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-1-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Clothing</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Denim jacket</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                500.000vnđ
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-
-                </div><!-- End .owl-carousel -->
-            </div><!-- .End .tab-pane -->
-            <div class="tab-pane p-0 fade" id="trending-women-tab" role="tabpanel" aria-labelledby="trending-women-link">
-                <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
-                                "nav": false, 
-                                "dots": true,
-                                "margin": 20,
-                                "loop": false,
-                                "responsive": {
-                                    "0": {
-                                        "items":0
-                                    },
-                                    "480": {
-                                        "items":2
-                                    },
-                                    "768": {
-                                        "items":3
-                                    },
-                                    "992": {
-                                        "items":4
-                                    },
-                                    "1200": {
-                                        "items":4,
-                                        "nav": true,
-                                        "dots": false
-                                    }
-                                }
-                            }'>
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <span class="product-label label-sale">sale</span>
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-3-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-3-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Clothing</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Printed sweatshirt</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="new-price">Now 450.000vnđ/span>
-                                    <span class="old-price">Was 500.000vnđ</span>
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-4-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-4-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Clothing</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Linen-blend paper bag trousers</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                500.000vnđ
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-1-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-1-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Clothing</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Denim jacket</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                500.000vnđ
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-                </div><!-- End .owl-carousel -->
-            </div><!-- .End .tab-pane -->
-
-            <div class="tab-pane p-0 fade" id="trending-men-tab" role="tabpanel" aria-labelledby="trending-men-link">
-                <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
-                                "nav": false, 
-                                "dots": true,
-                                "margin": 20,
-                                "loop": false,
-                                "responsive": {
-                                    "0": {
-                                        "items":0
-                                    },
-                                    "480": {
-                                        "items":2
-                                    },
-                                    "768": {
-                                        "items":3
-                                    },
-                                    "992": {
-                                        "items":4
-                                    },
-                                    "1200": {
-                                        "items":4,
-                                        "nav": true,
-                                        "dots": false
-                                    }
-                                }
-                            }'>
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <span class="product-label label-sale">sale</span>
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-3-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-3-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Clothing</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Printed sweatshirt</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="new-price">Now 450.000vnđ/span>
-                                    <span class="old-price">Was 500.000vnđ</span>
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-                </div><!-- End .owl-carousel -->
-            </div><!-- .End .tab-pane -->
-        </div><!-- End .tab-content -->
     </div><!-- End .container -->
 
     <div class="mb-5"></div><!-- End .mb-5 -->
@@ -424,42 +118,26 @@
                         <div class="deal-countdown" data-until="+10h"></div><!-- End .deal-countdown -->
                     </div><!-- End .deal-content -->
                     <div class="row deal-products">
+                        @foreach ($dealProducts as $item)
                         <div class="col-6 deal-product text-center">
                             <figure class="product-media">
-                                <a href="{{route('public.product.detail',"aaa")}}">
-                                    <img src="{{ asset('storage/images') }}/products/product-1-2.jpg" alt="Product image" class="product-image">
+                                <a href="{{route('public.product.detail',$item->slug)}}">
+                                    <img src="{{$item->image_thumbnail}}" alt="Product image" class="product-image product-thumbnail">
                                 </a>
 
                             </figure><!-- End .product-media -->
 
                             <div class="product-body">
-                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Elasticated cotton shorts</a></h3>
+                                <h3 class="product-title"><a href="{{route('public.product.detail',$item->slug)}}">{{$item->name}}</a></h3>
                                 <!-- End .product-title -->
                                 <div class="product-price">
-                                    <span class="new-price">Now 350.000vnđ</span>
-                                    <span class="old-price">Was 500.000vnđ</span>
+                                    <span class="new-price">Now {{$item->productVariants->min('price_sale')}} $</span>
+                                    <span class="old-price">Was {{$item->productVariants->min('price_regular')}} $</span>
                                 </div><!-- End .product-price -->
                             </div><!-- End .product-body -->
-                            <a href="category.html" class="action">shop now</a>
+                            <a href="{{route('public.product.detail',$item->slug)}}" class="action">shop now</a>
                         </div>
-                        <div class="col-6 deal-product text-center">
-                            <figure class="product-media">
-                                <a href="{{route('public.product.detail',"aaa")}}">
-                                    <img src="{{ asset('storage/images') }}/products/product-3-1.jpg" alt="Product image" class="product-image">
-                                </a>
-
-                            </figure><!-- End .product-media -->
-
-                            <div class="product-body">
-                                <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Fine-knit jumper</a></h3>
-                                <!-- End .product-title -->
-                                <div class="product-price">
-                                    <span class="new-price">Now 350.000vnđ/span>
-                                        <span class="old-price">Was 500.000vnđ</span>
-                                </div><!-- End .product-price -->
-                            </div><!-- End .product-body -->
-                            <a href="category.html" class="action">shop now</a>
-                        </div>
+                        @endforeach
                     </div>
                 </div><!-- End .col-lg-5 -->
             </div><!-- End .row -->
@@ -526,17 +204,13 @@
         <h2 class="title text-center mb-4">New Arrivals</h2><!-- End .title text-center -->
         <div class="products">
             <div class="row justify-content-center">
+                @foreach ($newArrivalProducts as $item)
                 <div class="col-6 col-md-4 col-lg-3">
                     <div class="product product-7 text-center">
                         <figure class="product-media">
-                            <span class="product-label label-sale">Sale</span>
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-5-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-5-2.jpg" alt="Product image" class="product-image-hover">
+                            <a href="{{route('public.product.detail',$item->slug)}}">
+                                <img src="{{$item->image_thumbnail}}" alt="Product image" class="product-image product-thumbnail">
                             </a>
-
-
-
                             <div class="product-action">
                                 <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
                             </div><!-- End .product-action -->
@@ -544,214 +218,18 @@
 
                         <div class="product-body">
                             <div class="product-cat">
-                                <a href="#">Clothing</a>
+                                <a href="#">{{$item->catalogue->name}}</a>
                             </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Tie-detail top</a></h3>
+                            <h3 class="product-title"><a href="{{route('public.product.detail',$item->slug)}}">{{$item->name}}</a></h3>
                             <!-- End .product-title -->
                             <div class="product-price">
-                                <span class="new-price">Now 450.000vnđ/span>
-                                    <span class="old-price">Was 500.000vnđ/span>
+                                <span class="new-price">Now {{$item->productVariants->min('price_sale')}} $</span>
+                                    <span class="old-price">Was {{$item->productVariants->min('price_regular')}} $</span>
                             </div><!-- End .product-price -->
                         </div><!-- End .product-body -->
                     </div><!-- End .product -->
                 </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-6-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-6-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Shoes</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Sandals</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                500.000vnđ
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-7-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-7-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Bags</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Small bucket bag</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                500.000vnđ
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-8-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-8-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Clothing</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Denim jacket</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                500.000vnđ
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-9-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-9-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Clothing</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">BShort wrap dress</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                500.000vnđ
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-10-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-10-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Clothing</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Biker jacket</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                500.000vnđ
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-11-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-11-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Shoes</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Loafers</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                500.000vnđ </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <span class="product-label label-sale">sale</span>
-                            <a href="{{route('public.product.detail',"aaa")}}">
-                                <img src="{{ asset('storage/images') }}/products/product-12-1.jpg" alt="Product image" class="product-image">
-                                <img src="{{ asset('storage/images') }}/products/product-12-2.jpg" alt="Product image" class="product-image-hover">
-                            </a>
-
-
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Clothing</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('public.product.detail',"aaa")}}">Super Skinny High Jeggings</a></h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="new-price">Now 450.000vnđ</span>
-                                <span class="old-price">Was 500.000vnđ</span>
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                @endforeach
             </div><!-- End .row -->
         </div><!-- End .products -->
 
@@ -807,11 +285,10 @@
                         </a>
 
                         <div class="banner-content banner-content-center">
-                            <h4 class="banner-subtitle text-white"><a href="#">Limited time only.</a></h4>
+                            <h4 class="banner-subtitle text-white">Limited time only.</h4>
                             <!-- End .banner-subtitle -->
-                            <h3 class="banner-title text-white"><a href="#">End of Season<br>save 50% off</a>
+                            <h3 class="banner-title text-white">End of Season<br>save 50% off
                             </h3><!-- End .banner-title -->
-                            <a href="#" class="btn btn-outline-white banner-link underline">Shop Now</a>
                         </div><!-- End .banner-content -->
                     </div><!-- End .banner -->
                 </div><!-- End .col-lg-6 -->
