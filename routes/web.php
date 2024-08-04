@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Public\CartController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProductController as PublicProductController;
 use App\Http\Controllers\Public\ProfileController;
@@ -45,19 +46,14 @@ Route::middleware('auth.logged')->group(function(){
 });
 
 // Route public
-Route::get('/', [HomeController::class, 'index'])
-    ->name('public.home');
-
-Route::get('/product/detail/{slug}', [PublicProductController::class, 'detail'])->name('public.product.detail');
-
-Route::get('/cart', function () {
-    return view('pages.public.cart.index');
-})->name('cart');
-
-Route::get('/allproduct', function () {
-    return view('pages.public.allProduct.index');
-})->name('allproduct');
-
-Route::get('/checkout', function () {
-    return view('pages.public.checkout.index');
-})->name('checkout');
+Route::name('public.')->group(function(){
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/product/detail/{slug}', [PublicProductController::class, 'detail'])->name('product.detail');
+    Route::get('/cart', [CartController::class,'index'])->name('cart');
+    Route::get('/allproduct', function () {
+        return view('pages.public.allProduct.index');
+    })->name('allproduct');
+    Route::get('/checkout', function () {
+        return view('pages.public.checkout.index');
+    })->name('checkout');
+});

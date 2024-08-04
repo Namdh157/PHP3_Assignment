@@ -57,7 +57,7 @@
                 </div>
                 <div class="header-right">
                     <div class="dropdown cart-dropdown">
-                        <a href="{{ route('cart')}}" class="dropdown-toggle" role="button">
+                        <a href="{{ route('public.cart')}}" class="dropdown-toggle" role="button">
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">2</span>
                         </a>
@@ -85,7 +85,7 @@
                                                         <div class="menu-title">Shop with sidebar</div>
                                                         <!-- End .menu-title -->
                                                         <ul>
-                                                            <li><a href="{{ route('allproduct')}}">Shop List</a></li>
+                                                            <li><a href="{{ route('public.allproduct')}}">Shop List</a></li>
                                                             <li><a href="#">Shop Grid 2 Columns</a>
                                                             </li>
                                                             <li><a href="#">Shop Grid 3 Columns</a></li>

@@ -3,7 +3,7 @@
 @section('content')
 
 <main class="main">
-    <div class="page-header text-center" style="background-image: url('{{ asset('storage/images') }}/page-header-bg.jpg')">
+    <div class="page-header text-center" style="background-image: url('{{ asset(`storage/images/page-header-bg.jpg`) }}')">
         <div class="container">
             <h1 class="page-title">Shopping Cart<span>Shop</span></h1>
         </div><!-- End .container -->
@@ -146,10 +146,10 @@
                                 </tbody>
                             </table><!-- End .table table-summary -->
 
-                            <a href="{{ route('checkout')}}" class="btn btn-outline-primary-2 btn-order btn-block w-100">PROCEED TO CHECKOUT</a>
+                            <a href="{{ route('public.checkout')}}" class="btn btn-outline-primary-2 btn-order btn-block w-100">PROCEED TO CHECKOUT</a>
                         </div><!-- End .summary -->
 
-                        <a href="{{ route('allproduct')}}" class="btn btn-outline-dark-2 btn-block mb-3 w-100"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
+                        <a href="{{ route('public.allproduct')}}" class="btn btn-outline-dark-2 btn-block mb-3 w-100"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
                     </aside><!-- End .col-lg-3 -->
                 </div><!-- End .row -->
             </div><!-- End .container -->
