@@ -85,7 +85,7 @@
                                                         <div class="menu-title">Shop with sidebar</div>
                                                         <!-- End .menu-title -->
                                                         <ul>
-                                                            <li><a href="{{ route('allproduct')}}">Shop List</a></li>
+                                                            <li><a href="{{ route('public.allProduct')}}">Shop List</a></li>
                                                             <li><a href="#">Shop Grid 2 Columns</a>
                                                             </li>
                                                             <li><a href="#">Shop Grid 3 Columns</a></li>

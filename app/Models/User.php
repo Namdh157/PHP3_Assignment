@@ -12,8 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    const TYPE_ADMIN = 'admin';
-    const TYPE_MEMBER = 'member';
+    const TYPE_USER = [
+        'admin' => 'admin',
+        'member' => 'member',
+    ];
     protected $fillable = [
         'name',
         'email',

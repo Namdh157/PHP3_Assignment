@@ -1,510 +1,247 @@
 @extends('layouts.public')
 
 @section('content')
-    <main class="main">
-        <div class="page-header text-center"
-            style="background-image: url('{{ asset('storage/images') }}/page-header-bg.jpg')">
-            <div class="container">
-                <h1 class="page-title">Grid 3 Columns<span>Shop</span></h1>
-            </div><!-- End .container -->
-        </div><!-- End .page-header -->
-        <div class="page-content mt-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-9">
-                        <div class="toolbox">
-                            <div class="toolbox-left">
-                                <div class="toolbox-info">
-                                    Showing <span>9 of 56</span> Products
-                                </div><!-- End .toolbox-info -->
-                            </div><!-- End .toolbox-left -->
+<main class="main">
+    <div class="page-header text-center">
+        <div class="container">
+            <h1 class="page-title">Fashion Shop<span>All products</span></h1>
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+    <div class="page-content mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="toolbox">
+                        <div class="toolbox-left">
+                            <div class="toolbox-info">
+                                Showing <span>9 of {{$products->total()}}</span> Products
+                            </div><!-- End .toolbox-info -->
+                        </div><!-- End .toolbox-left -->
 
-                            <div class="toolbox-right">
-                                <div class="toolbox-sort">
-                                    <label for="sortby">Sort by:</label>
-                                    <div class="select-custom">
-                                        <select name="sortby" id="sortby" class="form-control">
-                                            <option value="popularity" selected="selected">Most Popular</option>
-                                            <option value="date">Date</option>
-                                        </select>
-                                    </div>
-                                </div><!-- End .toolbox-sort -->
-                            </div><!-- End .toolbox-right -->
-                        </div><!-- End .toolbox -->
-                        <div class="products mb-3">
-                            <div class="row justify-content-center">
-                                <div class="col-6 col-md-4 col-lg-4">
-                                    <div class="product product-7 text-center">
-                                        <figure class="product-media">
-                                            <span class="product-label label-new">New</span>
-                                            <a href="{{route('public.product.detail')}}">
-                                                <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
+                        <div class="toolbox-right">
+                            <div class="toolbox-sort">
+                                <label for="sortby">Sort by:</label>
+                                <div class="select-custom">
+                                    <select name="sortby" id="sortby" class="form-control">
+                                        <option value="popularity" selected="selected">Most Popular</option>
+                                        <option value="date">Date</option>
+                                    </select>
+                                </div>
+                            </div><!-- End .toolbox-sort -->
+                        </div><!-- End .toolbox-right -->
+                    </div><!-- End .toolbox -->
+                    <div class="products mb-3">
+                        <div class="row justify-content-center">
+                            @foreach ($products as $product)
+                            <div class="col-6 col-md-4 col-lg-4">
+                                <div class="product product-7 text-center">
+                                    <figure class="product-media">
+                                        <span class="product-label label-new">New</span>
+                                        <a href="{{route('public.product.detail', $product->slug)}}">
+                                            <img src="{{asset($product->image_thumbnail)}}" alt="Product image thumbnail" class="product-image product-thumbnail">
+                                        </a>
+                                        <div class="product-action">
+                                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        </div><!-- End .product-action -->
+                                    </figure><!-- End .product-media -->
+
+                                    <div class="product-body">
+                                        <div class="product-cat">
+                                            <a href="#">{{ $product->catalogue_name }}</a>
+                                        </div><!-- End .product-cat -->
+                                        <h3 class="product-title">
+                                            <a href="{{route('public.product.detail', $product->slug)}}">
+                                                {{ $product->name }}
                                             </a>
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                            </div><!-- End .product-action -->
-                                        </figure><!-- End .product-media -->
+                                        </h3><!-- End .product-title -->
+                                        <div class="product-price">
+                                            {{ $product->price_regular }}
+                                        </div><!-- End .product-price -->
+                                    </div><!-- End .product-body -->
+                                </div><!-- End .product -->
+                            </div><!-- End .col-sm-6 col-lg-4 -->
+                            @endforeach
+                        </div><!-- End .row -->
+                    </div><!-- End .products -->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
 
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#">Women</a>
-                                            </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Brown paperbag waist pencil
-                                                    skirt</a></h3><!-- End .product-title -->
-                                            <div class="product-price">
-                                                $60.00
-                                            </div><!-- End .product-price -->
-                                        </div><!-- End .product-body -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-sm-6 col-lg-4 -->
+                            <li class="page-item {{ $curPage <= 1 ? 'disabled' : '' }}">
+                                <a class="page-link page-link-prev" href="{{$curPath}}?page={{$curPage < 1 ? $curPage : $curPage - 1}}" aria-label="Previous" tabindex="-1" aria-disabled="true">
+                                    <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
+                                </a>
+                            </li>
+                            @foreach ($pageArray as $key => $page)
+                            <li class="page-item {{$page == $curPage ? 'active' : ''}}" aria-current="page">
+                                <a class="page-link" href="{{$curPath}}?page={{ $page }}">{{ $page }}</a>
+                            </li>
+                            @endforeach
+                            <li class="page-item-total">of {{$products->lastPage()}}</li>
+                            <li class="page-item {{ $curPage >= $products->lastPage() ? 'disabled' : '' }}">
+                                <a class="page-link page-link-next" href="{{$curPath}}?page={{$curPage > $products->lastPage() ? $curPage : $curPage + 1}}" aria-label="Next">
+                                    Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div><!-- End .col-lg-9 -->
+                <aside class="col-lg-3 order-lg-first">
+                    <div class="sidebar sidebar-shop">
+                        <div class="widget widget-clean">
+                            <label>Filters:</label>
+                            <a href="#" class="sidebar-filter-clear">Clean All</a>
+                        </div><!-- End .widget widget-clean -->
 
-                                <div class="col-6 col-md-4 col-lg-4">
-                                    <div class="product product-7 text-center">
-                                        <figure class="product-media">
-                                            <a href="{{route('public.product.detail')}}">
-                                                <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
-                                            </a>
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                            </div><!-- End .product-action -->
-                                        </figure><!-- End .product-media -->
+                        <div class="widget widget-collapsible">
+                            <h3 class="widget-title">
+                                <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
+                                    Catalogue
+                                </a>
+                            </h3><!-- End .widget-title -->
 
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#">Dresses</a>
-                                            </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Dark yellow lace cut out swing
-                                                    dress</a></h3><!-- End .product-title -->
-                                            <div class="product-price">
-                                                $84.00
-                                            </div><!-- End .product-price -->
-                                        </div><!-- End .product-body -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-sm-6 col-lg-4 -->
+                            <div class="collapse show" id="widget-1">
+                                <div class="widget-body">
+                                    <div class="filter-items filter-items-count" id="container-catalogue">
+                                        @foreach ($catalogues as $key => $catalogue)
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" data-catalogue="{{ $catalogue->name }}" id="cat-{{$key}}">
+                                                <label class="custom-control-label" for="cat-{{$key}}">{{ $catalogue->name }}</label>
+                                            </div>
+                                            <!-- End .custom-checkbox -->
+                                            <span class="item-count">{{ $catalogue->products_count  }}</span>
+                                        </div>
+                                        <!-- End .filter-item -->
+                                        @endforeach
+                                        <div id="additional-catalogues"></div>
+                                        @if ($totalCatalogues > 5)
+                                        <div class="filter-item d-flex justify-content-center">
+                                            <p class="" id="show-more-catalogue" style="cursor: pointer;" onclick="showMoreCatalogues(routeCatalogueShowMore, '#additional-catalogues', this)">
+                                                Show more
+                                            </p>
+                                        </div>
+                                        @endif
+                                    </div><!-- End .filter-items -->
+                                </div><!-- End .widget-body -->
+                            </div><!-- End .collapse -->
+                        </div><!-- End .widget -->
 
-                                <div class="col-6 col-md-4 col-lg-4">
-                                    <div class="product product-7 text-center">
-                                        <figure class="product-media">
-                                            <span class="product-label label-out">Out of Stock</span>
-                                            <a href="{{route('public.product.detail')}}">
-                                                <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
-                                            </a>
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"><span>add to
-                                                        cart</span></a>
-                                            </div><!-- End .product-action -->
-                                        </figure><!-- End .product-media -->
+                        <div class="widget widget-collapsible">
+                            <h3 class="widget-title">
+                                <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true" aria-controls="widget-2">
+                                    Size
+                                </a>
+                            </h3><!-- End .widget-title -->
 
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#">Jackets</a>
-                                            </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Khaki utility boiler
-                                                    jumpsuit</a></h3><!-- End .product-title -->
-                                            <div class="product-price">
-                                                <span class="out-price">$120.00</span>
-                                            </div><!-- End .product-price -->
-                                        </div><!-- End .product-body -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-sm-6 col-lg-4 -->
+                            <div class="collapse show" id="widget-2">
+                                <div class="widget-body">
+                                    <div class="filter-items">
+                                        @foreach ($typeSize as $key => $size)
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" data-size="{{$size->size}}" id="size-{{$key}}">
+                                                <label class="custom-control-label" for="size-{{$key}}">{{$size->size}}</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .filter-item -->
+                                        @endforeach
+                                    </div><!-- End .filter-items -->
+                                </div><!-- End .widget-body -->
+                            </div><!-- End .collapse -->
+                        </div><!-- End .widget -->
+                        <div class="widget widget-collapsible">
+                            <h3 class="widget-title">
+                                <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true" aria-controls="widget-4">
+                                    Brand
+                                </a>
+                            </h3><!-- End .widget-title -->
 
-                                <div class="col-6 col-md-4 col-lg-4">
-                                    <div class="product product-7 text-center">
-                                        <figure class="product-media">
-                                            <a href="{{route('public.product.detail')}}">
-                                                <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
-                                            </a>
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"><span>add to
-                                                        cart</span></a>
-                                            </div><!-- End .product-action -->
-                                        </figure><!-- End .product-media -->
+                            <div class="collapse show" id="widget-4">
+                                <div class="widget-body">
+                                    <div class="filter-items filter-items-count" id="container-catalogue">
+                                        @foreach ($brands as $key => $brand)
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" data-brand="{{ $brand->name }}" id="cat-{{$key}}">
+                                                <label class="custom-control-label" for="cat-{{$key}}">{{ $brand->name }}</label>
+                                            </div>
+                                            <!-- End .custom-checkbox -->
+                                            <span class="item-count">{{ $brand->products_count }}</span>
+                                        </div>
+                                        <!-- End .filter-item -->
+                                        @endforeach
+                                        <div id="additional-brands"></div>
+                                        @if ($totalBrands > 5)
+                                        <div class="filter-item d-flex justify-content-center">
+                                            <p class="" id="show-more-brand" style="cursor: pointer;" onclick="showMoreBrands(routeBrandShowMore, '#additional-brands', this)">Show more</p>
+                                        </div>
+                                        @endif
+                                    </div><!-- End .filter-items -->
+                                </div><!-- End .widget-body -->
+                            </div><!-- End .collapse -->
+                        </div><!-- End .widget -->
+                    </div><!-- End .sidebar sidebar-shop -->
+                </aside><!-- End .col-lg-3 -->
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+    </div><!-- End .page-content -->
+</main><!-- End .main -->
 
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#">Jeans</a>
-                                            </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Blue utility pinafore denim
-                                                    dress</a></h3><!-- End .product-title -->
-                                            <div class="product-price">
-                                                $76.00
-                                            </div><!-- End .product-price -->
-                                        </div><!-- End .product-body -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-sm-6 col-lg-4 -->
+<!-- config scripts -->
+<script>
+    const routeCatalogueShowMore = '{{ $showMoreCatalogues }}';
+    const routeBrandShowMore = '{{ $showMoreBrands }}';
+</script>
 
-                                <div class="col-6 col-md-4 col-lg-4">
-                                    <div class="product product-7 text-center">
-                                        <figure class="product-media">
-                                            <span class="product-label label-new">New</span>
-                                            <a href="{{route('public.product.detail')}}">
-                                                <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
-                                            </a>
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"><span>add to
-                                                        cart</span></a>
-                                            </div><!-- End .product-action -->
-                                        </figure><!-- End .product-media -->
+<!-- Handle scripts -->
+<script>
+    // Create closure function
+    function createShowMore() {
+        let html = '';
+        let offset = 5;
+        return async function showMore(route, container, btn) {
+            const additionalContainer = document.querySelector(container);
 
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#">Shoes</a>
-                                            </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Beige knitted elastic runner
-                                                    shoes</a></h3><!-- End .product-title -->
-                                            <div class="product-price">
-                                                $84.00
-                                            </div><!-- End .product-price -->
-                                        </div><!-- End .product-body -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-sm-6 col-lg-4 -->
+            loading().on();
+            try {
+                const response = await fetch(`${route}?offset=${offset}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                });
 
-                                <div class="col-6 col-md-4 col-lg-4">
-                                    <div class="product product-7 text-center">
-                                        <figure class="product-media">
-                                            <a href="{{route('public.product.detail')}}">
-                                                <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
-                                            </a>
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"><span>add to
-                                                        cart</span></a>
-                                            </div><!-- End .product-action -->
-                                        </figure><!-- End .product-media -->
+                const result = await response.json();
+                if (result.success) {
+                    result.data.forEach((item, index) => {
+                        html += `
+                        <div class="filter-item">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" data-catalogue="${item.name}" id="cat-${offset + index}">
+                                <label class="custom-control-label" for="cat-${offset + index}">${item.name}</label>
+                            </div>
+                            <!-- End .custom-checkbox -->
+                            <span class="item-count">${item.products_count}</span>
+                        </div>
+                        <!-- End .filter-item -->
+                        `;
+                    });
+                    additionalContainer.innerHTML = html;
+                    offset += 5;
 
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#">Bags</a>
-                                            </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Orange saddle lock front
-                                                    chain cross body bag</a></h3><!-- End .product-title -->
-                                            <div class="product-price">
-                                                $84.00
-                                            </div><!-- End .product-price -->
-                                        </div><!-- End .product-body -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-sm-6 col-lg-4 -->
-
-                                <div class="col-6 col-md-4 col-lg-4">
-                                    <div class="product product-7 text-center">
-                                        <figure class="product-media">
-                                            <span class="product-label label-top">Top</span>
-                                            <a href="{{route('public.product.detail')}}">
-                                                <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
-                                            </a>
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"><span>add to
-                                                        cart</span></a>
-                                            </div><!-- End .product-action -->
-                                        </figure><!-- End .product-media -->
-
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#">Shoes</a>
-                                            </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Light brown studded Wide fit
-                                                    wedges</a></h3><!-- End .product-title -->
-                                            <div class="product-price">
-                                                $110.00
-                                            </div><!-- End .product-price -->
-                                        </div><!-- End .product-body -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-sm-6 col-lg-4 -->
-
-                                <div class="col-6 col-md-4 col-lg-4">
-                                    <div class="product product-7 text-center">
-                                        <figure class="product-media">
-                                            <a href="{{route('public.product.detail')}}">
-                                                <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
-                                            </a>
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"><span>add to
-                                                        cart</span></a>
-                                            </div><!-- End .product-action -->
-                                        </figure><!-- End .product-media -->
-
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#">Jumpers</a>
-                                            </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Yellow button front tea
-                                                    top</a></h3><!-- End .product-title -->
-                                            <div class="product-price">
-                                                $56.00
-                                            </div><!-- End .product-price -->
-                                        </div><!-- End .product-body -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-sm-6 col-lg-4 -->
-
-                                <div class="col-6 col-md-4 col-lg-4">
-                                    <div class="product product-7 text-center">
-                                        <figure class="product-media">
-                                            <a href="{{route('public.product.detail')}}">
-                                                <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
-                                            </a>
-                                            <div class="product-action">
-                                                <a href="#" class="btn-product btn-cart"><span>add to
-                                                        cart</span></a>
-                                            </div><!-- End .product-action -->
-                                        </figure><!-- End .product-media -->
-
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <a href="#">Bags</a>
-                                            </div><!-- End .product-cat -->
-                                            <h3 class="product-title"><a href="{{route('public.product.detail')}}">Black soft RI weekend travel
-                                                    bag</a></h3><!-- End .product-title -->
-                                            <div class="product-price">
-                                                $68.00
-                                            </div><!-- End .product-price -->
-                                        </div><!-- End .product-body -->
-                                    </div><!-- End .product -->
-                                </div><!-- End .col-sm-6 col-lg-4 -->
-                            </div><!-- End .row -->
-                        </div><!-- End .products -->
-
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link page-link-prev" href="#" aria-label="Previous"
-                                        tabindex="-1" aria-disabled="true">
-                                        <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
-                                    </a>
-                                </li>
-                                <li class="page-item active" aria-current="page"><a class="page-link"
-                                        href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item-total">of 6</li>
-                                <li class="page-item">
-                                    <a class="page-link page-link-next" href="#" aria-label="Next">
-                                        Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div><!-- End .col-lg-9 -->
-                    <aside class="col-lg-3 order-lg-first">
-                        <div class="sidebar sidebar-shop">
-                            <div class="widget widget-clean">
-                                <label>Filters:</label>
-                                <a href="#" class="sidebar-filter-clear">Clean All</a>
-                            </div><!-- End .widget widget-clean -->
-
-                            <div class="widget widget-collapsible">
-                                <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true"
-                                        aria-controls="widget-1">
-                                        Category
-                                    </a>
-                                </h3><!-- End .widget-title -->
-
-                                <div class="collapse show" id="widget-1">
-                                    <div class="widget-body">
-                                        <div class="filter-items filter-items-count">
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-1">
-                                                    <label class="custom-control-label" for="cat-1">Dresses</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">3</span>
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-2">
-                                                    <label class="custom-control-label" for="cat-2">T-shirts</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">0</span>
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-3">
-                                                    <label class="custom-control-label" for="cat-3">Bags</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">4</span>
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-4">
-                                                    <label class="custom-control-label" for="cat-4">Jackets</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">2</span>
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-5">
-                                                    <label class="custom-control-label" for="cat-5">Shoes</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">2</span>
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-6">
-                                                    <label class="custom-control-label" for="cat-6">Jumpers</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">1</span>
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-7">
-                                                    <label class="custom-control-label" for="cat-7">Jeans</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">1</span>
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="cat-8">
-                                                    <label class="custom-control-label" for="cat-8">Sportwear</label>
-                                                </div><!-- End .custom-checkbox -->
-                                                <span class="item-count">0</span>
-                                            </div><!-- End .filter-item -->
-                                        </div><!-- End .filter-items -->
-                                    </div><!-- End .widget-body -->
-                                </div><!-- End .collapse -->
-                            </div><!-- End .widget -->
-
-                            <div class="widget widget-collapsible">
-                                <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true"
-                                        aria-controls="widget-2">
-                                        Size
-                                    </a>
-                                </h3><!-- End .widget-title -->
-
-                                <div class="collapse show" id="widget-2">
-                                    <div class="widget-body">
-                                        <div class="filter-items">
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="size-1">
-                                                    <label class="custom-control-label" for="size-1">XS</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="size-2">
-                                                    <label class="custom-control-label" for="size-2">S</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" checked
-                                                        id="size-3">
-                                                    <label class="custom-control-label" for="size-3">M</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" checked
-                                                        id="size-4">
-                                                    <label class="custom-control-label" for="size-4">L</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="size-5">
-                                                    <label class="custom-control-label" for="size-5">XL</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="size-6">
-                                                    <label class="custom-control-label" for="size-6">XXL</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-                                        </div><!-- End .filter-items -->
-                                    </div><!-- End .widget-body -->
-                                </div><!-- End .collapse -->
-                            </div><!-- End .widget -->
-                            <div class="widget widget-collapsible">
-                                <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true"
-                                        aria-controls="widget-4">
-                                        Brand
-                                    </a>
-                                </h3><!-- End .widget-title -->
-
-                                <div class="collapse show" id="widget-4">
-                                    <div class="widget-body">
-                                        <div class="filter-items">
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-1">
-                                                    <label class="custom-control-label" for="brand-1">Next</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-2">
-                                                    <label class="custom-control-label" for="brand-2">River
-                                                        Island</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-3">
-                                                    <label class="custom-control-label" for="brand-3">Geox</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-4">
-                                                    <label class="custom-control-label" for="brand-4">New Balance</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-5">
-                                                    <label class="custom-control-label" for="brand-5">UGG</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-6">
-                                                    <label class="custom-control-label" for="brand-6">F&F</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-7">
-                                                    <label class="custom-control-label" for="brand-7">Nike</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-
-                                        </div><!-- End .filter-items -->
-                                    </div><!-- End .widget-body -->
-                                </div><!-- End .collapse -->
-                            </div><!-- End .widget -->
-                        </div><!-- End .sidebar sidebar-shop -->
-                    </aside><!-- End .col-lg-3 -->
-                </div><!-- End .row -->
-            </div><!-- End .container -->
-        </div><!-- End .page-content -->
-    </main><!-- End .main -->
+                } else {
+                    btn.style.display = 'none';
+                }
+            } catch (error) {
+                console.log(error);
+            } finally {
+                loading().off();
+            }
+        }
+    }
+    
+    // Create show more function
+    const showMoreCatalogues = createShowMore();
+    const showMoreBrands = createShowMore();
+</script>
 @endsection
