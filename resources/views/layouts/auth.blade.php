@@ -13,7 +13,6 @@
     }
 </style>
 <link href="{{ asset('css/auth/auth.css') }}" rel="stylesheet">
-
 @yield('content')
 
 <script>

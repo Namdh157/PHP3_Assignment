@@ -15,14 +15,10 @@
 
                 <div class="header-right">
                     <div class="social-icons social-icons-color">
-                        <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i
-                                class="icon-facebook-f"></i></a>
-                        <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i
-                                class="icon-twitter"></i></a>
-                        <a href="#" class="social-icon social-pinterest" title="Instagram" target="_blank"><i
-                                class="icon-pinterest-p"></i></a>
-                        <a href="#" class="social-icon social-instagram" title="Pinterest" target="_blank"><i
-                                class="icon-instagram"></i></a>
+                        <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                        <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                        <a href="#" class="social-icon social-pinterest" title="Instagram" target="_blank"><i class="icon-pinterest-p"></i></a>
+                        <a href="#" class="social-icon social-instagram" title="Pinterest" target="_blank"><i class="icon-instagram"></i></a>
                     </div><!-- End .soial-icons -->
                     <ul class="top-menu top-link-menu">
                         <li>
@@ -43,23 +39,21 @@
                             <div class="header-search-wrapper search-wrapper-wide">
                                 <label for="q" class="sr-only">Search</label>
                                 <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
-                                <input type="search" class="form-control" name="q" id="q"
-                                    placeholder="Search product ..." required>
+                                <input type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
                             </div><!-- End .header-search-wrapper -->
                         </form>
                     </div><!-- End .header-search -->
                 </div>
                 <div class="header-center">
                     <a href="/" class="logo">
-                        <img src="{{ asset('storage/images') }}/components/logo.png" alt="Molla Logo" width="82"
-                            height="20">
+                        <img src="{{ asset('storage/images') }}/components/logo.png" alt="Molla Logo" width="82" height="20">
                     </a>
                 </div>
                 <div class="header-right">
                     <div class="dropdown cart-dropdown">
                         <a href="{{ route('public.cart')}}" class="dropdown-toggle" role="button">
                             <i class="icon-shopping-cart"></i>
-                            <span class="cart-count">2</span>
+                            <span class="cart-count" id="cart-count">{{$countCart}}</span>
                         </a>
                     </div><!-- End .cart-dropdown -->
                 </div>
@@ -82,26 +76,25 @@
                                             <div class="menu-col">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <div class="menu-title">Shop with sidebar</div>
+                                                        <div class="menu-title">Shop with Brands</div>
                                                         <!-- End .menu-title -->
                                                         <ul>
-
-                                                            <li><a href="{{ route('public.allProduct')}}">Shop List</a></li>
-                                                            <li><a href="#">Shop Grid 2 Columns</a>
+                                                            @foreach ($listBrands as $item)
+                                                            <li>
+                                                                <a href="{{ route('public.allProduct','brand='.$item->id) }}">{{$item->name}}</a>
                                                             </li>
-                                                            <li><a href="#">Shop Grid 3 Columns</a></li>
-                                                            <li><a href="#">Shop Grid 4 Columns</a>
-                                                            </li>
+                                                            @endforeach
                                                         </ul>
                                                     </div><!-- End .col-md-6 -->
                                                     <div class="col-md-6">
                                                         <div class="menu-title">Product Category</div>
                                                         <!-- End .menu-title -->
                                                         <ul>
-                                                            <li><a href="#">Product Category
-                                                                    Boxed</a></li>
-                                                            <li><a href="#">Product
-                                                                    Category Fullwidth</a></li>
+                                                            @foreach ($listCatalogues as $item)
+                                                            <li>
+                                                                <a href="{{ route('public.allProduct','catalogue='.$item->id) }}">{{$item->name}}</a>
+                                                            </li>
+                                                            @endforeach
                                                         </ul>
                                                     </div><!-- End .col-md-6 -->
                                                 </div><!-- End .row -->
@@ -111,8 +104,7 @@
                                         <div class="col-md-4">
                                             <div class="banner banner-overlay">
                                                 <a href="category.html" class="banner banner-menu">
-                                                    <img src="{{ asset('storage/images') }}/components/header/menu/banner-1.jpg"
-                                                        alt="Banner">
+                                                    <img src="{{ asset('storage/images') }}/components/header/menu/banner-1.jpg" alt="Banner">
 
                                                     <div class="banner-content banner-content-top">
                                                         <div class="banner-title text-white">Last
@@ -125,43 +117,6 @@
                                         </div><!-- End .col-md-4 -->
                                     </div><!-- End .row -->
                                 </div><!-- End .megamenu megamenu-md -->
-                            </li>
-                            <li>
-                                <a href="product.html" class="sf-with-ul">Product</a>
-
-                                <div class="megamenu megamenu-sm">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-6">
-                                            <div class="menu-col">
-                                                <div class="menu-title">Product Details</div><!-- End .menu-title -->
-                                                <ul>
-                                                    <li><a href="{{route('public.product.detail',"aaa")}}">Default</a></li>
-                                                    <li><a href="#">Centered</a></li>
-                                                    <li><a href="#">Gallery</a></li>
-                                                    <li><a href="#">Sticky Info</a></li>
-                                                    <li><a href="#">Boxed With Sidebar</a></li>
-                                                    <li><a href="#">Full Width</a></li>
-                                                    <li><a href="#">Masonry Sticky Info</a></li>
-                                                </ul>
-                                            </div><!-- End .menu-col -->
-                                        </div><!-- End .col-md-6 -->
-
-                                        <div class="col-md-6">
-                                            <div class="banner banner-overlay">
-                                                <a href="category.html">
-                                                    <img src="{{ asset('storage/images') }}/components/header/menu/banner-2.jpg"
-                                                        alt="Banner">
-
-                                                    <div class="banner-content banner-content-bottom">
-                                                        <div class="banner-title text-white">New
-                                                            Trends<br><span><strong>spring 2019</strong></span></div>
-                                                        <!-- End .banner-title -->
-                                                    </div><!-- End .banner-content -->
-                                                </a>
-                                            </div><!-- End .banner -->
-                                        </div><!-- End .col-md-6 -->
-                                    </div><!-- End .row -->
-                                </div><!-- End .megamenu megamenu-sm -->
                             </li>
                             <li>
                                 <a href="#" class="sf-with-ul">Pages</a>

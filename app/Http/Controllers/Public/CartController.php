@@ -7,7 +7,7 @@ use App\Models\CartItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CartController extends Controller
+class CartController extends CommonController
 {
     public function index()
     {
@@ -18,7 +18,9 @@ class CartController extends Controller
             return view('pages.public.cart.index', [
             'title' => 'Cart',
             'cartItems' => $cartItems,
-            'cartTotal' => 0
+            'cartTotal' => 0,
+            ...$this->dataHeader
+              
         ]);
     }
 }
