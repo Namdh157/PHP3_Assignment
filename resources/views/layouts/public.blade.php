@@ -23,6 +23,7 @@
 @include('pages.public.components.footer')
 
 
+<script src="{{asset('js/public/common.js')}}"></script>
 <!-- Plugins JS File -->
 <script src="{{ asset('assets') }}/js/jquery.min.js"></script>
 <script src="{{ asset('assets') }}/js/bootstrap.bundle.min.js"></script>

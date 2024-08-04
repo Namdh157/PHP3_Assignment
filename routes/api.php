@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Api\BannerApiController;
 use App\Http\Controllers\Api\BrandApiController;
+use App\Http\Controllers\Api\CartApiController;
 use App\Http\Controllers\api\CatalogueApiController;
 use App\Http\Controllers\Api\ProductApiController;
 use App\Http\Controllers\Api\CommentApiController;
@@ -71,3 +72,6 @@ Route::get('catalogue/showMore', [CatalogueApiController::class, 'showMore'])
 
 Route::get('brand/showMore', [BrandApiController::class, 'showMore'])
     ->name('api.brand.showMore');
+
+Route::middleware('auth.logged')->delete('cart/destroy/{id}', [CartApiController::class, 'destroy'])
+    ->name('api.cart.destroy');

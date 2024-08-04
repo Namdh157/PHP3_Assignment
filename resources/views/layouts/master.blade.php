@@ -7,6 +7,7 @@
     <meta name="theme-color" content="#712cf9">
     <title>{{$title}}</title>
     <link rel="icon" href="{{asset('storage/images/logo.png')}}" type="image/gif" sizes="16x16">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Fonts -->

@@ -13,82 +13,61 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9">
-                        <table class="table table-cart table-mobile">
+                        <table class="table table-cart table-mobile table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
+                                    <th class="text-center">Product</th>
+                                    <th class="text-center">Price</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-center">Total</th>
                                     <th></th>
                                 </tr>
                             </thead>
 
                             <tbody>
+                                @foreach ($cartItems as $item)
+                                @php
+                                $cartTotal += ($item->productVariant->price_sale ?? 0) * $item->quantity;
+                                @endphp
                                 <tr>
-                                    <td class="product-col">
+                                    <td class="product-col px-3">
                                         <div class="product">
                                             <figure class="product-media">
-                                                <a href="#">
-                                                    <img src="{{ asset('storage/images') }}/products/product-5-1.jpg" alt="Product image product-thumbnail">
+                                                <a href="{{route('public.product.detail',$item->productVariant->product->slug)}}">
+                                                    <img src="{{ asset($item->productVariant->product->image_thumbnail) }}" alt="Product image">
                                                 </a>
                                             </figure>
 
                                             <h3 class="product-title">
-                                                <a href="#">Beige knitted elastic runner shoes</a>
+                                                <a href="{{route('public.product.detail',$item->productVariant->product->slug)}}">
+                                                    {{$item->productVariant->product->name}}
+                                                    <p class="mt-1 fs-6">{{$item->productVariant->variantColor->color . ' - ' .$item->productVariant->variantSize->size}}</p>
+                                                </a>
                                             </h3><!-- End .product-title -->
                                         </div><!-- End .product -->
                                     </td>
-                                    <td class="price-col">840.000vnđ</td>
+                                    <td class="price-col">
+                                        <div class="d-flex align-items-center">
+                                            <input type="number" name="price" class="form-control m-0 p-0 border-0 text-end bg-transparent" value="{{$item->productVariant->price_sale ?? 0}}" style="width: 80px" readonly>$
+                                        </div>
+                                    </td>
                                     <td class="quantity-col">
-                                        <div class="cart-product-quantity">
-                                            <input type="number" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                        <div class="cart-product-quantity mx-auto">
+                                            <input type="number" name="quantity" class="form-control text-center" value="{{$item->quantity}}" min="1" step="1" data-decimals="0" onchange="onChangeQuantity(this)">
                                         </div><!-- End .cart-product-quantity -->
                                     </td>
-                                    <td class="total-col">840.000vnđ</td>
-                                    <td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td class="product-col">
-                                        <div class="product">
-                                            <figure class="product-media">
-                                                <a href="#">
-                                                    <img src="{{ asset('storage/images') }}/products/product-1-2.jpg" alt="Product image product-thumbnail">
-                                                </a>
-                                            </figure>
-
-                                            <h3 class="product-title">
-                                                <a href="#">Blue utility pinafore denim dress</a>
-                                            </h3><!-- End .product-title -->
-                                        </div><!-- End .product -->
+                                    <td>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <input type="number" name="item-total" class="form-control m-0 p-0 border-0 text-end bg-transparent" value="{{($item->productVariant->price_sale ?? 0) * $item->quantity}}" style="width: 80px" readonly>$
+                                        </div>
                                     </td>
-                                    <td class="price-col">760.000vnđ</td>
-                                    <td class="quantity-col">
-                                        <div class="cart-product-quantity">
-                                            <input type="number" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
-                                        </div><!-- End .cart-product-quantity -->                                 
-                                    </td>
-                                    <td class="total-col">760.000vnđ</td>
-                                    <td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
+                                    <td class="remove-col text-center"><button class="btn-remove mx-auto" onclick="onRemoveCartItem(this)" data-cart-id="{{$item->id}}">x</button></td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table><!-- End .table table-wishlist -->
-
-                        <div class="cart-bottom">
-                            <div class="cart-discount">
-                                <form action="#">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" required placeholder="coupon code">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-primary-2" type="submit"><i class="icon-long-arrow-right"></i></button>
-                                        </div><!-- .End .input-group-append -->
-                                    </div><!-- End .input-group -->
-                                </form>
-                            </div><!-- End .cart-discount -->
-
-                            <a href="#" class="btn btn-outline-dark-2"><span>UPDATE CART</span><i class="icon-refresh"></i></a>
-                        </div><!-- End .cart-bottom -->
                     </div><!-- End .col-lg-9 -->
+
                     <aside class="col-lg-3">
                         <div class="summary summary-cart">
                             <h3 class="summary-title">Cart Total</h3><!-- End .summary-title -->
@@ -97,7 +76,7 @@
                                 <tbody>
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td>1.600.000vnđ</td>
+                                        <td><span id="sub-total">{{$cartTotal}}</span>$</td>
                                     </tr><!-- End .summary-subtotal -->
                                     <tr class="summary-shipping">
                                         <td>Shipping:</td>
@@ -107,41 +86,16 @@
                                     <tr class="summary-shipping-row">
                                         <td>
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="free-shipping" name="shipping" class="custom-control-input">
+                                                <input type="radio" id="free-shipping" name="shipping" class="custom-control-input" checked>
                                                 <label class="custom-control-label" for="free-shipping">Free Shipping:</label>
                                             </div><!-- End .custom-control -->
                                         </td>
-                                        <td>0.000</td>
+                                        <td>0.00$</td>
                                     </tr><!-- End .summary-shipping-row -->
-
-                                    <tr class="summary-shipping-row">
-                                        <td>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="standart-shipping" name="shipping" class="custom-control-input">
-                                                <label class="custom-control-label" for="standart-shipping">Standart:</label>
-                                            </div><!-- End .custom-control -->
-                                        </td>
-                                        <td>30.000vnđ</td>
-                                    </tr><!-- End .summary-shipping-row -->
-
-                                    <tr class="summary-shipping-row">
-                                        <td>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="express-shipping" name="shipping" class="custom-control-input">
-                                                <label class="custom-control-label" for="express-shipping">Express:</label>
-                                            </div><!-- End .custom-control -->
-                                        </td>
-                                        <td>20.000vnđ</td>
-                                    </tr><!-- End .summary-shipping-row -->
-
-                                    <tr class="summary-shipping-estimate">
-                                        <td>Estimate for Your Country<br> <a href="dashboard.html">Change address</a></td>
-                                        <td>&nbsp;</td>
-                                    </tr><!-- End .summary-shipping-estimate -->
 
                                     <tr class="summary-total">
                                         <td>Total:</td>
-                                        <td>1.600.000vnđ</td>
+                                        <td><span id="cart-total">{{$cartTotal}}</span>$</td>
                                     </tr><!-- End .summary-total -->
                                 </tbody>
                             </table><!-- End .table table-summary -->
@@ -157,5 +111,55 @@
     </div><!-- End .page-content -->
 </main><!-- End .main -->
 
+<!-- <form id="remove-item-form">
+    @csrf
+</form> -->
+@endsection
 
+@section('script')
+<!-- Config script -->
+<script>
+    const routeDelete = "{{ route('api.cart.destroy', ':cartId') }}";
+</script>
+<!-- Handler script -->
+<script>
+    function onChangeQuantity(input) {
+        updateItemTotal(input.closest('tr'));
+        updateCartTotal();
+    }
+
+    function onRemoveCartItem(button) {
+        if (!confirm('Are you sure to remove this item?')) {
+            return;
+        }
+        const cartId = button.getAttribute('data-cart-id');
+        url = routeDelete.replace(':cartId', cartId);
+
+        sendRequest(url, {}, 'DELETE', (data) => {
+            button.closest('tr').remove();
+            updateCartTotal();
+        });
+    }
+
+    function updateItemTotal(tr) {
+        const price = tr.querySelector('input[name="price"]').value;
+        const quantity = tr.querySelector('input[name="quantity"]').value;
+        const itemTotal = tr.querySelector('input[name="item-total"]');
+        itemTotal.value = (price * quantity).toFixed(2);
+    }
+
+    function updateCartTotal() {
+        const cartTotal = document.getElementById('cart-total');
+        const subTotal = document.getElementById('sub-total');
+        const itemTotals = document.getElementsByName('item-total');
+        let total = 0;
+        itemTotals.forEach(itemTotal => {
+            total = parseFloat(total) + parseFloat(itemTotal.value);
+            total = total.toFixed(2);
+        });
+
+        cartTotal.innerText = total;
+        subTotal.innerText = total;
+    }
+</script>
 @endsection
