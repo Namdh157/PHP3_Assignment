@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="{{ asset('assets') }}/css/demos/demo-6.css">
 <link rel="stylesheet" href="{{ asset('assets') }}/css/demos/carousel-layout.css">
 <link rel="stylesheet" href="{{ asset('assets') }}/css/plugins/nouislider/nouislider.css">
+<link href="{{ asset('css/auth/auth.css') }}" rel="stylesheet">
+
 
 @include('pages.public.components.header')
 
@@ -37,4 +39,8 @@
 <script src="{{ asset('assets') }}/js/wNumb.js"></script>
 <script src="{{ asset('assets') }}/js/nouislider.min.js"></script>
 <script src="{{ asset('assets') }}/js/slider.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+
 @endsection

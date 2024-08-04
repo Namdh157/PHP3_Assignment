@@ -39,7 +39,7 @@
                                             <span class="product-label label-new">New</span>
                                             <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
+                                                    alt="Product image" class="product-image product-thumbnail">
                                             </a>
                                             <div class="product-action">
                                                 <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
@@ -64,7 +64,7 @@
                                         <figure class="product-media">
                                             <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
+                                                    alt="Product image" class="product-image product-thumbnail">
                                             </a>
                                             <div class="product-action">
                                                 <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
@@ -90,7 +90,7 @@
                                             <span class="product-label label-out">Out of Stock</span>
                                             <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
+                                                    alt="Product image" class="product-image product-thumbnail">
                                             </a>
                                             <div class="product-action">
                                                 <a href="#" class="btn-product btn-cart"><span>add to
@@ -116,7 +116,7 @@
                                         <figure class="product-media">
                                             <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
+                                                    alt="Product image" class="product-image product-thumbnail">
                                             </a>
                                             <div class="product-action">
                                                 <a href="#" class="btn-product btn-cart"><span>add to
@@ -143,7 +143,7 @@
                                             <span class="product-label label-new">New</span>
                                             <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
+                                                    alt="Product image" class="product-image product-thumbnail">
                                             </a>
                                             <div class="product-action">
                                                 <a href="#" class="btn-product btn-cart"><span>add to
@@ -169,7 +169,7 @@
                                         <figure class="product-media">
                                             <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
+                                                    alt="Product image" class="product-image product-thumbnail">
                                             </a>
                                             <div class="product-action">
                                                 <a href="#" class="btn-product btn-cart"><span>add to
@@ -196,7 +196,7 @@
                                             <span class="product-label label-top">Top</span>
                                             <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
+                                                    alt="Product image" class="product-image product-thumbnail">
                                             </a>
                                             <div class="product-action">
                                                 <a href="#" class="btn-product btn-cart"><span>add to
@@ -222,7 +222,7 @@
                                         <figure class="product-media">
                                             <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
+                                                    alt="Product image" class="product-image product-thumbnail">
                                             </a>
                                             <div class="product-action">
                                                 <a href="#" class="btn-product btn-cart"><span>add to
@@ -248,7 +248,7 @@
                                         <figure class="product-media">
                                             <a href="{{route('public.product.detail')}}">
                                                 <img src="{{ asset('storage/images') }}/products/product-4.jpg"
-                                                    alt="Product image" class="product-image">
+                                                    alt="Product image" class="product-image product-thumbnail">
                                             </a>
                                             <div class="product-action">
                                                 <a href="#" class="btn-product btn-cart"><span>add to
