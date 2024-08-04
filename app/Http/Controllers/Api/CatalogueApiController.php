@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Catalogue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CatalogueApiController extends Controller
 {
@@ -52,6 +53,23 @@ class CatalogueApiController extends Controller
         return response()->json([
             'success' => 'Delete catalogue success',
             'data' => $delete
+        ]);
+    }
+    public function showMore(Request $request) {
+        $offset = $request->get('offset');
+        $catalogues = Catalogue::withCount('products')
+            ->has('products')
+            ->offset($offset)
+            ->take(5)
+            ->get();
+        if($catalogues->isEmpty()){
+            return response()->json([
+                'error' => 'No more catalogue'
+            ]);
+        }
+        return response()->json([
+            'success' => 'Get more catalogue success',
+            'data' => $catalogues
         ]);
     }
 }

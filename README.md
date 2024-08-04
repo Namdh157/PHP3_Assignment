@@ -26,7 +26,9 @@ php artisan serve
  -  
     <!-- @message: String -->
     <!-- @type: String ('success' | 'error' | 'info' | 'warning') -->
-    ```toastCustom (message, type = 'success')```                                
+    ```
+    toastCustom (message, type = 'success')
+    ```                                
 
  - 
    <!-- @return: { on, off } -->

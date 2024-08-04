@@ -50,25 +50,25 @@
     const route = "{{ $routePostTo }}";
     const method = "{{ $method }}";
     const httpReferer = "{{ $httpReferer }}";
-    const isConfirm = "@json($isConfirm)";
+    let successCallback = () => window.location.href = httpReferer;
 </script>
 
-<!-- Handler script -->
+@if (isset($isContinue) && $isContinue)
 <script>
-    function successCallback(res) {
+    successCallback = function(res) {
         setTimeout(() => {
-            if (isConfirm !== false) {
-                if (confirm('Do you want to add more brand?')) {
-                    window.location.reload();
-                } else {
-                    window.location.href = httpReferer;
-                }
+            if (confirm('Do you want to add more brand?')) {
+                window.location.reload();
             } else {
                 window.location.href = httpReferer;
             }
-        }, 1500);
+        }, 1200);
     }
+</script>
+@endif
 
+<!-- Handler script -->
+<script>
     function onChangeActive(checkbox) {
         const activeContainer = document.getElementById('active-container');
         if (checkbox.checked) activeContainer.classList.add('bg-info');
@@ -88,7 +88,7 @@
 
         // Handle Request
         function errorCallback(errors) {
-            console.log('Error:',  errors);
+            console.log('Error:', errors);
             setErrorValidate(fieldsInforNeedValid, errors || {}); // Set error for brand information
         }
         // Send request

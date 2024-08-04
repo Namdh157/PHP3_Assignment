@@ -1,6 +1,6 @@
 <div class="position-sticky top-0 bg-body-tertiary" style="height: 100vh">
     <div class="d-flex flex-column flex-shrink-0 p-3 h-100" style="width: 280px; overflow: auto;">
-        <a href="{{route('admin.dashboard')}}" class="fs-1 text-decoration-none px-2">
+        <a href="{{route('public.home')}}" class="fs-1 text-decoration-none px-2">
             <img src="{{asset('/storage/images/logo.png')}}" alt="" class="object-fit-contain" style="max-width: 100%; height: 70px">
         </a>
         <hr>

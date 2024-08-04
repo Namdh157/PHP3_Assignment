@@ -20,10 +20,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $title = 'Trang chủ';
         return view(self::PATH_VIEW . __FUNCTION__, [
-            'title' => $title,
-
+            'title' => 'Trang chủ',
         ]);
     }
 }

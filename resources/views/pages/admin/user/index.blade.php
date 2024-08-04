@@ -18,17 +18,14 @@
             </div>
         </div>
 
-        <table class="table">
-            <thead>
+        <table class="table table-hover table-bordered align-middle">
+            <thead align="middle">
                 <tr class="table-primary">
                     <th class="">
                         <input class="form-check-input" type="checkbox" id="checked-all">
                     </th>
                     <th class="">Name</th>
                     <th class="">Email</th>
-                    <th class="">Phone Number</th>
-                    <th class="">Address</th>
-                    <th class="">Image</th>
                     <th class="">Role</th>
                     <th class="">Action</th>
                 </tr>
@@ -40,21 +37,24 @@
                         <label for="check-item-{{$index}}" class="position-absolute top-0 start-0 w-100 h-100 z-3"></label>
                         <input class="form-check-input" type="checkbox" value="{{$user->id}}" name="check-item" id="check-item-{{$index}}">
                     </td>
-                    <td>{{ $user->name }}</td>
+                    <td>
+                    <a href="{{ route('admin.user.show', $user->id) }}" class="link-offset-2 text-decoration-none" style="--bs-link-hover-color-rgb: 25, 135, 84;">
+                            <span class="fw-bold">{{ $user->name }}</span>
+                        </a>
+                    </td>
                     <td>
                         {{ $user->email }}
                     </td>
-                    <td>
-                        {{ $user->phone_number }}
-                    </td>
-                    <td>
-                        {{ $user->address }}
-                    </td>
-                    <td>
-                        <img src="{{ $user->image }}" alt="" style="width: 100px">
-                    </td>
-                    <td>
-                        {{ $user->role }}
+                    <td style="width: 140px">
+                        <select class="form-select text-light" 
+                        onchange="onChangeSelect(event)" 
+                        onfocus="onFocusSelect(event)" 
+                        onclick="event.stopPropagation()" 
+                        data-user-id="{{$user->id}}">
+                            @foreach ($userType as $key => $status )
+                            <option value="{{$key}}" {{ strtolower($status) === strtolower($user->role) ? 'selected' : '' }}>{{$status}}</option>
+                            @endforeach
+                        </select>
                     </td>
 
                     <td>
@@ -82,13 +82,19 @@
     </div>
 </div>
 
-<form action="" id="form-data">
+<form action="" id="checkbox-form">
+    @csrf
+</form>
+<form action="" id="change-role-form">
     @csrf
 </form>
 <script>
     const routeUpdate = "{{ route('api.user.updateStatus') }}";
     const routeDelete = "{{ route('api.user.deleteMany') }}";
+    const routeUpdateRole = "{{route('api.user.updateRole')}}";
     const httpReferer = "{{isset($httpReferer)? $httpReferer : asset('admin.user.index')}}"
 </script>
+<!-- Handle Script -->
 <script src="{{asset('js/admin/selectIndex.js')}}"></script>
+<script src="{{asset('js/admin/user/index.js')}}"></script>
 @endsection

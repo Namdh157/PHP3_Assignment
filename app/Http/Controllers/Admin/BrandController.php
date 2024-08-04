@@ -27,8 +27,9 @@ class BrandController extends Controller
             ->paginate($this->model->getPerPage(), ['*'], 'brands', $curPage);
 
         $totalPage = $brands->lastPage();
-        $curPath = $brands->path();
+        $curPath = $brands->path() . '?';
         $pageArray = range(1, $totalPage);
+        
         return view(self::VIEW_PATH . __function__, [
             'title' => 'All brands',
             'sidebar' => self::SIDE_BAR,
@@ -53,7 +54,7 @@ class BrandController extends Controller
                 ['title' => 'Brands', 'route' => 'admin.brand.index'],
                 ['title' => 'Create brand', 'route' => 'admin.brand.create']
             ],
-            'isConfirm' => true,
+            'isContinue' => true,
             'routePostTo' => route('admin.brand.store'),
             'method' => 'POST',
             'httpReferer' => route('admin.brand.index')
@@ -106,10 +107,10 @@ class BrandController extends Controller
                 ['title' => 'Brands', 'route' => 'admin.brand.index'],
                 ['title' => 'Update brand', 'route' => 'admin.brand.edit']
             ],
-            'isConfirm' => true,
+            'isContinue' => false,
             'routePostTo' => route('admin.brand.update', $brand->id),
             'method' => 'PUT',
-            'httpReferer' => route('admin.brand.edit', $brand->id)
+            'httpReferer' => route('admin.brand.index')
         ]);
     }
 

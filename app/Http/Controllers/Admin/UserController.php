@@ -29,7 +29,7 @@ class UserController extends Controller
 
         // Pagination
         $totalPage = $users->lastPage();
-        $curPath = $users->path();
+        $curPath = $users->path() . '?';
         $pageArray = range(1, $totalPage);
 
         return view(self::PATH_VIEW . __FUNCTION__, [
@@ -40,33 +40,42 @@ class UserController extends Controller
             'totalPage' => $totalPage,
             'curPath' => $curPath,
             'pageArray' => $pageArray,
+            'userType' => $this->model::TYPE_USER,
             'breadcrumb' => [
                 ['title' => 'User', 'route' => 'admin.user.index']
             ]
         ]);
     }
-
-    public function edit(string $id)
+    public function show(User $user)
     {
+        $user = $this->model
+            ->query()
+            ->find($user->id);
+
         return view(self::PATH_VIEW . 'user', [
-            'title' => 'Edit User',
+            'title' => 'User Detail',
             'sidebar' => self::SIDE_BAR,
+            'user' => $user,
+            'userType' => $this->model::TYPE_USER,
             'breadcrumb' => [
-                ['title' => 'User', 'route' => 'admin.user.index']
-            ],
-            'httpReferer' => route('admin.user.index'),
-            'routePostTo' => route('admin.user.update', $id),
-            'user' => $this->model->find($id),
-            'method' => 'PUT',
+                ['title' => 'User', 'route' => 'admin.user.index'],
+                ['title' => 'Show', 'route' => 'admin.user.show', 'params' => $user->name]
+            ]
         ]);
     }
+        
 
-    public function update(Request $request, string $id)
+    public function edit(User $user)
+    {
+        
+    }
+
+    public function update(Request $request, User $user)
     {
         //
     }
 
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
         //
     }

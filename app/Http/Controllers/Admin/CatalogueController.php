@@ -50,14 +50,13 @@ class CatalogueController extends Controller
      */
     public function create()
     {
-        $isConfirm = true;
         return view(self::PATH_VIEW . 'catalogue', [
             'title' => 'Create Catalogue',
             'sidebar' => self::SIDE_BAR,
             'httpReferer' => route('admin.catalogue.index'),
             'routePostTo' => route('admin.catalogue.store'),
             'method' => 'POST',
-            'isConfirm' => $isConfirm,
+            'isContinue' => true,
             'breadcrumb' => [
                 ['title' => 'Catalogue', 'route' => 'admin.catalogue.index'],
                 ['title' => 'Create', 'route' => 'admin.catalogue.create'],
@@ -119,7 +118,7 @@ class CatalogueController extends Controller
             'httpReferer' => route('admin.catalogue.index'),
             'routePostTo' => route('admin.catalogue.update', $catalogue->id),
             'method' => 'PUT',
-            'isConfirm' => false,
+            'isContinue' => false,
         ]);   
     }
 

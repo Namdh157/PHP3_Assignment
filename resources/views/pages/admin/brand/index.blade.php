@@ -27,6 +27,8 @@
                     </th>
                     <th class="">Name</th>
                     <th class="">Active</th>
+                    <th class="">Updated</th>
+                    <th class="">Created</th>
                     <th class="">Action</th>
                 </tr>
             </thead>
@@ -40,6 +42,12 @@
                     <td>{{ $brand->name }}</td>
                     <td>
                         <input class="form-check-input" type="checkbox" onclick="((e)=>{e.preventDefault()})(event)" {{$brand->is_active ? 'checked':''}} name="active-item">
+                    </td>
+                    <td>
+                        {{ $brand->updated_at->diffForHumans() }}
+                    </td>
+                    <td>
+                        {{ $brand->created_at->diffForHumans() }}
                     </td>
                     <td>
                         <a href="{{ route('admin.brand.edit', $brand) }}" class="btn btn-outline-info">
@@ -65,7 +73,7 @@
     </div>
 </div>
 
-<form action="" id="form-data">
+<form action="" id="checkbox-form">
     @csrf
 </form>
 <script>
