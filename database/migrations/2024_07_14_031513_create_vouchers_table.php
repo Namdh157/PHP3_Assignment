@@ -20,7 +20,6 @@ return new class extends Migration
             $table->enum('type', array_keys(Voucher::TYPE))->default(array_keys(Voucher::TYPE)[0])->comment('Loại giảm giá');
             $table->integer('quantity')->comment('Số lượng mã giảm giá');
             $table->integer('used')->default(0)->comment('Số lượng mã giảm giá đã sử dụng');
-            $table->integer('max_use')->comment('Số lần sử dụng tối đa');
             $table->boolean('is_active')->default(true)->comment('Trạng thái hoạt động');
             $table->date('start_at')->comment('Thời gian bắt đầu');
             $table->date('end_at')->comment('Thời gian kết thúc');

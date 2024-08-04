@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Voucher;
+use Illuminate\Support\Facades\Validator;
 
 class VoucherController extends Controller
 {
@@ -22,6 +23,7 @@ class VoucherController extends Controller
     {
         $sort = request('sort');
         $curPage = request('page') ?? 1;
+        $typeArr = Voucher::TYPE;
 
         if ($curPage < 1)  $curPage = 1;
         $paramsOrder = match ($sort) {
@@ -48,6 +50,7 @@ class VoucherController extends Controller
             'curPath' => $curPath,
             'totalPage' => $totalPage,
             'vouchers' => $vouchers,
+            'typeArr' => $typeArr,
             'breadcrumb' => [
                 ['title' => 'Voucher', 'route' => 'admin.voucher.index']
             ]
@@ -60,10 +63,12 @@ class VoucherController extends Controller
     public function create()
     {
         $httpReferer = route('admin.voucher.index');
+        $types = Voucher::TYPE;
         return view(self::PATH_VIEW . 'voucher', [
             'title' => 'Add Voucher',
             'sidebar' => self::SIDE_BAR,
             'httpReferer' => $httpReferer,
+            'types' => $types,
             'routePostTo' => route('admin.voucher.store'),
             'method' => 'POST',
             'breadcrumb' => [
@@ -78,7 +83,38 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $voucher = $request->all();
+        $type = array_keys(Voucher::TYPE);
+
+        // Validate
+        $validate = Validator::make($voucher, [
+            'code' => 'required|unique:vouchers',
+            'type' => ['required', 'in:' . implode(',', $type)],
+            'value' => 'required|numeric|min:0',
+            'quantity' => 'required|int|min:0',
+            'start_at' => 'required|date',
+            'end_at' => 'required|date|after:start_at',
+            'is_active' => 'required|boolean',
+        ]);
+        if ($validate->fails()) {
+            return response()->json([
+                'error' => 'Validate error',
+                'data' => $validate->errors()
+            ]);
+        }
+
+        // Create
+        $voucher = $this->model->create($voucher);
+        if ($voucher) {
+            return response()->json([
+                'success' => 'Voucher has been created',
+                'data' => $voucher
+            ]);
+        }
+
+        return response()->json([
+            'error' => 'Can not create voucher'
+        ]);
     }
 
     /**
@@ -86,7 +122,6 @@ class VoucherController extends Controller
      */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -94,7 +129,26 @@ class VoucherController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $httpReferer = $_SERVER['HTTP_REFERER'] ?? route('admin.voucher.index');
+        $types = Voucher::TYPE;
+        $voucher = $this->model->find($id);
+        if (!$voucher) {
+            return redirect()->back()->with('error', 'Can not find voucher');
+        }
+
+        return view(self::PATH_VIEW . 'voucher', [
+            'title' => 'Edit Voucher',
+            'sidebar' => self::SIDE_BAR,
+            'httpReferer' => $httpReferer,
+            'types' => $types,
+            'voucher' => $voucher,
+            'routePostTo' => route('admin.voucher.update', $id),
+            'method' => 'PATCH',
+            'breadcrumb' => [
+                ['title' => 'Voucher', 'route' => 'admin.voucher.index'],
+                ['title' => 'Edit', 'route' => 'admin.voucher.show', 'params' => $id]
+            ],
+        ]);
     }
 
     /**
@@ -102,7 +156,42 @@ class VoucherController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $requestVoucher = $request->all();
+        $voucher = $this->model->find($id);
+        $type = array_keys(Voucher::TYPE);
+        $rule = [
+            'type' => ['required', 'in:' . implode(',', $type)],
+            'value' => 'required|numeric|min:0',
+            'quantity' => 'required|int|min:0',
+            'start_at' => 'required|date',
+            'end_at' => 'required|date|after:start_at',
+            'is_active' => 'required|boolean',
+        ];
+        if($requestVoucher['code'] != $voucher->code) {
+            $rule['code'] = 'required|unique:vouchers';
+        }
+
+        // Validate
+        $validate = Validator::make($requestVoucher, $rule);
+        if ($validate->fails()) {
+            return response()->json([
+                'error' => 'Validate error',
+                'data' => $validate->errors()
+            ]);
+        }
+
+        // Update
+        $voucher->fill($requestVoucher);
+        if ($voucher->save()) {
+            return response()->json([
+                'success' => 'Voucher has been updated',
+                'data' => $voucher
+            ]);
+        }
+
+        return response()->json([
+            'error' => 'Can not create voucher'
+        ]);
     }
 
     /**

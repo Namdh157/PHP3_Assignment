@@ -61,8 +61,8 @@ Route::middleware('auth.admin')->group(function () {
         ->name('api.voucher.deleteMany');
 
     //banners
-    Route::delete('banner/delete-many', [BannerApiController::class, 'deleteMany'])
-        ->name('api.banner.deleteMany');
+    Route::put('banner/set-active-on/{id}', [BannerApiController::class, 'setActiveOn'])
+        ->name('api.banner.setActiveOn');
 });
 
 //API for public
