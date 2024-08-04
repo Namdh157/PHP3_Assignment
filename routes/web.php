@@ -49,10 +49,16 @@ Route::middleware('auth.logged')->group(function(){
 // Route public
 Route::name('public.')->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    
     Route::get('/product/detail/{slug}', [PublicProductController::class, 'detail'])->name('product.detail');
+    
     Route::get('/cart', [CartController::class,'index'])->name('cart');
+    
     Route::get('/allProduct', [AllProductController::class, 'index'])->name('allProduct');
+    
     Route::get('/checkout', function () {
-        return view('pages.public.checkout.index');
+        return view('pages.public.checkout.index',[
+            'title' => 'Thanh toán'
+        ]);
     })->name('checkout');
 });
