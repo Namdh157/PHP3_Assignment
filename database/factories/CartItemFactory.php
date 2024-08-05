@@ -16,9 +16,11 @@ class CartItemFactory extends Factory
 
     public function definition()
     {
+        $users = User::all()->pluck('id')->toArray();
+        $productVariants = ProductVariant::all()->pluck('id')->toArray();
         return [
-            'user_id' => User::factory(),
-            'product_variant_id' => ProductVariant::factory(),
+            'user_id' => $this->faker->randomElement($users),
+            'product_variant_id' => $this->faker->randomElement($productVariants),
             'quantity' => $this->faker->numberBetween(1, 5),
             // 'price' => $this->faker->randomFloat(2, 10, 100),
         ];

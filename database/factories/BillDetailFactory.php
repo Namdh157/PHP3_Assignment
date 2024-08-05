@@ -15,9 +15,11 @@ class BillDetailFactory extends Factory
     protected $model = BillDetail::class;
     public function definition(): array
     {
+        $bills = Bill::all()->pluck('id')->toArray();
+        $products = Product::all()->pluck('id')->toArray();
         return [
-            'bill_id' => Bill::factory(),
-            'product_id' => Product::factory(),
+            'bill_id' => $this->faker->randomElement($bills),
+            'product_id' => $this->faker->randomElement($products),
             'product_name' => $this->faker->name(),
             'product_size' => $this->faker->randomElement(['S', 'M', 'L', 'XL']),
             'product_color' => $this->faker->randomElement(['Red', 'Green', 'Blue']),

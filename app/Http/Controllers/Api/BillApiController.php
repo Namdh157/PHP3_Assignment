@@ -63,7 +63,7 @@ class BillApiController extends Controller
         $bill->customer_phone = $phone_number;
         $bill->customer_email = $email;
         $bill->customer_address = $address;
-        $bill->customer_note = $note;
+        $bill->customer_note = $note ?? '';
         $bill->payment_method = $payment_method;
         $bill->quantity = count($cartItems);
         $bill->total_discount = $discountAmount;

@@ -15,9 +15,11 @@ class CommentFactory extends Factory
     protected $model = Comment::class;
     public function definition(): array
     {
+        $users = User::all()->pluck('id')->toArray();
+        $products = Product::all()->pluck('id')->toArray();
         return [
-            'user_id' => User::factory(),
-            'product_id' => Product::factory(),
+            'user_id' => $this->faker->randomElement($users),
+            'product_id' => $this->faker->randomElement($products),
             'content' => $this->faker->text(),
         ];
     }

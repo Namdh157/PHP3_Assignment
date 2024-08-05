@@ -24,7 +24,7 @@ class ProductVariantFactory extends Factory
             'color_id' => $this->faker->randomElement($Colors),
             'size_id' => $this->faker->randomElement($Sizes),
             'price_regular' => $this->faker->randomFloat(2, 10, 100),
-            'price_sale' => $this->faker->optional()->randomFloat(2, 5, 90),
+            'price_sale' => $this->faker->randomFloat(2, 5, 90),
             'stock' => $this->faker->numberBetween(0, 100),
             'is_active' => $this->faker->boolean(true),
         ];

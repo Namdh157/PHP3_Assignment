@@ -30,6 +30,9 @@ class CartController extends CommonController
         $this->cartItems = CartItem::where('user_id', Auth::user()->id)
             ->with(['productVariant.product', 'productVariant.variantColor', 'productVariant.variantSize'])
             ->get();
+        if ($this->cartItems->isEmpty()) {
+            return redirect()->route('public.cart')->with('error', 'Your cart is empty');
+        }
         $paymentMethods = Bill::PAYMENT_METHOD;
 
         return view('pages.public.cart.checkout', [

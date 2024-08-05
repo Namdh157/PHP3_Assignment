@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Color::class)->constrained();
             $table->foreignIdFor(Size::class)->constrained();
             $table->double('price_regular');
-            $table->double('price_sale')->nullable();
+            $table->double('price_sale');
             $table->unsignedInteger('stock');
             $table->boolean('is_sale')->default(false);
             $table->boolean('is_active')->default(true);

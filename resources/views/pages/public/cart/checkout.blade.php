@@ -136,7 +136,10 @@
 <script>
     const routeCreateBill = "{{route('api.bill.create')}}";
     const routeCheckVoucher = "{{route('api.voucher.check')}}";
+    const routePayment = "{{route('public.checkout.handle', ':id')}}";
     const totalAmount = "{{$cartTotal}}";
+    console.log(routePayment);
+    
 </script>
 <!-- Handler script -->
 <script>
@@ -183,11 +186,18 @@
         };
         const callBackSuccess = (data) => {
             ToastCustom('Order success', 'success');
+            if(payload.payment_method == 'cod'){
+                window.location.href = "{{route('public.cart')}}";
+                return;
+            }
+            window.location.href = routePayment.replace(':id', data.id);
         }
         const callBackError = () => {
             console.log('error');
         }
         sendRequest(routeCreateBill, payload, 'POST', callBackSuccess, callBackError);
     }
+
+
 </script>
 @endsection

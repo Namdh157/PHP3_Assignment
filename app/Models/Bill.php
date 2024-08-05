@@ -29,6 +29,7 @@ class Bill extends Model
         'payment_method',
         'customer_note',
         'status',
+        'is_paid',
         'quantity',
         'total_discount',
         'total_price',
