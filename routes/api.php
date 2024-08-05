@@ -8,8 +8,10 @@ use App\Http\Controllers\Api\CartApiController;
 use App\Http\Controllers\api\CatalogueApiController;
 use App\Http\Controllers\Api\ProductApiController;
 use App\Http\Controllers\Api\CommentApiController;
+use App\Http\Controllers\Api\ProductVariantApiController;
 use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\VoucherApiController;
+use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -88,3 +90,12 @@ Route::get('catalogue/showMore', [CatalogueApiController::class, 'showMore'])
 
 Route::get('brand/showMore', [BrandApiController::class, 'showMore'])
     ->name('api.brand.showMore');
+
+Route::middleware('auth.logged')->group(function(){
+    Route::delete('cart/destroy/{id}', [CartApiController::class, 'destroy'])
+    ->name('api.cart.destroy');
+    Route::post('cart/create', [CartApiController::class, 'create'])
+    ->name('api.cart.create');
+    Route::post('comment/create', [CommentApiController::class, 'create'])
+    ->name('api.comment.create');
+});

@@ -37,4 +37,24 @@ class CommentApiController extends Controller
         ]);
     }
 
+    public function create(Request $request)
+    {
+        $validateData = $request->validate([
+            'product_id' => 'required',
+            'content' => 'required',
+        ]);
+        $validateData['user_id'] = auth()->id();
+
+        $create = $this->model->create($validateData);
+        if(!$create){
+            return response()->json([
+                'error' => 'Failed to create comment'
+            ]);
+        }
+        return response()->json([
+            'success' => 'Create comment success',
+            'data' => $create
+        ]);
+    }
+
 }

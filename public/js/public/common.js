@@ -1,6 +1,7 @@
 async function sendRequest(route, data, method, callBackSuccess, callBackError) {
     loading().on();
     try {
+   
         const response = await fetch(route, {
             method: method || 'POST',
             headers: {
@@ -10,6 +11,8 @@ async function sendRequest(route, data, method, callBackSuccess, callBackError) 
             },
             body: JSON.stringify(data)
         });
+       
+        
         const result = await response.json();
         if (result.success) {
             // ToastCustom(result.success);
