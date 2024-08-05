@@ -17,8 +17,9 @@ class BannerImageFactory extends Factory
      */
     public function definition(): array
     {
+        $banners = Banner::all()->pluck('id')->toArray();
         return [
-            'banner_id' => Banner::factory(),
+            'banner_id' => $this->faker->randomElement($banners),
             'url' => $this->faker->imageUrl(1000, 450),
         ];
     }

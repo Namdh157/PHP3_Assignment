@@ -14,8 +14,9 @@ class ProductGalleryFactory extends Factory
     protected $model = ProductGallery::class;
     public function definition(): array
     {
+        $products = Product::all()->pluck('id')->toArray();
         return [
-            'product_id' => Product::factory(),
+            'product_id' => $this->faker->randomElement($products),
             'image' => 'https://picsum.photos/640/480',
         ];
     }

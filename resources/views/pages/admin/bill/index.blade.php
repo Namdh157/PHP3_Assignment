@@ -35,6 +35,7 @@
                     <th class="">Voucher discount</th>
                     <th class="">Cost</th>
                     <th class="">Status</th>
+                    <th class="">paid</th>
                     <th class="">Updated at</th>
                     <th class="">Created at</th>
                 </tr>
@@ -59,6 +60,9 @@
                             <option value="{{$key}}" {{ strtolower($status) === strtolower($bill->status) ? 'selected' : '' }}>{{$status}}</option>
                             @endforeach
                         </select>
+                    </td>
+                    <td>
+                    <input class="form-check-input" type="checkbox" onclick="((e)=>{e.preventDefault()})(event)" {{$bill->is_paid ? 'checked':''}}>
                     </td>
                     <td>
                         <span class="text-muted text-nowrap">{{ $bill->updated_at->diffForHumans() }}</span>

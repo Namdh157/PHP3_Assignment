@@ -16,10 +16,13 @@ class CheckVoucherFactory extends Factory
     protected $model = CheckVoucher::class;
     public function definition(): array
     {
+        $users = User::all()->pluck('id')->toArray();
+        $vouchers = Voucher::all()->pluck('id')->toArray();
+        $bills = Bill::all()->pluck('id')->toArray();
         return [
-            'user_id' => User::factory(),
-            'voucher_id' => Voucher::factory(),
-            'bill_id' => Bill::factory(),
+            'user_id' => $this->faker->randomElement($users),
+            'voucher_id' => $this->faker->randomElement($vouchers),
+            'bill_id' => $this->faker->randomElement($bills),
         ];
     }
 }

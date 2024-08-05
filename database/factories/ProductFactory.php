@@ -16,9 +16,11 @@ class ProductFactory extends Factory
     protected $model = Product::class;
     public function definition(): array
     {
+        $catalogues = Catalogue::all()->pluck('id')->toArray();
+        $brands = Brand::all()->pluck('id')->toArray();
         return [
-            'catalogue_id' => Catalogue::factory(),
-            'brand_id' => Brand::factory(),
+            'catalogue_id' => $this->faker->randomElement($catalogues),
+            'brand_id' => $this->faker->randomElement($brands),
             'name' => $this->faker->name(), 
             'slug' => $this->generateSlug(),
             'sku' => $this->faker->unique()->regexify('[A-Z0-9]{10}'),
