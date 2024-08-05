@@ -27,6 +27,7 @@ class Bill extends Model
         'customer_email',
         'customer_address',
         'payment_method',
+        'customer_note',
         'status',
         'quantity',
         'total_discount',

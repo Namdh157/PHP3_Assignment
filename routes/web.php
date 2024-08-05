@@ -43,6 +43,8 @@ Route::middleware('auth.notlogged')->controller(AuthController::class)->group(fu
 Route::middleware('auth.logged')->group(function(){
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/profile', [ProfileController::class, 'index'])->name('public.profile');
+    Route::get('/cart', [CartController::class,'index'])->name('public.cart');
+    Route::get('/checkout', [CartController::class,'checkout'])->name('public.checkout');
 });
 
 // Route public
@@ -50,10 +52,5 @@ Route::name('public.')->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('home');
     
     Route::get('/product/detail/{slug}', [PublicProductController::class, 'detail'])->name('product.detail');
-    
-    Route::get('/cart', [CartController::class,'index'])->name('cart');
     Route::get('/allProduct', [PublicProductController::class, 'allProduct'])->name('allProduct');
-    Route::get('/checkout', function () {
-        return view('pages.public.checkout.index', );
-    })->name('checkout');
 });

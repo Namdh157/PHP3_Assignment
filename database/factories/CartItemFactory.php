@@ -20,7 +20,7 @@ class CartItemFactory extends Factory
             'user_id' => User::factory(),
             'product_variant_id' => ProductVariant::factory(),
             'quantity' => $this->faker->numberBetween(1, 5),
-            'price' => $this->faker->randomFloat(2, 10, 100),
+            // 'price' => $this->faker->randomFloat(2, 10, 100),
         ];
     }
 }

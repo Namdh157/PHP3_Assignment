@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('bill_details', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Bill::class)->constrained()->onDelete('cascade');
-            $table->string('product_sku');
+            $table->string('product_id');
             $table->string('product_name');
             $table->string('product_size');
             $table->string('product_color');

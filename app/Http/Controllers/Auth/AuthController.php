@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            if(Auth::user()->role === User::TYPE_USER['admin']) {
+            if(Auth::user()->role === User::ROLE[1]) {
                 return redirect()->route('admin.dashboard')->with('success', 'Welcome back, ' . Auth::user()->name);
             }
             else {

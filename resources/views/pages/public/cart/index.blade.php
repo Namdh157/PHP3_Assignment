@@ -6,12 +6,13 @@
     <div class="page-header text-center" style="background-image: url('{{ asset(`storage/images/page-header-bg.jpg`) }}')">
         <div class="container">
             <h1 class="page-title">Shopping Cart<span>Shop</span></h1>
-        </div><!-- End .container -->
-    </div><!-- End .page-header -->
+        </div>
+    </div>
     <div class="page-content mt-5">
         <div class="cart">
             <div class="container">
                 <div class="row">
+                    <!-- Left -->
                     <div class="col-lg-9">
                         <table class="table table-cart table-mobile table-bordered">
                             <thead>
@@ -29,7 +30,7 @@
                                 @php
                                 $cartTotal += ($item->productVariant->price_sale ?? 0) * $item->quantity;
                                 @endphp
-                                <tr>
+                                <tr class="cart-item" data-variant-id="{{$item->productVariant->id}}">
                                     <td class="product-col px-3">
                                         <div class="product">
                                             <figure class="product-media">
@@ -43,8 +44,8 @@
                                                     {{$item->productVariant->product->name}}
                                                     <p class="mt-1 fs-6">{{$item->productVariant->variantColor->color . ' - ' .$item->productVariant->variantSize->size}}</p>
                                                 </a>
-                                            </h3><!-- End .product-title -->
-                                        </div><!-- End .product -->
+                                            </h3>
+                                        </div>
                                     </td>
                                     <td class="price-col">
                                         <div class="d-flex align-items-center">
@@ -54,7 +55,7 @@
                                     <td class="quantity-col">
                                         <div class="cart-product-quantity mx-auto">
                                             <input type="number" name="quantity" class="form-control text-center" value="{{$item->quantity}}" min="1" step="1" data-decimals="0" onchange="onChangeQuantity(this)">
-                                        </div><!-- End .cart-product-quantity -->
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="d-flex align-items-center justify-content-center">
@@ -65,19 +66,20 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                        </table><!-- End .table table-wishlist -->
-                    </div><!-- End .col-lg-9 -->
+                        </table>
+                    </div>
 
+                    <!-- Right -->
                     <aside class="col-lg-3">
                         <div class="summary summary-cart">
-                            <h3 class="summary-title">Cart Total</h3><!-- End .summary-title -->
+                            <h3 class="summary-title">Cart Total</h3>
 
                             <table class="table table-summary">
                                 <tbody>
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
                                         <td><span id="sub-total">{{$cartTotal}}</span>$</td>
-                                    </tr><!-- End .summary-subtotal -->
+                                    </tr>
                                     <tr class="summary-shipping">
                                         <td>Shipping:</td>
                                         <td>&nbsp;</td>
@@ -88,44 +90,42 @@
                                             <div class="custom-control custom-radio">
                                                 <input type="radio" id="free-shipping" name="shipping" class="custom-control-input" checked>
                                                 <label class="custom-control-label" for="free-shipping">Free Shipping:</label>
-                                            </div><!-- End .custom-control -->
+                                            </div>
                                         </td>
                                         <td>0.00$</td>
-                                    </tr><!-- End .summary-shipping-row -->
+                                    </tr>
 
                                     <tr class="summary-total">
                                         <td>Total:</td>
                                         <td><span id="cart-total">{{$cartTotal}}</span>$</td>
-                                    </tr><!-- End .summary-total -->
+                                    </tr>
                                 </tbody>
-                            </table><!-- End .table table-summary -->
+                            </table>
 
-                            <a href="{{ route('public.checkout')}}" class="btn btn-outline-primary-2 btn-order btn-block w-100">PROCEED TO CHECKOUT</a>
-                        </div><!-- End .summary -->
+                            <a href="{{ route('public.checkout')}}" onclick="toCheckout(event)" class="btn btn-outline-primary-2 btn-order btn-block w-100">PROCEED TO CHECKOUT</a>
+                        </div>
 
                         <a href="{{ route('public.allProduct')}}" class="btn btn-outline-dark-2 btn-block mb-3 w-100"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
-                    </aside><!-- End .col-lg-3 -->
-                </div><!-- End .row -->
-            </div><!-- End .container -->
-        </div><!-- End .cart -->
-    </div><!-- End .page-content -->
-</main><!-- End .main -->
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
-<!-- <form id="remove-item-form">
-    @csrf
-</form> -->
 @endsection
 
 @section('script')
 <!-- Config script -->
 <script>
     const routeDelete = "{{ route('api.cart.destroy', ':cartId') }}";
+    const routeUpdateCart = "{{ route('api.cart.update', ':cartId') }}";
 </script>
 <!-- Handler script -->
 <script>
     function onChangeQuantity(input) {
-        updateItemTotal(input.closest('tr'));
-        updateCartTotal();
+        onUpdateItemTotal(input.closest('tr'));
+        onUpdateCartTotal();
     }
 
     function onRemoveCartItem(button) {
@@ -137,18 +137,18 @@
 
         sendRequest(url, {}, 'DELETE', (data) => {
             button.closest('tr').remove();
-            updateCartTotal();
+            onUpdateCartTotal();
         });
     }
 
-    function updateItemTotal(tr) {
+    function onUpdateItemTotal(tr) {
         const price = tr.querySelector('input[name="price"]').value;
         const quantity = tr.querySelector('input[name="quantity"]').value;
         const itemTotal = tr.querySelector('input[name="item-total"]');
         itemTotal.value = (price * quantity).toFixed(2);
     }
 
-    function updateCartTotal() {
+    function onUpdateCartTotal() {
         const cartTotal = document.getElementById('cart-total');
         const subTotal = document.getElementById('sub-total');
         const itemTotals = document.getElementsByName('item-total');
@@ -160,6 +160,38 @@
 
         cartTotal.innerText = total;
         subTotal.innerText = total;
+    }
+
+    function toCheckout(e) {
+        e.preventDefault();
+        if (confirm('Are you sure to checkout?')) {
+            const callBackSuccess = () => {
+                const url = e.target.href;
+                window.location.href = url;
+            }
+            const callBackError = () => {
+                console.log('Update cart error');
+            }
+            updateCartItem(callBackSuccess, callBackError);
+        }
+    }
+
+    function updateCartItem(callBackSuccess, callBackError) {
+        const cartItems = document.querySelectorAll('tr.cart-item');
+        const payload = [];
+        cartItems.forEach(item => {
+            const cartId = item.querySelector('button').getAttribute('data-cart-id');
+            const quantity = item.querySelector('input[name="quantity"]').value;
+            payload.push({
+                cart_id: cartId,
+                product_variant_id: item.getAttribute('data-variant-id'),
+                quantity: quantity
+            });
+        });
+
+        sendRequest(routeUpdateCart, {
+            cartItems: payload
+        }, 'PUT', callBackSuccess, callBackError);
     }
 </script>
 @endsection

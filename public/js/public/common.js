@@ -12,7 +12,7 @@ async function sendRequest(route, data, method, callBackSuccess, callBackError) 
         });
         const result = await response.json();
         if (result.success) {
-            ToastCustom(result.success);
+            // ToastCustom(result.success);
             callBackSuccess && callBackSuccess(result.data);
         } else throw new Error(JSON.stringify(result));
     } catch (error) {
