@@ -28,13 +28,16 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
-    public function bills(){
+    public function bills()
+    {
         return $this->hasMany(Bill::class);
     }
-    public function checkVouchers() {
+    public function checkVouchers()
+    {
         return $this->hasMany(CheckVoucher::class);
     }
 }

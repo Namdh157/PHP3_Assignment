@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         Color::factory(10)->create();
         ProductVariant::factory(10)->create();
         Comment::factory(10)->create();
-        CartItem::factory(10)->create();
+        CartItem::factory(20)->create();
         Bill::factory(10)->create();
         BillDetail::factory(10)->create();
         Voucher::factory(20)->create();
