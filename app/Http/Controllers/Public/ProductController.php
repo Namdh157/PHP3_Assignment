@@ -14,15 +14,33 @@ class ProductController extends CommonController
     //
     const PATH_VIEW = 'pages.public.';
     public function detail($slug){
-        //echo $slug;
-        $product = Product::where('slug',$slug)->with('catalogue','brand','productVariants')->first();
-        $alsoLikeProducts = Product::where('catalogue_id',$product->catalogue_id)->limit(4)
-            ->with('catalogue','productVariants')->get();
-        //dd($product);
+        // product detail
+        $product = Product::where('slug',$slug)
+            ->with(['catalogue','brand','productVariants', 'productGalleries', 'productVariants.variantColor', 'productVariants.variantSize'])
+            ->first();
+        if($product->count() == 0){
+            return redirect()->route('public.home');
+        }
+
+        // also like products
+        $alsoLikeProducts = Product::where('catalogue_id', $product->catalogue_id)
+            ->first()
+            ->limit(4)
+            ->with(['catalogue','productVariants'])->get();
+
+        // comments
+        $comments = $product->comments()
+            ->join('users', 'comments.user_id', '=', 'users.id')
+            ->select('comments.*', 'users.name as user_name')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        // dd($product['product_galleries']);
+
         return view(self::PATH_VIEW.'detail.index',[
             'title' => 'Detail',
-            'product' => $product,
+            'product' => $product->toArray(),
             'alsoLikeProducts' => $alsoLikeProducts,
+            'comments' => $comments,
             ...$this->dataHeader
 
         ]);

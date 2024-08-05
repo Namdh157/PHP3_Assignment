@@ -70,4 +70,16 @@ class ProductApiController extends Controller
             'data' => $delete
         ]);
     }
+
+    public function stock(Request $request)
+    {
+        $product_id = $request->get('product_id');
+        $size = $request->get('size');
+        $color = $request->get('color');
+        $stock = $this->model->getStock($product_id, $size, $color);
+        return response()->json([
+            'success' => 'Stock fetched successfully',
+            'data' => $stock
+        ]);
+    }
 }
