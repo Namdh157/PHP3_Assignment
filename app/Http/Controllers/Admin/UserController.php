@@ -40,7 +40,7 @@ class UserController extends Controller
             'totalPage' => $totalPage,
             'curPath' => $curPath,
             'pageArray' => $pageArray,
-            'userType' => $this->model::TYPE_USER,
+            'userType' => $this->model::ROLE,
             'breadcrumb' => [
                 ['title' => 'User', 'route' => 'admin.user.index']
             ]
@@ -56,7 +56,7 @@ class UserController extends Controller
             'title' => 'User Detail',
             'sidebar' => self::SIDE_BAR,
             'user' => $user,
-            'userType' => $this->model::TYPE_USER,
+            'userType' => $this->model::ROLE,
             'breadcrumb' => [
                 ['title' => 'User', 'route' => 'admin.user.index'],
                 ['title' => 'Show', 'route' => 'admin.user.show', 'params' => $user->name]

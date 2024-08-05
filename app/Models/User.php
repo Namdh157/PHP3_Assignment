@@ -12,10 +12,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    const TYPE_USER = [
-        'admin' => 'admin',
-        'member' => 'member',
-    ];
+    const ROLE = ['member', 'admin'];
     protected $fillable = [
         'name',
         'email',
@@ -31,13 +28,16 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
-    public function bills(){
+    public function bills()
+    {
         return $this->hasMany(Bill::class);
     }
-    public function checkVouchers() {
+    public function checkVouchers()
+    {
         return $this->hasMany(CheckVoucher::class);
     }
 }

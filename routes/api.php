@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Api\BannerApiController;
+use App\Http\Controllers\Api\BillApiController;
 use App\Http\Controllers\Api\BrandApiController;
 use App\Http\Controllers\Api\CartApiController;
 use App\Http\Controllers\api\CatalogueApiController;
@@ -66,12 +67,24 @@ Route::middleware('auth.admin')->group(function () {
         ->name('api.banner.setActiveOn');
 });
 
+// Api logged
+Route::middleware('auth.logged')->group(function(){
+    Route::delete('cart/destroy/{id}', [CartApiController::class, 'destroy'])
+        ->name('api.cart.destroy');
+
+    Route::put('cart/update/{id}', [CartApiController::class, 'update'])
+        ->name('api.cart.update');
+    
+    Route::post('bill/create', [BillApiController::class, 'create'])
+        ->name('api.bill.create');
+    
+    Route::post('voucher/check', [VoucherApiController::class, 'check'])
+        ->name('api.voucher.check');
+});
+
 //API for public
 Route::get('catalogue/showMore', [CatalogueApiController::class, 'showMore'])
     ->name('api.catalogue.showMore');
 
 Route::get('brand/showMore', [BrandApiController::class, 'showMore'])
     ->name('api.brand.showMore');
-
-Route::middleware('auth.logged')->delete('cart/destroy/{id}', [CartApiController::class, 'destroy'])
-    ->name('api.cart.destroy');
