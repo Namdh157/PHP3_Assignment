@@ -13,12 +13,13 @@ class ProductController extends CommonController
 {
     //
     const PATH_VIEW = 'pages.public.';
-    public function detail($slug){
+    public function detail($slug)
+    {
         // product detail
-        $product = Product::where('slug',$slug)
-            ->with(['catalogue','brand','productVariants', 'productGalleries', 'productVariants.variantColor', 'productVariants.variantSize'])
+        $product = Product::where('slug', $slug)
+            ->with(['catalogue', 'brand', 'productVariants', 'productGalleries', 'productVariants.variantColor', 'productVariants.variantSize'])
             ->first();
-        if($product->count() == 0){
+        if ($product->count() == 0) {
             return redirect()->route('public.home');
         }
 
@@ -26,7 +27,7 @@ class ProductController extends CommonController
         $alsoLikeProducts = Product::where('catalogue_id', $product->catalogue_id)
             ->first()
             ->limit(4)
-            ->with(['catalogue','productVariants'])->get();
+            ->with(['catalogue', 'productVariants'])->get();
 
         // comments
         $comments = $product->comments()
@@ -36,7 +37,7 @@ class ProductController extends CommonController
             ->get();
         // dd($product['product_galleries']);
 
-        return view(self::PATH_VIEW.'detail.index',[
+        return view(self::PATH_VIEW . 'detail.index', [
             'title' => 'Detail',
             'product' => $product->toArray(),
             'alsoLikeProducts' => $alsoLikeProducts,
@@ -46,60 +47,67 @@ class ProductController extends CommonController
         ]);
     }
 
-    public function allProduct(){
-        $title = 'All Products';
+    public function allProduct()
+    {
+        $catalogues = Catalogue::all();
+        $brands = Brand::all();
         //products
         $curPage = $_GET['page'] ?? 1;
-        if($curPage < 1)  $curPage = 1;
-        $products = DB::table('products')
-            ->leftJoin('catalogues', 'products.catalogue_id', '=', 'catalogues.id')
-            ->leftJoin('brands', 'products.brand_id', '=', 'brands.id')
-            ->Join('product_variants', 'products.id', '=', 'product_variants.product_id')
-            ->select('products.name', 'products.image_thumbnail', 'products.slug',
-                        'catalogues.name AS catalogue_name', 
-                        'brands.name AS brand_name', 'product_variants.price_regular')
-            ->distinct()
-            ->where('products.is_active', 1, 'and' )
-            ->paginate(9, '*', 'products', $curPage);
+        if ($curPage < 1)  $curPage = 1;
+        $listBrandParams = $_GET['brand'] ?? '';
+        $listCatalogueParams = $_GET['catalogue'] ?? '';
 
-        // paginate
+        $products = match (true) {
+            !empty($listBrandParams) && !empty($listCatalogueParams) => Product::where('is_active', 1)
+                ->whereHas('productVariants', function ($query) {
+                    $query->where('id', '>', 0);
+                })
+                ->whereIn('catalogue_id', $listCatalogueParams)
+                ->whereIn('brand_id', $listBrandParams)
+                ->with(['catalogue', 'productVariants'])
+                ->paginate(9, '*', 'products', $curPage),
+
+            !empty($listBrandParams) => Product::where('is_active', 1)
+                ->whereHas('productVariants', function ($query) {
+                    $query->where('id', '>', 0);
+                })
+                ->whereIn('brand_id', $listBrandParams)
+                ->with(['catalogue', 'productVariants'])
+                ->paginate(9, '*', 'products', $curPage),
+
+            !empty($listCatalogueParams) => Product::where('is_active', 1)
+                ->whereHas('productVariants', function ($query) {
+                    $query->where('id', '>', 0);
+                })
+                ->whereIn('catalogue_id', $listCatalogueParams)
+                ->with(['catalogue', 'productVariants'])
+                ->paginate(9, '*', 'products', $curPage),
+
+            default => Product::where('is_active', 1)
+                ->whereHas('productVariants', function ($query) {
+                    $query->where('id', '>', 0);
+                })
+                ->with(['catalogue', 'productVariants'])
+                ->paginate(9, '*', 'products', $curPage),
+        };
+
+
+        // dd($products);
         $pageArray = range(1, $products->lastPage());
         $curPath = $products->path();
 
-        //catalogue
-        $catalogues = Catalogue::withCount('products')
-            ->has('products')
-            ->take(5)
-            ->get();
-        $totalCatalogues = Catalogue::has('products')->count();
-
-        //size
-        $typeSize = DB::table('sizes')
-            ->select('size')
-            ->distinct()
-            ->get();
-
-        //brand
-        $brands = Brand::withCount('products')
-            ->has('products')
-            ->take(5)
-            ->get();
-        $totalBrands = Brand::has('products')->count();
-
-        // dd($this->dataHeader);
-        return view('pages.public.allProduct.index',[
-            'title' => $title,
+        return view('pages.public.allProduct.index', [
+            'title' => 'All Products',
             'catalogues' => $catalogues,
-            'totalCatalogues' => $totalCatalogues,
             'showMoreCatalogues' => route('api.catalogue.showMore'),
-            'typeSize' => $typeSize,
             'brands' => $brands,
-            'totalBrands' => $totalBrands,
             'showMoreBrands' => route('api.brand.showMore'),
             'products' => $products,
             'pageArray' => $pageArray,
             'curPath' => $curPath,
             'curPage' => $curPage,
+            'listBrandParams' => is_array($listBrandParams) ? $listBrandParams : [$listBrandParams],
+            'listCatalogueParams' => is_array($listCatalogueParams) ? $listCatalogueParams : [$listCatalogueParams],
             ...$this->dataHeader
         ]);
     }

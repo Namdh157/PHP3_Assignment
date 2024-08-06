@@ -89,13 +89,13 @@ class BillApiController extends Controller
                 $billDetail->save();
             }
             // create check_voucher
-            if ($voucher) {
-                $checkVoucherModel = new CheckVoucher();
-                $checkVoucherModel->user_id = $userId;
-                $checkVoucherModel->voucher_id = $voucher->id;
-                $checkVoucherModel->bill_id = $bill->id;
-                $checkVoucherModel->save();
-            }
+            // if ($voucher) {
+            //     $checkVoucherModel = new CheckVoucher();
+            //     $checkVoucherModel->user_id = $userId;
+            //     $checkVoucherModel->voucher_id = $voucher->id;
+            //     $checkVoucherModel->bill_id = $bill->id;
+            //     $checkVoucherModel->save();
+            // }
             // Delete cart items
             CartItem::where('user_id', $userId)->delete();
             return response()->json([
