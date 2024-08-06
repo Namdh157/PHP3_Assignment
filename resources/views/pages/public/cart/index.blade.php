@@ -3,11 +3,6 @@
 @section('content')
 
 <main class="main">
-    <div class="page-header text-center" style="background-image: url('{{ asset(`storage/images/page-header-bg.jpg`) }}')">
-        <div class="container">
-            <h1 class="page-title">Shopping Cart<span>Shop</span></h1>
-        </div>
-    </div>
     <div class="page-content mt-5">
         <div class="cart">
             <div class="container">

@@ -19,4 +19,7 @@ class BillDetail extends Model
         'unit_price',
         'quantity'
     ];
+    public function bill(){
+        return $this->belongsTo(Bill::class);
+    }
 }

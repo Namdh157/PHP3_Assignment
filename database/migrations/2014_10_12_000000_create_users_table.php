@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('email')->unique();
             $table->string('password');
-            $table->date('date_of_birth')->nullable();
+            // $table->date('date_of_birth')->nullable();
             $table->string('phone_number', 20)->nullable();
             $table->string('address')->nullable();
             $table->string('image')->default('storage/images/no-avatar.jpg');

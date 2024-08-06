@@ -6,26 +6,28 @@ use App\Http\Controllers\Controller;
 use App\Models\Bill;
 use App\Models\BillDetail;
 use App\Models\CartItem;
+use App\Models\CheckVoucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class BillApiController extends Controller
 {
-    public function create(Request $request){
-        $validate = Validator::make($request->all(),[
+    public function create(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
             'name' => 'required',
             'phone_number' => 'required',
             'address' => 'required',
             'payment_method' => 'required'
         ]);
-        if($validate->fails()){
-            foreach($validate->errors()->all() as $error){
+        if ($validate->fails()) {
+            foreach ($validate->errors()->all() as $error) {
                 return response()->json([
                     'error' => $error
                 ]);
             }
         }
-        
+
         $userId = $request->user()->id;
         $email = $request->user()->email;
         $name = $request->get('name');
@@ -41,18 +43,21 @@ class BillApiController extends Controller
             ->with(['productVariant.product', 'productVariant.variantColor', 'productVariant.variantSize'])
             ->get();
         $cartTotal = 0;
-        foreach($cartItems as $item){
+        foreach ($cartItems as $item) {
             $cartTotal += ($item->productVariant->price_sale ?? 0) * $item->quantity;
         }
 
         // VOucher and discount
-        if($voucher){
+        if ($voucher) {
             $voucherApiModel = new VoucherApiController();
             $checkVoucher = $voucherApiModel->checkVoucher($voucher);
-            if($checkVoucher['status']){
+            if ($checkVoucher['status']) {
                 $voucher = $checkVoucher['data'];
                 $type = $voucher->type;
                 $discountAmount = ($type == 'fixed') ? $voucher->value : $cartTotal * $voucher->value / 100;
+                // update voucher used
+                $voucher->used++;
+                $voucher->save();
             }
         }
 
@@ -68,9 +73,10 @@ class BillApiController extends Controller
         $bill->quantity = count($cartItems);
         $bill->total_discount = $discountAmount;
         $bill->total_price = $cartTotal - $discountAmount > 0 ? $cartTotal - $discountAmount : 0;
-        if($bill->save()){
+
+        if ($bill->save()) {
             // Create bill detail
-            foreach($cartItems as $item){
+            foreach ($cartItems as $item) {
                 $billDetail = new BillDetail();
                 $billDetail->bill_id = $bill->id;
                 $billDetail->product_id = $item->productVariant->product_id;
@@ -81,6 +87,14 @@ class BillApiController extends Controller
                 $billDetail->unit_price = $item->productVariant->price_sale ?? 0;
                 $billDetail->quantity = $item->quantity;
                 $billDetail->save();
+            }
+            // create check_voucher
+            if ($voucher) {
+                $checkVoucherModel = new CheckVoucher();
+                $checkVoucherModel->user_id = $userId;
+                $checkVoucherModel->voucher_id = $voucher->id;
+                $checkVoucherModel->bill_id = $bill->id;
+                $checkVoucherModel->save();
             }
             // Delete cart items
             CartItem::where('user_id', $userId)->delete();

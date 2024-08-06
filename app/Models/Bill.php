@@ -43,4 +43,7 @@ class Bill extends Model
     {
         return $this->hasMany(CheckVoucher::class);
     }
+    public function billDetails(){
+        return $this->hasMany(BillDetail::class);
+    }
 }

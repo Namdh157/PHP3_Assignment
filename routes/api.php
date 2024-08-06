@@ -80,6 +80,15 @@ Route::middleware('auth.logged')->group(function(){
     
     Route::post('voucher/check', [VoucherApiController::class, 'check'])
         ->name('api.voucher.check');
+
+    Route::put('user/update', [UserApiController::class, 'updateInfor'])
+        ->name('api.user.update');
+
+    Route::put('user/change-password', [UserApiController::class, 'changePassword'])
+        ->name('api.user.changePassword');
+
+    Route::post('user/update-avatar', [UserApiController::class, 'updateAvatar'])
+        ->name('api.user.updateAvatar');
 });
 
 //API for public

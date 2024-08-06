@@ -10,8 +10,8 @@
                                 <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
                             </ul>
                         </li>
-                    </ul><!-- End .top-menu -->
-                </div><!-- End .header-left -->
+                    </ul>
+                </div>
 
                 <div class="header-right">
                     <div class="social-icons social-icons-color">
@@ -19,30 +19,47 @@
                         <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
                         <a href="#" class="social-icon social-pinterest" title="Instagram" target="_blank"><i class="icon-pinterest-p"></i></a>
                         <a href="#" class="social-icon social-instagram" title="Pinterest" target="_blank"><i class="icon-instagram"></i></a>
-                    </div><!-- End .soial-icons -->
-                    <ul class="top-menu top-link-menu">
+                    </div>
+                    <ul class="m-0">
                         <li>
+                            @if (!$user)
                             <ul>
                                 <a href="{{ route('login.form') }}"><i class="icon-user"></i>Login</a>
                             </ul>
+                            @else
+                            <div class="dropdown">
+                                <button class="btn border-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="icon-user"></i> {{$user->name}}
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @if ($user->role == 'admin')
+                                    <li class=" fs-5 mx-0 "><a class="dropdown-item" href="{{route('admin.dashboard')}}">Admin manager</a></li>
+                                    <hr class="border-1 border-dark my-1">
+                                    @endif
+                                    <li class=" fs-5 mx-0 "><a class="dropdown-item" href="{{route('public.profile')}}">Profile setting</a></li>
+                                    <li class=" fs-5 mx-0 "><a class="dropdown-item" href="{{route('public.cart')}}">Cart</a></li>
+                                    <li class=" fs-5 mx-0 "><a class="dropdown-item" href="{{route('logout')}}">Logout <i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+                                </ul>
+                            </div>
+                            @endif
                         </li>
-                    </ul><!-- End .top-menu -->
-                </div><!-- End .header-right -->
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="header-middle">
             <div class="container">
                 <div class="header-left">
                     <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
-                        <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                        <!-- <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
                         <form action="#" method="get">
                             <div class="header-search-wrapper search-wrapper-wide">
                                 <label for="q" class="sr-only">Search</label>
                                 <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
                                 <input type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
-                            </div><!-- End .header-search-wrapper -->
-                        </form>
-                    </div><!-- End .header-search -->
+                            </div>
+                        </form> -->
+                    </div>
                 </div>
                 <div class="header-center">
                     <a href="/" class="logo">
@@ -55,10 +72,10 @@
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count" id="cart-count">{{$countCart}}</span>
                         </a>
-                    </div><!-- End .cart-dropdown -->
+                    </div>
                 </div>
-            </div><!-- End .container -->
-        </div><!-- End .header-middle -->
+            </div>
+        </div>
 
         <div class="header-bottom sticky-header">
             <div class="container">
@@ -77,7 +94,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="menu-title">Shop with Brands</div>
-                                                        <!-- End .menu-title -->
+                                                        
                                                         <ul>
                                                             @foreach ($listBrands as $item)
                                                             <li>
@@ -85,10 +102,10 @@
                                                             </li>
                                                             @endforeach
                                                         </ul>
-                                                    </div><!-- End .col-md-6 -->
+                                                    </div>
                                                     <div class="col-md-6">
                                                         <div class="menu-title">Product Category</div>
-                                                        <!-- End .menu-title -->
+                                                        
                                                         <ul>
                                                             @foreach ($listCatalogues as $item)
                                                             <li>
@@ -96,10 +113,10 @@
                                                             </li>
                                                             @endforeach
                                                         </ul>
-                                                    </div><!-- End .col-md-6 -->
-                                                </div><!-- End .row -->
-                                            </div><!-- End .menu-col -->
-                                        </div><!-- End .col-md-8 -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="col-md-4">
                                             <div class="banner banner-overlay">
@@ -110,13 +127,13 @@
                                                         <div class="banner-title text-white">Last
                                                             <br>Chance<br><span><strong>Sale</strong></span>
                                                         </div>
-                                                        <!-- End .banner-title -->
-                                                    </div><!-- End .banner-content -->
+                                                        
+                                                    </div>
                                                 </a>
-                                            </div><!-- End .banner banner-overlay -->
-                                        </div><!-- End .col-md-4 -->
-                                    </div><!-- End .row -->
-                                </div><!-- End .megamenu megamenu-md -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                             <li>
                                 <a href="#" class="sf-with-ul">Pages</a>
@@ -131,19 +148,19 @@
                                     <li><a href="#">Error 404</a></li>
                                 </ul>
                             </li>
-                        </ul><!-- End .menu -->
-                    </nav><!-- End .main-nav -->
+                        </ul>
+                    </nav>
 
                     <button class="mobile-menu-toggler">
                         <span class="sr-only">Toggle mobile menu</span>
                         <i class="icon-bars"></i>
                     </button>
-                </div><!-- End .header-left -->
+                </div>
 
                 <div class="header-right">
                     <i class="la la-lightbulb-o"></i>
                     <p>Clearance Up to 30% Off</span></p>
                 </div>
-            </div><!-- End .container -->
-        </div><!-- End .header-bottom -->
-    </header><!-- End .header -->
+            </div>
+        </div>
+    </header>
