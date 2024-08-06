@@ -57,19 +57,26 @@ class CatalogueApiController extends Controller
     }
     public function showMore(Request $request) {
         $offset = $request->get('offset');
+        $limit = 5; 
+    
         $catalogues = Catalogue::withCount('products')
             ->has('products')
             ->offset($offset)
-            ->take(5)
+            ->limit($limit + 1)
             ->get();
-        if($catalogues->isEmpty()){
-            return response()->json([
-                'error' => 'No more catalogue'
-            ]);
+    
+        if($catalogues->count() <= $limit) {
+            $hasMore = false;
+        } else {
+            $hasMore = true;
+            $catalogues = $catalogues->slice(0, $limit); 
         }
+    
         return response()->json([
             'success' => 'Get more catalogue success',
-            'data' => $catalogues
+            'data' => $catalogues,
+            'hasMore' => $hasMore
         ]);
     }
+    
 }
