@@ -2,11 +2,6 @@
 
 @section('content')
 <main class="main">
-    <div class="page-header text-center">
-        <div class="container">
-            <h1 class="page-title">Fashion Shop<span>All products</span></h1>
-        </div><!-- End .container -->
-    </div><!-- End .page-header -->
     <div class="page-content mt-5">
         <div class="container">
             <div class="row">
@@ -89,7 +84,8 @@
                     <div class="sidebar sidebar-shop">
                         <div class="widget widget-clean">
                             <label>Filters:</label>
-                            <a href="#" class="sidebar-filter-clear">Clean All</a>
+                            <span class="sidebar-filter-clear" style="cursor: pointer;" onclick="filterProduct()">Filter</span>
+                            <span class="sidebar-filter-clear" style="cursor: pointer;" onclick="resetFilter()">Clean All</span>
                         </div><!-- End .widget widget-clean -->
 
                         <div class="widget widget-collapsible">
@@ -103,10 +99,10 @@
                                 <div class="widget-body">
                                     <div class="filter-items filter-items-count" id="container-catalogue">
                                         @foreach ($catalogues as $key => $catalogue)
-                                        <div class="filter-item">
+                                        <div class="filter-item inputCatalogue">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" data-catalogue="{{ $catalogue->name }}" id="cat-{{$key}}">
-                                                <label class="custom-control-label" for="cat-{{$key}}">{{ $catalogue->name }}</label>
+                                                <input type="checkbox" class="custom-control-input" data-catalogue="{{ $catalogue->id }}" id="cat-{{$catalogue->name}}">
+                                                <label class="custom-control-label" for="cat-{{$catalogue->name}}">{{ $catalogue->name }}</label>
                                             </div>
                                             <!-- End .custom-checkbox -->
                                             <span class="item-count">{{ $catalogue->products_count  }}</span>
@@ -137,10 +133,10 @@
                                 <div class="widget-body">
                                     <div class="filter-items">
                                         @foreach ($typeSize as $key => $size)
-                                        <div class="filter-item">
+                                        <div class="filter-item inputSize">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" data-size="{{$size->size}}" id="size-{{$key}}">
-                                                <label class="custom-control-label" for="size-{{$key}}">{{$size->size}}</label>
+                                                <input type="checkbox" class="custom-control-input" data-size="{{$size->id}}" id="size-{{$size->size}}">
+                                                <label class="custom-control-label" for="size-{{$size->size}}">{{$size->size}}</label>
                                             </div><!-- End .custom-checkbox -->
                                         </div><!-- End .filter-item -->
                                         @endforeach
@@ -159,10 +155,10 @@
                                 <div class="widget-body">
                                     <div class="filter-items filter-items-count" id="container-catalogue">
                                         @foreach ($brands as $key => $brand)
-                                        <div class="filter-item">
+                                        <div class="filter-item inputBrand">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" data-brand="{{ $brand->name }}" id="cat-{{$key}}">
-                                                <label class="custom-control-label" for="cat-{{$key}}">{{ $brand->name }}</label>
+                                                <input type="checkbox" class="custom-control-input" data-brand="{{ $brand->id }}" id="cat-{{$brand->name}}">
+                                                <label class="custom-control-label" for="cat-{{$brand->name}}">{{ $brand->name }}</label>
                                             </div>
                                             <!-- End .custom-checkbox -->
                                             <span class="item-count">{{ $brand->products_count }}</span>
@@ -212,13 +208,15 @@
                 });
 
                 const result = await response.json();
+                // console.log(result);
+                
                 if (result.success) {
                     result.data.forEach((item, index) => {
                         html += `
                         <div class="filter-item">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" data-catalogue="${item.name}" id="cat-${offset + index}">
-                                <label class="custom-control-label" for="cat-${offset + index}">${item.name}</label>
+                                <input type="checkbox" class="custom-control-input" data-catalogue="${item.id}" id="cat-${item.name}">
+                                <label class="custom-control-label" for="cat-${item.name}">${item.name}</label>
                             </div>
                             <!-- End .custom-checkbox -->
                             <span class="item-count">${item.products_count}</span>
@@ -228,8 +226,8 @@
                     });
                     additionalContainer.innerHTML = html;
                     offset += 5;
-
-                } else {
+                }
+                if(!result.hasMore) {
                     btn.style.display = 'none';
                 }
             } catch (error) {
@@ -243,5 +241,59 @@
     // Create show more function
     const showMoreCatalogues = createShowMore();
     const showMoreBrands = createShowMore();
+
+    // Reset filter
+    function resetFilter() {
+        const inputCatalogue = document.querySelectorAll('.filter-item.catalogue input');
+        const inputSize = document.querySelectorAll('.filter-item input');
+        inputCatalogue.forEach(item => {
+            item.checked = false;
+        });
+        inputSize.forEach(item => {
+            item.checked = false;
+        });
+    }
+
+    function filterProduct() {
+        const inputCatalogue = document.querySelectorAll('.filter-item.inputCatalogue input');
+        const inputSize = document.querySelectorAll('.filter-item.inputSize input');
+        const inputBrand = document.querySelectorAll('.filter-item.inputBrand input');
+        const catalogue = [];
+        const size = [];
+        const brand = [];
+        inputCatalogue.forEach(item => {
+            if(item.checked) {
+                catalogue['catalogue'] += item.dataset.catalogue;
+            }
+        });
+        inputSize.forEach(item => {
+            if(item.checked) {
+                size['size'] += item.dataset.size;
+            }
+        });
+        inputBrand.forEach(item => {
+            if(item.checked) {
+                brand['brand'] += item.dataset.brand;
+            }
+        });
+        
+        console.log(catalogue, size, brand);
+        
+        // const url = new URL(window.location.href);
+        // const params = url.searchParams;
+        // params.delete('catalogue');
+        // params.delete('size');
+        // params.delete('brand');
+        // catalogue.forEach(item => {
+        //     params.append('catalogue', item);
+        // });
+        // size.forEach(item => {
+        //     params.append('size', item);
+        // });
+        // brand.forEach(item => {
+        //     params.append('brand', item);
+        // });
+        // window.location.reload();
+    }
 </script>
 @endsection

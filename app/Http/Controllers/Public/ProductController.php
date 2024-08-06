@@ -26,7 +26,11 @@ class ProductController extends CommonController
         $alsoLikeProducts = Product::where('catalogue_id', $product->catalogue_id)
             ->first()
             ->limit(4)
-            ->with(['catalogue','productVariants'])->get();
+            ->with(['catalogue','productVariants'])
+            ->whereHas('productVariants', function($query) {
+                $query->where('stock', '>', 0);
+            })
+            ->get();
 
         // comments
         $comments = $product->comments()
@@ -34,7 +38,7 @@ class ProductController extends CommonController
             ->select('comments.*', 'users.name as user_name')
             ->orderBy('created_at', 'desc')
             ->get();
-        // dd($product['product_galleries']);
+        // dd($product->toArray());
 
         return view(self::PATH_VIEW.'detail.index',[
             'title' => 'Detail',
@@ -51,16 +55,31 @@ class ProductController extends CommonController
         //products
         $curPage = $_GET['page'] ?? 1;
         if($curPage < 1)  $curPage = 1;
+        $filterBrand = $_GET['brand'] ?? '';
+        $filterCatalogue = $_GET['catalogue'] ?? '';
+        $filterSize = $_GET['size'] ?? '';
+        // dd($filterBrand, $filterCatalogue, $filterSize);
+        
         $products = DB::table('products')
-            ->leftJoin('catalogues', 'products.catalogue_id', '=', 'catalogues.id')
-            ->leftJoin('brands', 'products.brand_id', '=', 'brands.id')
-            ->Join('product_variants', 'products.id', '=', 'product_variants.product_id')
-            ->select('products.name', 'products.image_thumbnail', 'products.slug',
-                        'catalogues.name AS catalogue_name', 
-                        'brands.name AS brand_name', 'product_variants.price_regular')
-            ->distinct()
-            ->where('products.is_active', 1, 'and' )
-            ->paginate(9, '*', 'products', $curPage);
+        ->leftJoin('catalogues', 'products.catalogue_id', '=', 'catalogues.id')
+        ->leftJoin('brands', 'products.brand_id', '=', 'brands.id')
+        ->Join('product_variants', 'products.id', '=', 'product_variants.product_id')
+        ->select('products.name', 'products.image_thumbnail', 'products.slug',
+                    'catalogues.name AS catalogue_name', 
+                    'brands.name AS brand_name', 'product_variants.price_regular')
+        ->distinct()
+        ->where('products.is_active', 1, 'and' )
+        ->where('product_variants.stock', '>', 0, 'and' )
+        ->when($filterBrand, function($query, $filterBrand){
+            return $query->where('brands.id', $filterBrand);
+        })
+        ->when($filterCatalogue, function($query, $filterCatalogue){
+            return $query->where('catalogues.id', $filterCatalogue);
+        })
+        ->when($filterSize, function($query, $filterSize){
+            return $query->where('product_variants.size_id', $filterSize);
+        })
+        ->paginate(9, '*', 'products', $curPage);
 
         // paginate
         $pageArray = range(1, $products->lastPage());
@@ -75,7 +94,7 @@ class ProductController extends CommonController
 
         //size
         $typeSize = DB::table('sizes')
-            ->select('size')
+            ->select('id', 'size')
             ->distinct()
             ->get();
 
