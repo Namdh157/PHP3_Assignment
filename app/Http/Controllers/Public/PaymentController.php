@@ -103,15 +103,18 @@ class PaymentController extends Controller
         if ($secureHash === $vnp_SecureHash) {
             $vnp_TransactionStatus = $inputData['vnp_TransactionStatus'];
             $vnp_TxnRef = $inputData['vnp_TxnRef'];
+            $mailController = new MailController();
 
             if ($vnp_TransactionStatus == 00) {
                 // Cập nhật trạng thái đơn hàng
                 $bill = Bill::find($vnp_TxnRef);
                 $bill->is_paid = 1;
                 $bill->save();
+                $mailController->send($vnp_TxnRef);
                 return redirect()->route('public.cart')->with('success', 'Payment success');
             }
         }
+        $mailController->send($vnp_TxnRef);
         return redirect()->route('public.cart')->with('error', 'Payment failed');
     }
 }

@@ -82,6 +82,7 @@
                                             <div class="col-1">#</div>
                                             <div class="col-3 fs-5">Payment method</div>
                                             <div class="col fs-5">Paid</div>
+                                            <div class="col fs-5">Discount</div>
                                             <div class="col fs-5">Total price</div>
                                             <div class="col fs-5">Status</div>
                                             <div class="col fs-5">Order at</div>
@@ -95,6 +96,7 @@
                                                         <div class="col-1">{{$key + 1}}</div>
                                                         <div class="col-3">{{ucwords($bill->payment_method)}}</div>
                                                         <div class="col">{{$bill->is_paid ? 'Yes' : 'No'}}</div>
+                                                        <div class="col">{{$bill->total_discount}}$</div>
                                                         <div class="col">{{$bill->total_price}}$</div>
                                                         <div class="col">{{$bill->status}}</div>
                                                         <div class="col">{{$bill->created_at->diffForHumans()}}</div>

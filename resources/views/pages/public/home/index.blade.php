@@ -2,7 +2,7 @@
 
 @section('content')
 <style>
-    #deal-bg{
+    #deal-bg {
         background-image: url("{{ asset('storage/images') }}/bg-1.jpg");
     }
 </style>
@@ -10,8 +10,9 @@
 <main class="main">
     <div class="intro-slider-container h-100">
         <!-- intro-slider owl-carousel owl-theme -->
+        @if ($slideBanner)
         <div class="slide">
-            <img class="d-block" src="{{ asset('storage/images/slider') }}/slide-1.jpg" alt="" id="anh">
+            <img class="d-block object-fit-{{$slideBanner->object_fit}} mx-auto" src="{{$slideBanner->bannerImages[0]->url}}" {{'style=width:'.$slideBanner->width.'px;height:'.$slideBanner->height.'px;'}} alt="" id="slide-image">
             <div class="container intro-content carousel-caption d-none d-md-block">
                 <h3 class="intro-subtitle text-white">You're Looking Good</h3>
                 <h1 class="intro-title text-white">New Lookbook</h1>
@@ -21,15 +22,16 @@
             </div>
         </div>
         <div class="controlBtn">
-            <button class="carousel-control-prev" type="button" onclick="previousImg()">
+            <button class="carousel-control-prev" type="button" onclick="prevSlide()">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" onclick="nextImg()">
+            <button class="carousel-control-next" type="button" onclick="nextSlide()">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+        @endif
     </div>
     <div class="pt-2 pb-3">
         <div class="container">
@@ -42,9 +44,9 @@
 
                         <div class="banner-content banner-content-center">
                             <h4 class="banner-subtitle text-white">New in</h4>
-                            
+
                             <h3 class="banner-title text-white"><strong>Women’s</strong></h3>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -57,9 +59,9 @@
 
                         <div class="banner-content banner-content-center">
                             <h4 class="banner-subtitle text-white">New in</h4>
-                            
+
                             <h3 class="banner-title text-white"><strong>Men’s</strong></h3>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -85,16 +87,16 @@
                                     <a href="{{route('public.product.detail',$item->slug)}}" class="btn-product btn-cart"><span>add to cart</span></a>
                                 </div>
                             </figure>
-    
+
                             <div class="product-body">
                                 <div class="product-cat">
                                     <a href="{{route('public.product.detail',$item->slug)}}">{{$item->catalogue->name}}</a>
                                 </div>
                                 <h3 class="product-title"><a href="{{route('public.product.detail',$item->slug)}}">{{$item->name}}</a></h3>
-                                
+
                                 <div class="product-price">
                                     <span class="new-price">Now {{$item->productVariants->min('price_sale')}} $</span>
-                                        <span class="old-price">Was {{$item->productVariants->min('price_regular')}} $</span>
+                                    <span class="old-price">Was {{$item->productVariants->min('price_regular')}} $</span>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +104,7 @@
                     @endforeach
                 </div>
             </div>
-    
+
         </div>
     </div>
 
@@ -129,7 +131,7 @@
 
                             <div class="product-body">
                                 <h3 class="product-title"><a href="{{route('public.product.detail',$item->slug)}}">{{$item->name}}</a></h3>
-                                
+
                                 <div class="product-price">
                                     <span class="new-price">Now {{$item->productVariants->min('price_sale')}} $</span>
                                     <span class="old-price">Was {{$item->productVariants->min('price_regular')}} $</span>
@@ -221,10 +223,10 @@
                                 <a href="{{route('public.product.detail',$item->slug)}}">{{$item->catalogue->name}}</a>
                             </div>
                             <h3 class="product-title"><a href="{{route('public.product.detail',$item->slug)}}">{{$item->name}}</a></h3>
-                            
+
                             <div class="product-price">
                                 <span class="new-price">Now {{$item->productVariants->min('price_sale')}} $</span>
-                                    <span class="old-price">Was {{$item->productVariants->min('price_regular')}} $</span>
+                                <span class="old-price">Was {{$item->productVariants->min('price_regular')}} $</span>
                             </div>
                         </div>
                     </div>
@@ -286,7 +288,7 @@
 
                         <div class="banner-content banner-content-center">
                             <h4 class="banner-subtitle text-white">Limited time only.</h4>
-                            
+
                             <h3 class="banner-title text-white">End of Season<br>save 50% off
                             </h3>
                         </div>
@@ -409,4 +411,30 @@
         </div>
     </div>
 </main>
+@endsection
+
+@section('script')
+@if ($slideBanner)
+<script>
+    const slideData = JSON.parse(`@json($slideBanner->bannerImages)`);
+    let currentSlide = 0;
+    const imageSlide = document.getElementById('slide-image');
+
+    function prevSlide() {
+        currentSlide--;
+        if (currentSlide < 0) {
+            currentSlide = slideData.length - 1;
+        }
+        imageSlide.src = slideData[currentSlide].url;
+    }
+
+    function nextSlide() {
+        currentSlide++;
+        if (currentSlide >= slideData.length) {
+            currentSlide = 0;
+        }
+        imageSlide.src = slideData[currentSlide].url;
+    }
+</script>
+@endif
 @endsection

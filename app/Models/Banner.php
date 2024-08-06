@@ -12,7 +12,13 @@ class Banner extends Model
     const OBJECT_FIT = ['cover', 'contain'];
     const DEFAULT_WIDTH = 1400;
     const DEFAULT_HEIGHT = 500;
-    protected $fillable = ['name', 'thumbnail', 'is_active'];
+    protected $fillable = [
+        'name', 
+        'width',
+        'height',
+        'object_fit',
+        'is_active',
+    ];
 
     // Relationship
     public function bannerImages()
