@@ -59,7 +59,12 @@ class CartApiController extends Controller
                 'data' => $cartItem
             ]);
         }
-
+        $cartItem = CartItem::create($validateData);
+        return response()->json([
+            'success' => 'Cart item created successfully',
+            'data' => $cartItem
+        ]);
+    }
     /**
      * Update the specified resource in storage.
      */
