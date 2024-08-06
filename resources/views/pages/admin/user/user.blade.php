@@ -32,10 +32,6 @@
                         <td>{{ $user->email }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Date Of birth</strong></td>
-                        <td>{{ isset($user->date_of_birth) ? $user->date_of_birth : 'Not Update' }}</td>
-                    </tr>
-                    <tr>
                         <td><strong>Phone number</strong></td>
                         <td>{{ isset($user->phone_number) ? $user->phone_number : 'Not Update' }}</td>
                     </tr>
