@@ -215,15 +215,15 @@ class BannerController extends Controller
         // nếu is_active === true thì cập nhật tất cả các banner khác về false
         if ($request->is_active) {
             $this->model->where('is_active', true)->update(['is_active' => false]);
+            $banner->is_active = true;
         }
 
         // update banner
         $update = $banner->update([
-            'name' => $request->name,
-            'width' => $request->width,
-            'height' => $request->height,
-            'object_fit' => $request->object_fit,
-            'is_active' => $request->is_active ?? false
+            'name' => $request->get('name'),
+            'width' => $request->get('width'),
+            'height' => $request->get('height'),
+            'object_fit' => $request->get('object_fit'),
         ]);
         if (!$update) {
             return response()->json([

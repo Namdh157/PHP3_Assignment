@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Public\CartController;
 use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\MailController;
 use App\Http\Controllers\Public\PaymentController;
 use App\Http\Controllers\Public\ProductController as PublicProductController;
 use App\Http\Controllers\Public\ProfileController;
