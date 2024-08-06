@@ -60,20 +60,23 @@ class BrandApiController extends Controller
     public function showMore(Request $request)
     {
         $offset = $request->get('offset');
-        $brands = $this->model->withCount('products')
+        $limit = 5;
+        $brands = $this->model::withCount('products')
             ->has('products')
             ->offset($offset)
-            ->take(5)
+            ->limit($limit + 1)
             ->get();
-
-        if ($brands->isEmpty()) {
-            return response()->json([
-                'error' => 'No more catalogue'
-            ]);
+        
+        if($brands->count() <= $limit) {
+            $hasMore = false;
+        } else {
+            $hasMore = true;
+            $brands = $brands->slice(0, $limit);
         }
         return response()->json([
-            'success' => 'Get more catalogue success',
-            'data' => $brands
+            'success' => 'Get more brands success',
+            'data' => $brands,
+            'hasMore' => $hasMore
         ]);
     }
 }

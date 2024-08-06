@@ -16,13 +16,33 @@ class HomeController extends CommonController
 
     public function index()
     {
-        $trendingProducts = Product::where('is_active',1)->orderBy('view', 'desc')->limit(8)
-            ->with('catalogue','productVariants')->get();
-        $newArrivalProducts = Product::where('is_active',1)->orderBy('created_at', 'asc')->limit(8)
-            ->with('catalogue','productVariants')->get();
-        $dealProducts = Product::where('is_active',1)->orderBy('sell_count', 'desc')->limit(2)
-            ->with('catalogue','productVariants')->get();
-        $slideBanner = Banner::where('is_active',1)->with('bannerImages')->first();
+        $trendingProducts = Product::where('is_active',1)
+            ->orderBy('view', 'desc')
+            ->limit(8)
+            ->with('catalogue','productVariants')
+            ->whereHas('productVariants', function($query) {
+                $query->where('stock', '>', 0);
+            })
+            ->get();
+        $newArrivalProducts = Product::where('is_active',1)
+            ->orderBy('created_at', 'asc')
+            ->limit(8)
+            ->with('catalogue','productVariants')
+            ->whereHas('productVariants', function($query) {
+                $query->where('stock', '>', 0);
+            })
+            ->get();
+        $dealProducts = Product::where('is_active',1)
+            ->orderBy('sell_count', 'desc')
+            ->limit(2)
+            ->with('catalogue','productVariants')
+            ->whereHas('productVariants', function($query) {
+                $query->where('stock', '>', 0);
+            })
+            ->get();
+        $slideBanner = Banner::where('is_active',1)
+            ->with('bannerImages')
+            ->first();
     
         return view(self::PATH_VIEW . __FUNCTION__, [
             'title' => 'Trang chủ',

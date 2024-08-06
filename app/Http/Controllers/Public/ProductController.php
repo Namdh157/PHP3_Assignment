@@ -27,7 +27,12 @@ class ProductController extends CommonController
         $alsoLikeProducts = Product::where('catalogue_id', $product->catalogue_id)
             ->first()
             ->limit(4)
-            ->with(['catalogue', 'productVariants'])->get();
+
+            ->with(['catalogue','productVariants'])
+            ->whereHas('productVariants', function($query) {
+                $query->where('stock', '>', 0);
+            })
+            ->get();
 
         // comments
         $comments = $product->comments()
@@ -35,7 +40,7 @@ class ProductController extends CommonController
             ->select('comments.*', 'users.name as user_name')
             ->orderBy('created_at', 'desc')
             ->get();
-        // dd($product['product_galleries']);
+        // dd($product->toArray());
 
         return view(self::PATH_VIEW . 'detail.index', [
             'title' => 'Detail',
@@ -56,6 +61,7 @@ class ProductController extends CommonController
         if ($curPage < 1)  $curPage = 1;
         $listBrandParams = $_GET['brand'] ?? '';
         $listCatalogueParams = $_GET['catalogue'] ?? '';
+
 
         $products = match (true) {
             !empty($listBrandParams) && !empty($listCatalogueParams) => Product::where('is_active', 1)

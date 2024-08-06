@@ -89,7 +89,7 @@
                                 <div class="widget-body">
                                     <div class="filter-items filter-items-count" id="container-catalogue">
                                         @foreach ($catalogues as $key => $catalogue)
-                                        <div class="filter-item">
+                                        <div class="filter-item inputCatalogue">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" 
                                                     name="catalogue[]" data-catalogue="{{ $catalogue->name }}" 
@@ -108,7 +108,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="widget widget-collapsible">
                             <h3 class="widget-title">
                                 <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true" aria-controls="widget-4">
@@ -120,7 +119,7 @@
                                 <div class="widget-body">
                                     <div class="filter-items filter-items-count" id="container-catalogue">
                                         @foreach ($brands as $key => $brand)
-                                        <div class="filter-item">
+                                        <div class="filter-item inputBrand">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" name="brand[]" class="custom-control-input" 
                                                     data-brand="{{ $brand->name }}" 
