@@ -9,55 +9,41 @@
                     <div class="toolbox">
                         <div class="toolbox-left">
                             <div class="toolbox-info">
-                                Showing <span>9 of {{$products->total()}}</span> Products
-                            </div><!-- End .toolbox-info -->
-                        </div><!-- End .toolbox-left -->
-
-                        <div class="toolbox-right">
-                            <div class="toolbox-sort">
-                                <label for="sortby">Sort by:</label>
-                                <div class="select-custom">
-                                    <select name="sortby" id="sortby" class="form-control">
-                                        <option value="popularity" selected="selected">Most Popular</option>
-                                        <option value="date">Date</option>
-                                    </select>
-                                </div>
-                            </div><!-- End .toolbox-sort -->
-                        </div><!-- End .toolbox-right -->
-                    </div><!-- End .toolbox -->
+                                <!-- Showing <span>9 of {{$products->total()}}</span> Products -->
+                            </div>
+                        </div>
+                    </div>
                     <div class="products mb-3">
                         <div class="row justify-content-center">
+                            <!-- Product -->
                             @foreach ($products as $product)
-                            <div class="col-6 col-md-4 col-lg-4">
+                            <div class="col-4">
                                 <div class="product product-7 text-center">
                                     <figure class="product-media">
-                                        <span class="product-label label-new">New</span>
-                                        <a href="{{route('public.product.detail', $product->slug)}}">
-                                            <img src="{{asset($product->image_thumbnail)}}" alt="Product image thumbnail" class="product-image product-thumbnail">
+                                        <a href="{{route('public.product.detail',$product->slug)}}">
+                                            <img src="{{$product->image_thumbnail}}" alt="Product image" class="product-image product-thumbnail">
                                         </a>
                                         <div class="product-action">
-                                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                        </div><!-- End .product-action -->
-                                    </figure><!-- End .product-media -->
+                                            <a href="{{route('public.product.detail',$product->slug)}}" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        </div>
+                                    </figure>
 
                                     <div class="product-body">
                                         <div class="product-cat">
-                                            <a href="#">{{ $product->catalogue_name }}</a>
-                                        </div><!-- End .product-cat -->
-                                        <h3 class="product-title">
-                                            <a href="{{route('public.product.detail', $product->slug)}}">
-                                                {{ $product->name }}
-                                            </a>
-                                        </h3><!-- End .product-title -->
+                                            <a href="{{route('public.product.detail',$product->slug)}}">{{$product->catalogue->name}}</a>
+                                        </div>
+                                        <h3 class="product-title"><a href="{{route('public.product.detail',$product->slug)}}">{{$product->name}}</a></h3>
+
                                         <div class="product-price">
-                                            {{ $product->price_regular }}
-                                        </div><!-- End .product-price -->
-                                    </div><!-- End .product-body -->
-                                </div><!-- End .product -->
-                            </div><!-- End .col-sm-6 col-lg-4 -->
+                                            <span class="new-price">Now {{$product->productVariants->min('price_sale')}} $</span>
+                                            <span class="old-price">Was {{$product->productVariants->min('price_regular')}} $</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
-                        </div><!-- End .row -->
-                    </div><!-- End .products -->
+                        </div>
+                    </div>
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center">
 
@@ -79,21 +65,25 @@
                             </li>
                         </ul>
                     </nav>
-                </div><!-- End .col-lg-9 -->
+                </div>
+
+                <!-- Filter -->
                 <aside class="col-lg-3 order-lg-first">
-                    <div class="sidebar sidebar-shop">
-                        <div class="widget widget-clean">
-                            <label>Filters:</label>
-                            <span class="sidebar-filter-clear" style="cursor: pointer;" onclick="filterProduct()">Filter</span>
-                            <span class="sidebar-filter-clear" style="cursor: pointer;" onclick="resetFilter()">Clean All</span>
-                        </div><!-- End .widget widget-clean -->
+                    <form class="sidebar sidebar-shop" method="get">
+                        <div class="widget widget-clean d-flex justify-content-between pe-5">
+                            <button type="button" class="btn btn-outline-secondary rounded p-1" style="width: 80px; min-width:50px"
+                                onclick="window.location.href=`{{route('public.allProduct')}}`"
+                                >Reset
+                            </button>
+                            <button type="submit" class="btn btn-outline-success rounded p-1" style="width: 80px; min-width:50px">Filter</button>
+                        </div>
 
                         <div class="widget widget-collapsible">
                             <h3 class="widget-title">
                                 <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
                                     Catalogue
                                 </a>
-                            </h3><!-- End .widget-title -->
+                            </h3>
 
                             <div class="collapse show" id="widget-1">
                                 <div class="widget-body">
@@ -101,55 +91,29 @@
                                         @foreach ($catalogues as $key => $catalogue)
                                         <div class="filter-item inputCatalogue">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" data-catalogue="{{ $catalogue->id }}" id="cat-{{$catalogue->name}}">
-                                                <label class="custom-control-label" for="cat-{{$catalogue->name}}">{{ $catalogue->name }}</label>
+                                                <input type="checkbox" class="custom-control-input" 
+                                                    name="catalogue[]" data-catalogue="{{ $catalogue->name }}" 
+                                                    id="catalogue-{{$key}}" 
+                                                    value="{{$catalogue->id}}"
+                                                    @if (in_array($catalogue->id, $listCatalogueParams))
+                                                        checked
+                                                    @endif
+                                                >
+                                                <label class="custom-control-label" for="catalogue-{{$key}}">{{ $catalogue->name }}</label>
                                             </div>
-                                            <!-- End .custom-checkbox -->
-                                            <span class="item-count">{{ $catalogue->products_count  }}</span>
-                                        </div>
-                                        <!-- End .filter-item -->
-                                        @endforeach
-                                        <div id="additional-catalogues"></div>
-                                        @if ($totalCatalogues > 5)
-                                        <div class="filter-item d-flex justify-content-center">
-                                            <p class="" id="show-more-catalogue" style="cursor: pointer;" onclick="showMoreCatalogues(routeCatalogueShowMore, '#additional-catalogues', this)">
-                                                Show more
-                                            </p>
-                                        </div>
-                                        @endif
-                                    </div><!-- End .filter-items -->
-                                </div><!-- End .widget-body -->
-                            </div><!-- End .collapse -->
-                        </div><!-- End .widget -->
 
-                        <div class="widget widget-collapsible">
-                            <h3 class="widget-title">
-                                <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true" aria-controls="widget-2">
-                                    Size
-                                </a>
-                            </h3><!-- End .widget-title -->
-
-                            <div class="collapse show" id="widget-2">
-                                <div class="widget-body">
-                                    <div class="filter-items">
-                                        @foreach ($typeSize as $key => $size)
-                                        <div class="filter-item inputSize">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" data-size="{{$size->id}}" id="size-{{$size->size}}">
-                                                <label class="custom-control-label" for="size-{{$size->size}}">{{$size->size}}</label>
-                                            </div><!-- End .custom-checkbox -->
-                                        </div><!-- End .filter-item -->
+                                        </div>
                                         @endforeach
-                                    </div><!-- End .filter-items -->
-                                </div><!-- End .widget-body -->
-                            </div><!-- End .collapse -->
-                        </div><!-- End .widget -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="widget widget-collapsible">
                             <h3 class="widget-title">
                                 <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true" aria-controls="widget-4">
                                     Brand
                                 </a>
-                            </h3><!-- End .widget-title -->
+                            </h3>
 
                             <div class="collapse show" id="widget-4">
                                 <div class="widget-body">
@@ -157,143 +121,27 @@
                                         @foreach ($brands as $key => $brand)
                                         <div class="filter-item inputBrand">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" data-brand="{{ $brand->id }}" id="cat-{{$brand->name}}">
-                                                <label class="custom-control-label" for="cat-{{$brand->name}}">{{ $brand->name }}</label>
+                                                <input type="checkbox" name="brand[]" class="custom-control-input" 
+                                                    data-brand="{{ $brand->name }}" 
+                                                    id="brand-{{$key}}" 
+                                                    value="{{$brand->id}}"
+                                                    @if (in_array($brand->id, $listBrandParams))
+                                                        checked
+                                                    @endif
+                                                >
+                                                <label class="custom-control-label" for="brand-{{$key}}">{{ $brand->name }}</label>
                                             </div>
-                                            <!-- End .custom-checkbox -->
-                                            <span class="item-count">{{ $brand->products_count }}</span>
+
                                         </div>
-                                        <!-- End .filter-item -->
                                         @endforeach
-                                        <div id="additional-brands"></div>
-                                        @if ($totalBrands > 5)
-                                        <div class="filter-item d-flex justify-content-center">
-                                            <p class="" id="show-more-brand" style="cursor: pointer;" onclick="showMoreBrands(routeBrandShowMore, '#additional-brands', this)">Show more</p>
-                                        </div>
-                                        @endif
-                                    </div><!-- End .filter-items -->
-                                </div><!-- End .widget-body -->
-                            </div><!-- End .collapse -->
-                        </div><!-- End .widget -->
-                    </div><!-- End .sidebar sidebar-shop -->
-                </aside><!-- End .col-lg-3 -->
-            </div><!-- End .row -->
-        </div><!-- End .container -->
-    </div><!-- End .page-content -->
-</main><!-- End .main -->
-
-<!-- config scripts -->
-<script>
-    const routeCatalogueShowMore = '{{ $showMoreCatalogues }}';
-    const routeBrandShowMore = '{{ $showMoreBrands }}';
-</script>
-
-<!-- Handle scripts -->
-<script>
-    // Create closure function
-    function createShowMore() {
-        let html = '';
-        let offset = 5;
-        return async function showMore(route, container, btn) {
-            const additionalContainer = document.querySelector(container);
-
-            loading().on();
-            try {
-                const response = await fetch(`${route}?offset=${offset}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                    },
-                });
-
-                const result = await response.json();
-                // console.log(result);
-                
-                if (result.success) {
-                    result.data.forEach((item, index) => {
-                        html += `
-                        <div class="filter-item">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" data-catalogue="${item.id}" id="cat-${item.name}">
-                                <label class="custom-control-label" for="cat-${item.name}">${item.name}</label>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- End .custom-checkbox -->
-                            <span class="item-count">${item.products_count}</span>
                         </div>
-                        <!-- End .filter-item -->
-                        `;
-                    });
-                    additionalContainer.innerHTML = html;
-                    offset += 5;
-                }
-                if(!result.hasMore) {
-                    btn.style.display = 'none';
-                }
-            } catch (error) {
-                console.log(error);
-            } finally {
-                loading().off();
-            }
-        }
-    }
-    
-    // Create show more function
-    const showMoreCatalogues = createShowMore();
-    const showMoreBrands = createShowMore();
-
-    // Reset filter
-    function resetFilter() {
-        const inputCatalogue = document.querySelectorAll('.filter-item.catalogue input');
-        const inputSize = document.querySelectorAll('.filter-item input');
-        inputCatalogue.forEach(item => {
-            item.checked = false;
-        });
-        inputSize.forEach(item => {
-            item.checked = false;
-        });
-    }
-
-    function filterProduct() {
-        const inputCatalogue = document.querySelectorAll('.filter-item.inputCatalogue input');
-        const inputSize = document.querySelectorAll('.filter-item.inputSize input');
-        const inputBrand = document.querySelectorAll('.filter-item.inputBrand input');
-        const catalogue = [];
-        const size = [];
-        const brand = [];
-        inputCatalogue.forEach(item => {
-            if(item.checked) {
-                catalogue['catalogue'] += item.dataset.catalogue;
-            }
-        });
-        inputSize.forEach(item => {
-            if(item.checked) {
-                size['size'] += item.dataset.size;
-            }
-        });
-        inputBrand.forEach(item => {
-            if(item.checked) {
-                brand['brand'] += item.dataset.brand;
-            }
-        });
-        
-        console.log(catalogue, size, brand);
-        
-        // const url = new URL(window.location.href);
-        // const params = url.searchParams;
-        // params.delete('catalogue');
-        // params.delete('size');
-        // params.delete('brand');
-        // catalogue.forEach(item => {
-        //     params.append('catalogue', item);
-        // });
-        // size.forEach(item => {
-        //     params.append('size', item);
-        // });
-        // brand.forEach(item => {
-        //     params.append('brand', item);
-        // });
-        // window.location.reload();
-    }
-</script>
+                    </form>
+                </aside>
+            </div>
+        </div>
+    </div>
+</main>
 @endsection

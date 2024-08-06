@@ -32,11 +32,11 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         Catalogue::factory(10)->create();
         Brand::factory(10)->create();
-        Product::factory(10)->create();
-        ProductGallery::factory(10)->create();
+        Product::factory(100)->create();
+        ProductGallery::factory(100)->create();
         Size::factory(10)->create();
         Color::factory(10)->create();
-        ProductVariant::factory(10)->create();
+        ProductVariant::factory(50)->create();
         Comment::factory(10)->create();
         CartItem::factory(20)->create();
         Bill::factory(10)->create();

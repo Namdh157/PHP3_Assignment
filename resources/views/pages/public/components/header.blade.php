@@ -98,7 +98,7 @@
                                                         <ul>
                                                             @foreach ($listBrands as $item)
                                                             <li>
-                                                                <a href="{{ route('public.allProduct','brand='.$item->id) }}">{{$item->name}}</a>
+                                                                <a href="{{ route('public.allProduct','brand[]='.$item->id) }}">{{$item->name}}</a>
                                                             </li>
                                                             @endforeach
                                                         </ul>
@@ -109,7 +109,7 @@
                                                         <ul>
                                                             @foreach ($listCatalogues as $item)
                                                             <li>
-                                                                <a href="{{ route('public.allProduct','catalogue='.$item->id) }}">{{$item->name}}</a>
+                                                                <a href="{{ route('public.allProduct','catalogue[]='.$item->id) }}">{{$item->name}}</a>
                                                             </li>
                                                             @endforeach
                                                         </ul>

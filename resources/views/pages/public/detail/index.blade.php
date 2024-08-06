@@ -335,8 +335,9 @@ $variant = json_encode($product['product_variants']);
             product_id: product_id
         }
 
-        sendRequest(route, data, 'POST', () => {
-            ToastCustom('Add product to cart successfully', 'success')
+        sendRequest(route, data, 'POST', (count) => {
+            ToastCustom('Add product to cart successfully', 'success');  
+            document.querySelector('#cart-count').innerText = count;
         })
 
     }

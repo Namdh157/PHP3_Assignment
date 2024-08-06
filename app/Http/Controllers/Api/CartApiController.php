@@ -51,18 +51,26 @@ class CartApiController extends Controller
         $cartItem = CartItem::where('user_id', $validateData['user_id'])
             ->where('product_variant_id', $validateData['product_variant_id'])
             ->first();
+
         if($cartItem) {
             $cartItem->quantity += $validateData['quantity'];
             $cartItem->save();
             return response()->json([
                 'success' => 'Cart item updated successfully',
-                'data' => $cartItem
+                'data' => CartItem::where('user_id', $validateData['user_id'])->count()
             ]);
         }
+
+        // Add to cart
         $cartItem = CartItem::create($validateData);
+        if (!$cartItem) {
+            return response()->json([
+                'error' => 'Can not add to cart'
+            ]);
+        }
         return response()->json([
-            'success' => 'Cart item created successfully',
-            'data' => $cartItem
+            'success' => 'Cart item added successfully',
+            'data' => CartItem::where('user_id', $validateData['user_id'])->count()
         ]);
     }
     /**
